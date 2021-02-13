@@ -7,18 +7,19 @@ if (require('electron-squirrel-startup')) {
 	app.quit();
 }
 
-const createWindow = () => {
+const createWindow = async () => {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 800,
-		height: 600
+		height: 600,
+		title: 'MonoLauncher - Launching'
 	});
-
 	// and load the index.html of the app.
-	mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
+	await mainWindow.loadFile(path.join(__dirname, 'index.html'));
+	mainWindow.setTitle('MonoLauncher');
 	// Open the DevTools.
-	mainWindow.webContents.openDevTools();
+
+	await mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
