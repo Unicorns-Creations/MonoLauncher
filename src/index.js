@@ -3,6 +3,7 @@ const path = require('path');
 const ipc = require('electron').ipcMain;
 const { findSteam } = require('find-steam-app');
 const cp = require('child_process');
+var os = require('os');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
 	// eslint-disable-line global-require
@@ -42,7 +43,6 @@ app.on('window-all-closed', () => {
 		app.quit();
 	}
 });
-
 app.on('activate', () => {
 	// On OS X it's common to re-create a window in the app when the
 	// dock icon is clicked and there are no other windows open.
