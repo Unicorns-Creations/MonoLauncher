@@ -10,7 +10,6 @@ if (require('electron-squirrel-startup')) {
 }
 async function launchMonolith() {
 	var SteamLocation = await findSteam();
-	console.log(SteamLocation);
 	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
 }
 const createWindow = async () => {
