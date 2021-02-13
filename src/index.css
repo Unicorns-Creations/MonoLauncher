@@ -19,6 +19,10 @@
   border-radius: 10px;
 }
 
+#launcher-text {
+  margin-top: 0.5rem;
+}
+
 header {
   position: absolute;
   top: 0;
