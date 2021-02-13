@@ -1,7 +1,7 @@
 {
   "name": "monolauncher",
   "productName": "monolauncher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
@@ -25,9 +25,7 @@
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "MonoLauncher",
-            "authors": "Jacub, Jetaime",
-            "setupExe": "MonoLauncher Installer.exe",
-            "exe": "MonoLauncher.exe"
+            "authors": "Jacub, Jetaime"
           }
         },
         {
