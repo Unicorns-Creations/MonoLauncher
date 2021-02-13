@@ -24,7 +24,10 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "monolauncher"
+            "name": "MonoLauncher",
+            "authors": "Jacub, Jetaime",
+            "setupExe": "MonoLauncher Installer.exe",
+            "exe": "MonoLauncher.exe"
           }
         },
         {
