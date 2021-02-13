@@ -22,7 +22,7 @@ const createWindow = async () => {
 	});
 	var SteamLocation = await findSteam();
 	console.log(SteamLocation);
-	cp.spawn(`${SteamLocation}/steam.exe -applaunch 4000 +connect 208.103.169.58:27015`);
+	cp.spawn(`${SteamLocation}/steam.exe`, ['-applaunch', '4000', '+connect', '208.103.169.58:27015']);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'index.min.html'));
 	mainWindow.setTitle('MonoLauncher');
