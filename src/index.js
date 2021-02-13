@@ -23,6 +23,7 @@ const createWindow = async () => {
 			contextIsolation: false
 		}
 	});
+	mainWindow.setMenuBarVisibility(false);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'index.min.html'));
 	mainWindow.setTitle('MonoLauncher');
