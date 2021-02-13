@@ -8,7 +8,11 @@ if (require('electron-squirrel-startup')) {
 	// eslint-disable-line global-require
 	app.quit();
 }
-
+async function launchMonolith() {
+	var SteamLocation = await findSteam();
+	console.log(SteamLocation);
+	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
+}
 const createWindow = async () => {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
@@ -20,9 +24,6 @@ const createWindow = async () => {
 			contextIsolation: true
 		}
 	});
-	var SteamLocation = await findSteam();
-	console.log(SteamLocation);
-	cp.spawn(`${SteamLocation}/steam.exe`, ['-applaunch', '4000', '+connect', '208.103.169.58:27015']);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'index.min.html'));
 	mainWindow.setTitle('MonoLauncher');
@@ -50,8 +51,8 @@ app.on('activate', () => {
 	}
 });
 
-ipc.on('game-launch-mother-fucking-thing', function(event, arg) {
-	win.webContents.send('targetPriceVal', arg);
+ipc.on('game-launch', function(event, arg) {
+	launchMonolith();
 });
 
 // In this file you can include the rest of your app's specific main process
