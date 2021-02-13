@@ -14,8 +14,6 @@
 }
 
 #launchmono:hover {
-  width: 6rem;
-  height: 3rem;
   background-color: rgb(39, 170, 98);
   color: white;
   border-radius: 10px;
