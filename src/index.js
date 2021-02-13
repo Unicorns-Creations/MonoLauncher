@@ -12,11 +12,16 @@ const createWindow = async () => {
 	const mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
-		title: 'MonoLauncher - Launching'
+		title: 'MonoLauncher - Launching',
+		webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: true
+		}
 	});
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'index.html'));
 	mainWindow.setTitle('MonoLauncher');
+
 	// Open the DevTools.
 
 	await mainWindow.webContents.openDevTools();
