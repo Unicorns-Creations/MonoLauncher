@@ -13,6 +13,14 @@ async function launchMonolith() {
 	var SteamLocation = await findSteam();
 	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
 }
+
+function getramusage() {
+	var owo = os.totalmem() - os.freemem();
+	var awa = owo / 1024 / 1024 / 1024;
+	var awo = os.totalmem / 1024 / 1024 / 1024;
+	return `${awa.toFixed(2)}/${awo.toFixed(2)}GB`;
+}
+
 const createWindow = async () => {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
