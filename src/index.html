@@ -5,16 +5,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="index.min.css">
+  <script src="renderer.js"></script>
 </head>
-<script>
-  const {
-    ipcRenderer
-  } = require('electron')
-
-  function launchMonolith() {
-    ipcRenderer.send('game-launch')
-  }
-</script>
 
 <body>
   <header>
