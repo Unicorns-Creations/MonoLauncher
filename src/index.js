@@ -1,14 +1,8 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const ipc = require('electron').ipcMain
-const {
-	findSteam,
-	findSteamAppById,
-	findSteamAppByName,
-	findSteamAppManifest,
-	findSteamLibraries,
-  } = require('find-steam-app');
-
+const ipc = require('electron').ipcMain;
+const { findSteam } = require('find-steam-app');
+const cp = require('child_process');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
 	// eslint-disable-line global-require
@@ -26,8 +20,9 @@ const createWindow = async () => {
 			contextIsolation: true
 		}
 	});
-	var SteamLocation = await findSteam()
-	console.log(SteamLocation)
+	var SteamLocation = await findSteam();
+	console.log(SteamLocation);
+	cp.exec(`${SteamLocation}/steam.exe -applaunch 4000 +connect 208.103.169.58:27015`);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'index.min.html'));
 	mainWindow.setTitle('MonoLauncher');
@@ -55,9 +50,9 @@ app.on('activate', () => {
 	}
 });
 
-ipc.on('game-launch-mother-fucking-thing', function (event, arg) {
-	win.webContents.send('targetPriceVal', arg)
-  })
+ipc.on('game-launch-mother-fucking-thing', function(event, arg) {
+	win.webContents.send('targetPriceVal', arg);
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
