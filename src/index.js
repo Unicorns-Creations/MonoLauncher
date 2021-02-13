@@ -1,5 +1,13 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const ipc = require('electron').ipcMain
+const {
+	findSteam,
+	findSteamAppById,
+	findSteamAppByName,
+	findSteamAppManifest,
+	findSteamLibraries,
+  } = require('find-steam-app');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -18,6 +26,8 @@ const createWindow = async () => {
 			contextIsolation: true
 		}
 	});
+	var SteamLocation = await findSteam()
+	console.log(SteamLocation)
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'index.min.html'));
 	mainWindow.setTitle('MonoLauncher');
@@ -44,6 +54,10 @@ app.on('activate', () => {
 		createWindow();
 	}
 });
+
+ipc.on('game-launch-mother-fucking-thing', function (event, arg) {
+	win.webContents.send('targetPriceVal', arg)
+  })
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
