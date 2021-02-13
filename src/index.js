@@ -21,10 +21,6 @@ const createWindow = async () => {
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'index.html'));
 	mainWindow.setTitle('MonoLauncher');
-
-	// Open the DevTools.
-
-	await mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
