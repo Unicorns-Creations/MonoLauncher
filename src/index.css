@@ -44,6 +44,10 @@ header h1 {
 body {
   margin-top: 5rem;
   margin-left: 2rem;
-  background-color: rgb(53, 53, 53);
+  background: url(loading_bg_dark.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   color: white;
 }
