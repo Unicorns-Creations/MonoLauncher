@@ -21,7 +21,7 @@ const createWindow = async () => {
 		title: 'MonoLauncher - Launching',
 		webPreferences: {
 			nodeIntegration: true,
-			contextIsolation: true
+			contextIsolation: false
 		}
 	});
 	// and load the index.html of the app.

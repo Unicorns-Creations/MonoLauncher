@@ -5,13 +5,19 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="index.min.css">
 </head>
-
+<script>
+  const { ipcRenderer } = require('electron')
+  function launchMonolith(){
+    ipcRenderer.send('game-launch')
+  }
+</script>
 <body>
   <header>
     <h1>MonoLauncher</h1>
   </header>
   <h3>MonoLauncher</h3>
   <p>Highest quality of all launchers</p>
+  <button onclick="launchMonolith()">Launch Monolith</button>
   <a href="https://monolithserver.com">MonolithServers</a>
 </body>
 
