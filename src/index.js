@@ -3,6 +3,7 @@ const path = require('path');
 const ipc = require('electron').ipcMain;
 const { findSteam } = require('find-steam-app');
 const cp = require('child_process');
+var window;
 var os = require('os');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -18,7 +19,7 @@ function getramusage() {
 	var owo = os.totalmem() - os.freemem();
 	var awa = owo / 1024 / 1024 / 1024;
 	var awo = os.totalmem / 1024 / 1024 / 1024;
-	return `${awa.toFixed(2)}/${awo.toFixed(2)}GB`;
+	return `${awa.toFixed(2)}/${awo.toFixed(2)}GB (${Math.round(awa/awo*100)}%)`;
 }
 
 const createWindow = async () => {
@@ -36,6 +37,7 @@ const createWindow = async () => {
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'index.min.html'));
 	mainWindow.setTitle('MonoLauncher');
+	window = mainWindow;
 };
 
 // This method will be called when Electron has finished
@@ -61,6 +63,9 @@ app.on('activate', () => {
 
 ipc.on('game-launch', function(event, arg) {
 	launchMonolith();
+});
+ipc.on('request-ram', function(event, arg) {
+	window.webContents.send('ram', getramusage());
 });
 
 // In this file you can include the rest of your app's specific main process

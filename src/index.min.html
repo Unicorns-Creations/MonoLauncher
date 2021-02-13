@@ -1,7 +1,1 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><link rel="stylesheet" href="index.min.css"></head><script>const {
-    ipcRenderer
-  } = require('electron')
-
-  function launchMonolith() {
-    ipcRenderer.send('game-launch')
-  }</script><body><header><h1 id="title">MonoLauncher</h1></header><h3>Launcher</h3><p id="launcher-text"><b>MADE WITH COCAINE</b>, yes... It's true, a lot of cocaine was consumed in the process of making this.</p><button onclick="launchMonolith()" id="launchmono">Launch</button></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><link rel="stylesheet" href="index.min.css"><script src="renderer.js"></script></head><body><header><h1 id="title">MonoLauncher</h1></header><h3>Launcher</h3><p id="launcher-text"><b>MADE WITH COCAINE</b>, yes... It's true, a lot of cocaine was consumed in the process of making this.</p><button onclick="launchMonolith()" id="launchmono">Launch</button><p id="ram-usage-holder">Current Ram Usage:</p><p id="ram-usage">0/0GB</p><p></p></body></html>
