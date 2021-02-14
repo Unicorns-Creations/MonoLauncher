@@ -9,20 +9,10 @@ async function updatePlayers() {
 		maxAttempts: 3
 	});
 	if (!state) return;
-	/*
-            <tr>
-                <td>Jill</td>
-                <td>10h</td>
-            </tr>
-            <tr>
-                <td>Eve</td>
-                <td>20h</td>
-            </tr>*/
 	onlinepe.innerText = `${state.players.length}/${state.maxplayers}`;
 	var players = state.players.filter((f) => f.name && f.name.length > 1).map((f) => {
-		return `<tr> <td>${f.name}</td> <td>${ms(f.time * 1000, {long: true})}</td> </tr>`;
+		return `<tr> <td>${f.name}</td> <td>${ms(f.time * 1000, { long: true })}</td> </tr>`;
 	});
-	console.log(state.players);
 	onlinetbl.innerHTML = `<tr> <th>Steam Name</th> <th>Playtime</th> </tr>` + players;
 }
 
