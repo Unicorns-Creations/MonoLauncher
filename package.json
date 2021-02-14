@@ -2,7 +2,7 @@
   "name": "monolauncher",
   "productName": "monolauncher",
   "version": "1.0.6",
-  "description": "My Electron application description",
+  "description": "Made with COCAINE",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
