@@ -15,26 +15,6 @@
 
 }
 
-
-#launchmono {
-  width: 5rem;
-  height: 2rem;
-  border-radius: 10px;
-  border: 0px;
-  transition: 500ms;
-}
-
-#launchmono:hover {
-  background-color: rgb(39, 170, 98);
-  color: white;
-  border-radius: 10px;
-}
-
-#launcher-text {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
 #title {
   font-family: nexalight;
   font-size-adjust: initial;
@@ -65,4 +45,8 @@ body {
   -o-background-size: cover;
   background-size: cover;
   color: white;
+}
+
+#online-table {
+  text-align: center;
 }
