@@ -1,9 +1,5 @@
 const { ipcRenderer } = require('electron');
 
-function launchMonolith() {
-	ipcRenderer.send('game-launch');
-}
-
 function requestram() {
 	return ipcRenderer.send('request-ram');
 }
