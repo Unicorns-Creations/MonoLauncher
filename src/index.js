@@ -19,7 +19,7 @@ function getramusage() {
 	var owo = os.totalmem() - os.freemem();
 	var awa = owo / 1024 / 1024 / 1024;
 	var awo = os.totalmem / 1024 / 1024 / 1024;
-	return `${awa.toFixed(2)}/${awo.toFixed(2)}GB (${Math.round(awa/awo*100)}%)`;
+	return `${awa.toFixed(2)}/${awo.toFixed(2)}GB (${Math.round(awa / awo * 100)}%)`;
 }
 
 const createWindow = async () => {
