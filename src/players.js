@@ -12,7 +12,7 @@ async function updatePlayers() {
 	onlinepe.innerText = `${state.players.length}/${state.maxplayers}`;
 	var players = state.players.filter((f) => f.name && f.name.length > 1).map((f) => {
 		return `<tr> <td>${f.name}</td> <td>${ms(f.time * 1000, { long: true })}</td> </tr>`;
-	});
+	}).join("\n")
 	onlinetbl.innerHTML = `<tr> <th>Steam Name</th> <th>Playtime</th> </tr>` + players;
 }
 
