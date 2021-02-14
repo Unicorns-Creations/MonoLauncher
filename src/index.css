@@ -15,18 +15,6 @@
 
 }
 
-#DevInfo {
-  background-color: gray;
-  color: black;
-  position:absolute;
-  bottom: 5%;
-  right: 5%;
-}
-
-#DevInfo:hover {
-  background-color: white;
-  color: black;
-}
 
 #launchmono {
   width: 5rem;
