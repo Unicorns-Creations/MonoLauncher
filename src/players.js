@@ -19,7 +19,10 @@ async function updatePlayers() {
 		host: '208.103.169.58',
 		maxAttempts: 3
 	});
-	if (!state) return;
+	if (!state) {
+		console.error("Couldn't connect to server.");
+		return;
+	}
 	onlinepe.innerText = `${state.players.length}/${state.maxplayers}`;
 	var players = state.players
 		.filter((f) => f.name && f.name.length > 1)
