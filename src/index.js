@@ -12,7 +12,7 @@ if (require('electron-squirrel-startup')) {
 	app.quit();
 }
 const DiscordRPC = require('discord-rpc');
-const rpc = new DiscordRPC.Client({ transport: 'ipc' });
+var rpc = new DiscordRPC.Client({ transport: 'ipc' });
 const startTimestamp = new Date();
 async function launchMonolith() {
 	var SteamLocation = await findSteam();
@@ -37,7 +37,11 @@ async function setActivity() {
 }
 
 const createWindow = async () => {
-	rpc.login({ clientId });
+	rpc.login({ clientId }).catch((err) => {
+		if (err) {
+			rpc = { setActivity: function() {}, user: { username: 'Username', discriminator: '0000' } };
+		}
+	});
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 800,
