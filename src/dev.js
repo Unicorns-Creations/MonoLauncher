@@ -1,4 +1,6 @@
 const { ipcRenderer } = require('electron');
+const DiscordRPC = require('discord-rpc');
+var rpc = new DiscordRPC.Client({ transport: 'ipc' });
 
 function requestram() {
 	return ipcRenderer.send('request-ram');
@@ -20,5 +22,5 @@ ipcRenderer.on('discord', (event, message) => {
 
 setInterval(() => {
 	requestram();
-	requestdiscord();
+	requestdiscord();	
 }, 500);

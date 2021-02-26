@@ -39,7 +39,7 @@ header {
 body {
   margin-top: 5rem;
   margin-left: 2rem;
-  background: url(loading_bg_dark.png) no-repeat center center fixed;
+  background: url(background.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -49,4 +49,9 @@ body {
 
 #online-table {
   text-align: center;
+}
+
+#online-table-container {
+background-color: black;
+opacity: 50%;
 }
