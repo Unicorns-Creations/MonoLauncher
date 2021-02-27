@@ -17,27 +17,44 @@
 
 
 #launchmono {
-  width: 5rem;
-  height: 2rem;
-  border-radius: 10px;
+  width: 150px;
+  height: 50px;
+  border-radius: 3px;
   border: 0px;
+  opacity: 60%;
   transition: 500ms;
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
 }
 
 #launchmono:hover {
-  background-color: rgb(39, 170, 98);
-  color: white;
-  border-radius: 10px;
+  opacity: 100%;
 }
 
 #launcher-text {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  position: absolute;
+  bottom: 5%;
+  left: 8%;
 }
 
-#title {
-  font-family: nexalight;
-  font-size-adjust: initial;
+#MonolithLogo {
+  position: absolute;
+  bottom: 20%;
+  left: 3%;
+}
+
+#newsbox1 {
+  width: 25%;
+  background-color: black;
+  opacity: 75%;
+  font-size: 12px;
+}
+
+#newsbox1-photo-container{
+  background-image: url('loading_bg_dark.png');
+  position: fixed;
+  width: 5%;
 }
 
 header {
@@ -52,7 +69,6 @@ header {
   height: 4rem;
   line-height: 4rem;
   border-radius: 2px;
-  text-align: center;
   margin-left: auto;
 }
 
@@ -65,4 +81,10 @@ body {
   -o-background-size: cover;
   background-size: cover;
   color: white;
+}
+
+#discordicon {
+  position: absolute;
+  bottom: 3%;
+  left: 3%;
 }
