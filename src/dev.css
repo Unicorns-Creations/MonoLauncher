@@ -33,11 +33,12 @@
     margin-bottom: 0.5rem;
   }
   
-  #title {
-    font-family: nexalight;
-    font-size-adjust: initial;
+  #MonolithLogo {
+    position: absolute;
+    bottom: 20%;
+    left: 3%;
   }
-  
+    
   header {
     position: absolute;
     top: 0;
