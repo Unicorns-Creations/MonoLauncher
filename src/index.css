@@ -15,6 +15,28 @@
 
 }
 
+#MonolithLogo {
+  display:inline-block;
+  vertical-align: middle;
+  top: 30%;
+  bottom: 0;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(41, 41, 41) !important;
+  opacity: 0.7;
+  width: 100%;
+  height: 4rem;
+  line-height: 4rem;
+  border-radius: 2px;
+  text-align: center;
+}
+
 
 #launchmono {
   width: 150px;
@@ -39,12 +61,6 @@
   left: 8%;
 }
 
-#MonolithLogo {
-  position: absolute;
-  bottom: 20%;
-  left: 3%;
-}
-
 #newsbox1 {
   position: absolute;
   top: 25%;
@@ -67,20 +83,6 @@
   padding-top: 10px;
 }
 
-header {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgb(41, 41, 41) !important;
-  opacity: 0.7;
-  width: 100%;
-  height: 4rem;
-  line-height: 4rem;
-  border-radius: 2px;
-  margin-left: auto;
-}
 
 body {
   margin-top: 5rem;

@@ -16,9 +16,10 @@
 }
 
 #MonolithLogo {
-  position: absolute;
-  bottom: 20%;
-  left: 3%;
+  display:inline-block;
+  vertical-align: middle;
+  top: 30%;
+  bottom: 0;
 }
 
 header {
@@ -34,7 +35,6 @@ header {
   line-height: 4rem;
   border-radius: 2px;
   text-align: center;
-  margin-left: auto;
 }
 
 body {
