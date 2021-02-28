@@ -16,7 +16,7 @@
 }
 
 #MonolithLogo {
-  display:inline-block;
+  display: inline-block;
   vertical-align: middle;
   top: 30%;
   bottom: 0;
@@ -53,17 +53,11 @@ body {
 }
 
 #online-table-container {
-  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(26, 26, 26);
   text-align: center;
   opacity: 50%;
-  margin: 0 auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-#online-table>tbody>tr {
-  text-align: center;
-  text-decoration: dotted;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
 }
