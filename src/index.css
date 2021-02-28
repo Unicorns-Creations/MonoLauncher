@@ -45,16 +45,25 @@
 }
 
 #newsbox1 {
+  position: absolute;
+  top: 25%;
   width: 25%;
   background-color: black;
   opacity: 75%;
   font-size: 12px;
 }
 
-#newsbox1-photo-container{
-  background-image: url('loading_bg_dark.png');
-  position: fixed;
-  width: 5%;
+#newsbox1-body {
+  text-align: center;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+#newsbox1-title {
+  text-align: center;
+  padding-top: 10px;
 }
 
 header {
