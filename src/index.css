@@ -26,6 +26,7 @@
   position: absolute;
   bottom: 3%;
   right: 3%;
+  z-index: 1;
 }
 
 #launchmono:hover {
