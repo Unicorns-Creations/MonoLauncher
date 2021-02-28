@@ -81,14 +81,33 @@ app.on('activate', () => {
 	}
 });
 
-ipc.on('game-launch', function(event, arg) {
+ipc.on('game-launch', () => {
 	launchMonolith();
 });
-ipc.on('request-ram', function(event, arg) {
+ipc.on('request-ram', () => {
 	window.webContents.send('ram', getramusage());
 });
-ipc.on('request-discord', (event, arg) => {
+ipc.on('request-discord', () => {
 	window.webContents.send('discord', `${rpc.user.username}#${rpc.user.discriminator}`);
+});
+ipc.on('join-discord', async () => {
+	const secondWindow = new BrowserWindow({
+		width: 50,
+		height: 50,
+		show: false,
+		title: 'MonoLauncher Discord',
+		webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: true
+		}
+	});
+	secondWindow.loadURL('https://discord.gg/RcAdxHXJ');
+	secondWindow.setMenuBarVisibility(false);
+	secondWindow.setTitle('Discord Prompt');
+	secondWindow.webContents.on('did-finish-load', function() {
+		secondWindow.show();
+		secondWindow.hide();
+	});
 });
 
 setInterval(setActivity, 16000);

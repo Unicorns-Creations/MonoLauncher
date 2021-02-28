@@ -55,6 +55,10 @@ header {
   opacity: 100%;
 }
 
+#discordicon {
+  z-index: 1;
+}
+
 #launcher-text {
   position: absolute;
   bottom: 5%;
