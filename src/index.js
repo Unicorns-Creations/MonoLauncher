@@ -31,8 +31,10 @@ async function setActivity() {
 		details: 'Thinking about joining Monolith',
 		state: 'Exploring menus',
 		startTimestamp,
-		largeImageKey: 'discord-asset-unicorn',
-		largeImageText: 'Unicorn :O'
+		largeImageKey: 'monolith',
+		largeImageText: 'Monolith Servers',
+		smallImageKey: 'discord',
+		smallImageText: 'discord.gg/uj6NRBS'
 	});
 }
 
