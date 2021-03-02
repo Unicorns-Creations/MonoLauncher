@@ -6,19 +6,27 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="index.min.css">
   <link rel="stylesheet" href="menu.css">
-  <script src="launcher.js"></script>
+  <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <header>
-    <h1 id="title">MonoLauncher</h1>
+    <img id="MonolithLogo" src="logo.png" alt="Monolith Logo" style="width:215px;height:36px;">
   </header>
-  <h3>Launcher</h3>
-  <p id="launcher-text"><b>MADE WITH COCAINE</b>, yes... It's true, a lot of cocaine was consumed in the process of
-    making this.</p>
-  <button onclick="launchMonolith()" id="launchmono">Launch</button>
+  <h3>Monohead Launcher</h3>
+  <div id="newsbox1">
+    <img id="newsbox1-photo" src="maxresdefault.jpg" alt="Monolith Logo" style="width: 195px;height:105px;">
+    <div id="newsbox1-text-container">
+      <h3 id="newsbox1-title">Update 2.0 Released!</h3>
+      <p id="newsbox1-body">This new update brings a brand new rule which allows players to falsly arrest you, without
+        it being considered a rulebreak!</p>
+    </div>
+  </div>
+  <p id="launcher-text"><b>MADE WITH COCAINE</b></p>
+  <button onclick="launchMonolith()" id="launchmono">Play!</button>
   </p>
-
+  <i id="discordicon" class="fab fa-discord" style="font-size: 35px;color: rgb(114, 137, 218);"
+    onclick="joinDiscord()"></i>
   <div class="menu">
     <nav class="menu__nav">
       <ul class="menu__list r-list">
@@ -43,6 +51,6 @@
   </div>
 </body>
 <script src="menu.js"></script>
-
+<script src="launcher.js"></script>
 
 </html>

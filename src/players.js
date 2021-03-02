@@ -33,4 +33,4 @@ async function updatePlayers() {
 	onlinetbl.innerHTML = `<tr> <th>Steam Name</th> <th>Playtime (HH:MM:SS)</th> </tr>` + players;
 }
 
-setInterval(updatePlayers, 2500);
+setInterval(updatePlayers, 5000);

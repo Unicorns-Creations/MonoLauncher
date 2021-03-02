@@ -15,9 +15,11 @@
 
 }
 
-#title {
-  font-family: nexalight;
-  font-size-adjust: initial;
+#MonolithLogo {
+  display: inline-block;
+  vertical-align: middle;
+  top: 30%;
+  bottom: 0;
 }
 
 header {
@@ -33,13 +35,12 @@ header {
   line-height: 4rem;
   border-radius: 2px;
   text-align: center;
-  margin-left: auto;
 }
 
 body {
   margin-top: 5rem;
   margin-left: 2rem;
-  background: url(loading_bg_dark.png) no-repeat center center fixed;
+  background: url(background.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -49,4 +50,14 @@ body {
 
 #online-table {
   text-align: center;
+}
+
+#online-table-container {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(26, 26, 26);
+  text-align: center;
+  opacity: 50%;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
 }

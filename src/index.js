@@ -12,7 +12,7 @@ if (require('electron-squirrel-startup')) {
 	app.quit();
 }
 const DiscordRPC = require('discord-rpc');
-const rpc = new DiscordRPC.Client({ transport: 'ipc' });
+var rpc = new DiscordRPC.Client({ transport: 'ipc' });
 const startTimestamp = new Date();
 async function launchMonolith() {
 	var SteamLocation = await findSteam();
@@ -31,13 +31,19 @@ async function setActivity() {
 		details: 'Thinking about joining Monolith',
 		state: 'Exploring menus',
 		startTimestamp,
-		largeImageKey: 'discord-asset-unicorn',
-		largeImageText: 'Unicorn :O'
+		largeImageKey: 'monolith',
+		largeImageText: 'Monolith Servers',
+		smallImageKey: 'discord',
+		smallImageText: 'discord.gg/uj6NRBS'
 	});
 }
 
 const createWindow = async () => {
-	rpc.login({ clientId });
+	rpc.login({ clientId }).catch((err) => {
+		if (err) {
+			rpc = { setActivity: function() {}, user: { username: 'Username', discriminator: '0000' } };
+		}
+	});
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 800,
@@ -77,14 +83,33 @@ app.on('activate', () => {
 	}
 });
 
-ipc.on('game-launch', function(event, arg) {
+ipc.on('game-launch', () => {
 	launchMonolith();
 });
-ipc.on('request-ram', function(event, arg) {
+ipc.on('request-ram', () => {
 	window.webContents.send('ram', getramusage());
 });
-ipc.on('request-discord', (event, arg) => {
+ipc.on('request-discord', () => {
 	window.webContents.send('discord', `${rpc.user.username}#${rpc.user.discriminator}`);
+});
+ipc.on('join-discord', async () => {
+	const secondWindow = new BrowserWindow({
+		width: 50,
+		height: 50,
+		show: false,
+		title: 'MonoLauncher Discord',
+		webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: true
+		}
+	});
+	secondWindow.loadURL('https://discord.gg/RcAdxHXJ');
+	secondWindow.setMenuBarVisibility(false);
+	secondWindow.setTitle('Discord Prompt');
+	secondWindow.webContents.on('did-finish-load', function() {
+		secondWindow.show();
+		secondWindow.hide();
+	});
 });
 
 setInterval(setActivity, 16000);

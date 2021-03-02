@@ -153,7 +153,6 @@ DEPENDENCES
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: var(--menuZindex, 9998);
   }
   
   .menu__nav{
@@ -166,7 +165,7 @@ DEPENDENCES
   
     display: flex;
     align-items: flex-end;
-    z-index: 2;
+    z-index: 99999999999999;
   }
   
   .menu__list{
@@ -184,7 +183,7 @@ DEPENDENCES
     flex: none;
   
     position: relative;
-    z-index: 0;
+    z-index: 2;
   }
   
   .menu__toggle::before{
@@ -243,6 +242,7 @@ DEPENDENCES
   
   .menu_activated{
     height: 100%;
+    z-index: 15000;
   }
   
   .menu_activated .menu__nav{
