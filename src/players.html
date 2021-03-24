@@ -4,27 +4,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="players.min.css">
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="players.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
 </head>
 
 <body>
     <header>
         <img id="MonolithLogo" src="logo.png" alt="Monolith Logo" style="width:215px;height:36px;">
     </header>
-    <h3>Online Players</h3>
-    <p id="online-players-holder">Current Online Players: <p id="online-players-count">0/0</p>
-        <br />
-        <div id="online-table-container" style="width: fit-content;">
-            <table id="online-table">
-                <tr>
-                    <th>Steam Name</th>
-                    <th>Playtime (HH:MM:SS)</th>
-                </tr>
-            </table>
-        </div>
+    <div id="root"></div>
 
 </body>
-<script src="players.js"></script>
+<script src="players.ui.js"></script>
 
 </html>
