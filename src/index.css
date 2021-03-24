@@ -37,70 +37,10 @@ header {
   text-align: center;
 }
 
-
-#launchmono {
-  width: 150px;
-  height: 50px;
-  border-radius: 3px;
-  border: 0px;
-  opacity: 60%;
-  transition: 500ms;
-  position: absolute;
-  bottom: 3%;
-  right: 3%;
-  z-index: 1;
-}
-
-#launchmono:hover {
-  opacity: 100%;
-}
-
-#discordicon {
-  z-index: 1;
-}
-
-#launcher-text {
-  position: absolute;
-  bottom: 5%;
-  left: 8%;
-}
-
-#newsbox1 {
-  position: absolute;
-  top: 25%;
-  width: 25%;
-  background-color: black;
-  opacity: 75%;
-  font-size: 12px;
-}
-
-#newsbox1-body {
-  text-align: center;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-}
-
-#newsbox1-title {
-  text-align: center;
-  padding-top: 10px;
-}
-
-
 body {
   margin-top: 5rem;
   margin-left: 2rem;
   background: url(background.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover;
   color: white;
-}
-
-#discordicon {
-  position: absolute;
-  bottom: 3%;
-  left: 3%;
 }
