@@ -1,10 +1,11 @@
-function tick() {
+window.addEventListener('load', function() {
+	var Button = MaterialUI.Button;
 	const element = (
 		<div>
-			<h1>Hello, world!</h1>
-			<h2>It is {new Date().toLocaleTimeString()}.</h2>
+			<Button color="primary" variant="contained">
+				Launch Monolith
+			</Button>
 		</div>
 	);
-	ReactDOM.render(element, document.getElementById('root'));
-}
-setInterval(tick, 1000);
+	ReactDOM.render(element, document.getElementById('launch-mono-root'));
+});
