@@ -3,27 +3,27 @@
 
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="tools.css">
-    <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="monobuttons.css">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="tools.css">
+  <link rel="stylesheet" href="menu.css">
+  <link rel="stylesheet" href="monobuttons.css">
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
 </head>
 
 <header>
-    <img id="MonolithLogo" src="imgs/logo.png" alt="Monolith Logo" style="width:215px;height:36px;">
-    <div id="navbar">
-      <button class="navbutton" onclick="window.location.href=`launcher.html`">Return</button>
-    </div>
-  </header>
+  <div id="header-root"></div>
+</header>
 
 <body>
-    
-    <h1>MonoLauncher Tools</h1>
-    <p>Pretty cool tools created by us!</p>
-    <div id="toolscontainer">
-      <button class="graybttn h"><img src="imgs/calculator.png" style="width: 75%;height: 75%;"></button>
-      <button class="sgoldbttn h"><img src="imgs/misc_unicorn.png" style="width: 75%;height: 75%;"></button>
-    </div>
+
+  <h1>MonoLauncher Tools</h1>
+  <p>Pretty cool tools created by us!</p>
+  <div id="toolscontainer">
+    <button class="graybttn h"><img src="imgs/calculator.png" style="width: 75%;height: 75%;"></button>
+    <button class="sgoldbttn h"><img src="imgs/misc_unicorn.png" style="width: 75%;height: 75%;"></button>
+  </div>
+  <script src="header.ui.js"></script>
 </body>
 
 

@@ -8,14 +8,13 @@
   <link rel="stylesheet" href="menu.css">
   <script src="dev.js"></script>
   <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
 </head>
 
 <body>
   <header>
-    <img id="MonolithLogo" src="imgs/logo.png" alt="Monolith Logo" style="width:215px;height:36px;">
-    <div id="navbar">
-      <button class="navbutton" onclick="window.location.href=`launcher.html`">Return</button>
-    </div>
+    <div id="header-root"></div>
   </header>
   <h3>Ram Usage</h3>
   <p id="ram-usage-holder">Current Ram Usage: <p id="ram-usage">0/0GB</p>
@@ -29,7 +28,7 @@
 <footer>
   <p>Created By Unicorns /w Love. Jacub Stinks 2021 © All Rights Reserved.</p>
 </footer>
-<script src="menu.js"></script>
+<script src="header.ui.js"></script>
 
 
 </html>

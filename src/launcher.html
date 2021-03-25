@@ -6,7 +6,6 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="launcher.css">
   <link rel="stylesheet" href="monobuttons.css">
-  <link rel="stylesheet" href="menu.css">
   <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
@@ -14,18 +13,14 @@
 </head>
 
 <header>
-  <img id="MonolithLogo" src="imgs/logo.png" alt="Monolith Logo" style="width:215px;height:36px;">
-  <div id="navbar">
-    <button class="navbutton" onclick="window.location.href=`launcher.html`">Home</button>
-    <button class="navbutton" onclick="window.location.href=`dev.html`">Dev</button>
-    <button class="navbutton" onclick="window.location.href=`players.html`">Players</button>
-    <button class="navbutton" onclick="window.location.href=`tools.html`">Tools</button>
-  </div>
+  <div id="header-root"></div>
 </header>
 
 <body>
   <button id="playbttn">Launch Monolith!</button>
   <div id="root"></div>
+  <script src="header.ui.js"></script>
+  <link rel="stylesheet" href="menu.css">
 </body>
 
 </html>
