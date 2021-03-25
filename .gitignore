@@ -89,4 +89,4 @@ typings/
 out/
 
 # yes
-thingy/
+thingy/node_modules
