@@ -14,6 +14,7 @@
     border: darkred;
     border-style: solid;
     border-width: 2px;
+
 }
 
 .purplebttn {
@@ -23,6 +24,7 @@
     border: purple;
     border-style: solid;
     border-width: 2px;
+
 }
 
 .goldbttn {
@@ -32,6 +34,7 @@
     border: goldenrod;
     border-style: solid;
     border-width: 2px;
+
 }
 
 .graybttn {
@@ -41,6 +44,85 @@
     border: gray;
     border-style: solid;
     border-width: 2px;
+
+}
+
+.sgraybttn {
+    width: 100px;
+    height: 100px;
+    background-image: url("imgs/monobuttons/graystripes.png") , linear-gradient(to bottom right, black, black, gray);
+    background-size: 100%, 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: gray;
+    border-style: solid;
+    border-width: 2px;
+
+}
+
+.sredbttn {
+    width: 100px;
+    height: 100px;
+    background-image: url("imgs/monobuttons/redstripes.png") , linear-gradient(to bottom right, black, black, darkred);
+    background-size: 100%, 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: darkred;
+    border-style: solid;
+    border-width: 2px;
+
+}
+
+.sbluebttn {
+    width: 100px;
+    height: 100px;
+    background-image: url("imgs/monobuttons/bluestripes.png") , linear-gradient(to bottom right, black, black, blue);
+    background-size: 100%, 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: blue;
+    border-style: solid;
+    border-width: 2px;
+
+}
+
+.sgreenbttn {
+    width: 100px;
+    height: 100px;
+    background-image: url("imgs/monobuttons/greenstripes.png") , linear-gradient(to bottom right, black, black, green);
+    background-size: 100%, 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: green;
+    border-style: solid;
+    border-width: 2px;
+
+}
+
+.spurplebttn {
+    width: 100px;
+    height: 100px;
+    background-image: url("imgs/monobuttons/purplestripes.png") , linear-gradient(to bottom right, black, black, purple);
+    background-size: 100%, 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: purple;
+    border-style: solid;
+    border-width: 2px;
+
+}
+
+.sgoldbttn {
+    width: 100px;
+    height: 100px;
+    background-image: url("imgs/monobuttons/orangestripes.png") , linear-gradient(to bottom right, black, black, goldenrod);
+    background-size: 100%, 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: goldenrod;
+    border-style: solid;
+    border-width: 2px;
+
 }
 
 .h {

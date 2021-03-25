@@ -1,0 +1,24 @@
+@font-face {
+    font-family: nexabold;
+    src: url(fonts/nexabold.otf);
+  }
+  
+  @font-face {
+    font-family: nexalight;
+    src: url(fonts/nexalight.otf);
+  }
+  
+  * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0px;
+    padding: 0px;
+  
+  }
+  
+  body {
+    margin-top: 5rem;
+    margin-left: 2rem;
+    background: url(imgs/background.jpg) no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+  }
