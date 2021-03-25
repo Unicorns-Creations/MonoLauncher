@@ -12,7 +12,7 @@ function toTimeFormat(totalSeconds) {
 	return `${hours}:${minutes}:${seconds}`;
 }
 class PlayerList extends React.Component {
-	state = { query: { players: [] } };
+	state = { query: { players: [], maxplayers: 0 } };
 	intervalID = 0;
 	componentDidMount() {
 		this.updatePlayers();

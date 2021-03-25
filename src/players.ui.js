@@ -34,7 +34,7 @@ var PlayerList = function (_React$Component) {
 			args[_key] = arguments[_key];
 		}
 
-		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = PlayerList.__proto__ || Object.getPrototypeOf(PlayerList)).call.apply(_ref, [this].concat(args))), _this), _this.state = { query: { players: [] } }, _this.intervalID = 0, _temp), _possibleConstructorReturn(_this, _ret);
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = PlayerList.__proto__ || Object.getPrototypeOf(PlayerList)).call.apply(_ref, [this].concat(args))), _this), _this.state = { query: { players: [], maxplayers: 0 } }, _this.intervalID = 0, _temp), _possibleConstructorReturn(_this, _ret);
 	}
 
 	_createClass(PlayerList, [{
