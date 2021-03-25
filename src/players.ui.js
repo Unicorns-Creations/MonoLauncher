@@ -6,7 +6,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var _require = require('electron'),
+    clipboard = _require.clipboard;
+
 var gamedig = require('gamedig');
+var Button = MaterialUI.Button;
 function toTimeFormat(totalSeconds) {
 	hours = Math.floor(totalSeconds / 3600);
 	totalSeconds %= 3600;
@@ -64,6 +68,8 @@ var PlayerList = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
+			var _this3 = this;
+
 			return React.createElement(
 				'div',
 				{ id: 'player-holder' },
@@ -86,8 +92,25 @@ var PlayerList = function (_React$Component) {
 				),
 				React.createElement(
 					'h3',
-					{ style: { textAlign: "center", marginBottom: "10px" } },
+					{ style: { textAlign: 'center', marginBottom: '10px' } },
 					'Player List'
+				),
+				React.createElement(
+					Button,
+					{
+						variant: 'contained',
+						color: 'primary',
+						onClick: function onClick() {
+							clipboard.writeText(_this3.state.query.players.filter(function (f) {
+								return f.name && f.name.length > 1;
+							}).filter(function (f) {
+								return f.time < 86400;
+							}).map(function (f) {
+								return f.name + ' | ' + toTimeFormat(Math.ceil(f.time));
+							}).join('\n'));
+						}
+					},
+					'Copy Players to Clipboard'
 				),
 				React.createElement(
 					'div',
