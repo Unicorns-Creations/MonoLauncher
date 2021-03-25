@@ -86,13 +86,6 @@ app.on('activate', () => {
 ipc.on('game-launch', () => {
 	launchMonolith();
 });
-/*
-ipc.on('request-ram', () => {
-	window.webContents.send('ram', getramusage());
-});
-ipc.on('request-discord', () => {
-	window.webContents.send('discord', `${rpc.user.username}#${rpc.user.discriminator}`);
-});*/
 ipc.handle('request-ram', async (event) => {
 	var result = getramusage();
 	return result;
