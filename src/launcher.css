@@ -18,13 +18,41 @@
 body {
   margin-top: 5rem;
   margin-left: 2rem;
-  background: url(imgs/background.jpg) no-repeat center center fixed;
+  background: url(imgs/bg2.png) no-repeat center center fixed;
   background-size: cover;
   color: white;
 }
 
-#launch-mono-root {
+.gamelaunch {
   position: absolute;
+  font-family: nexalight;
   bottom: 25px;
   right: 15px;
+  width: 150px;
+  height: 50px;
+  background-color: black;
+  border: 0;
+  color: white;
+  transition-duration: 500ms;
+  opacity: 75%;
+}
+
+.gamelaunch:hover {
+  opacity: 90%;
+}
+
+
+#info {
+  color:gray;
+  font-family: nexalight;
+  font-size: 12px;
+  position: absolute;
+  bottom: 3%;
+  left: 3%;
+}
+
+#videoframe {
+  position: absolute;
+  top: 25%;
+  left: 3%;
 }
