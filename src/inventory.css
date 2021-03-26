@@ -94,6 +94,16 @@
     opacity: 65%;
 }
 
+.monocoin {
+    width: 75px;
+    height: 75px;
+    background-image: linear-gradient(to bottom right, black, black, darkgreen);
+    border: darkgreen;
+    border-style: solid;
+    border-width: 2px;
+    opacity: 65%;
+}
+
 .QA {
     position: absolute;
     bottom: 15px;
