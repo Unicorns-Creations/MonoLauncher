@@ -47,6 +47,27 @@
 
 }
 
+.orangebttn {
+    width: 100px;
+    height: 100px;
+    background-image: linear-gradient(to bottom right, black, black, darkorange);
+    border: darkorange;
+    border-style: solid;
+    border-width: 2px;
+
+}
+
+.bluebttn {
+    width: 100px;
+    height: 100px;
+    background-image: linear-gradient(to bottom right, black, black, darkblue);
+    border: darkblue;
+    border-style: solid;
+    border-width: 2px;
+
+}
+
+
 .sgraybttn {
     width: 100px;
     height: 100px;
@@ -76,11 +97,24 @@
 .sbluebttn {
     width: 100px;
     height: 100px;
-    background-image: url("imgs/monobuttons/bluestripes.png") , linear-gradient(to bottom right, black, black, blue);
+    background-image: url("imgs/monobuttons/bluestripes.png") , linear-gradient(to bottom right, black, black, darkblue);
     background-size: 100%, 100%;
     background-position: center;
     background-repeat: no-repeat;
-    border: blue;
+    border: darkblue;
+    border-style: solid;
+    border-width: 2px;
+
+}
+
+.slbluebttn {
+    width: 100px;
+    height: 100px;
+    background-image: url("imgs/monobuttons/lightbluestripes.png") , linear-gradient(to bottom right, black, black, teal);
+    background-size: 100%, 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: teal;
     border-style: solid;
     border-width: 2px;
 
