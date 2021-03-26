@@ -22,3 +22,7 @@
     background-size: cover;
     color: white;
   }
+  
+  #toolscontainer {
+    padding-top: 5px;
+  }
