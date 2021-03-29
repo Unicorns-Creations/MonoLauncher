@@ -9,7 +9,7 @@ window.addEventListener('load', function() {
 	var Button = MaterialUI.Button;
 	const element = (
 		<div>
-			<Button color="primary" variant="contained" onClick={() => launchMonolith()} >
+			<Button color="primary" variant="contained" onClick={() => launchMonolith()}>
 				Launch Monolith
 			</Button>
 		</div>
