@@ -99,7 +99,7 @@ var PlayerList = function (_React$Component) {
 					Button,
 					{
 						variant: 'contained',
-						color: 'primary',						
+						color: 'primary',
 						onClick: function onClick() {
 							clipboard.writeText(_this3.state.query.players.filter(function (f) {
 								return f.name && f.name.length > 1;

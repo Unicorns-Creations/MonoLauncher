@@ -20,5 +20,5 @@ window.addEventListener('load', function () {
 			'Launch Monolith'
 		)
 	);
-	ReactDOM.render(element, document.getElementById('launch-mono-root'));
+	// ReactDOM.render(element, document.getElementById('launch-mono-root'));
 });
