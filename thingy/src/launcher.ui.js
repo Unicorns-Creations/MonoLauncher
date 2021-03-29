@@ -14,5 +14,5 @@ window.addEventListener('load', function() {
 			</Button>
 		</div>
 	);
-	ReactDOM.render(element, document.getElementById('launch-mono-root'));
+	// ReactDOM.render(element, document.getElementById('launch-mono-root'));
 });
