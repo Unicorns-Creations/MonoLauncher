@@ -1,6 +1,7 @@
 const clientId = '810552076304121866';
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+var fs = require('fs');
 const ipc = require('electron').ipcMain;
 const { findSteam } = require('find-steam-app');
 const cp = require('child_process');
@@ -92,6 +93,10 @@ ipc.handle('request-ram', async (event) => {
 });
 ipc.handle('request-discord', async (event) => {
 	var result = `${rpc.user.username}#${rpc.user.discriminator}`;
+	return result;
+});
+ipc.handle('request-pkgjson', async (event) => {
+	var result = JSON.parse(fs.readFileSync('package.json').toString());
 	return result;
 });
 ipc.on('join-discord', async () => {
