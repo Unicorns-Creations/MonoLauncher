@@ -14,7 +14,6 @@
 </header>
 
 <body>
-    <span id="reee" style="color: red;">I'm not finished so of-course things are out of place and are gonna be messed up...<br>Just make the window full-screen for now.</span>
     <span id="actionBar"><a onclick="window.location.href='../../monotablet.html'"><i class="fas fa-chevron-circle-left"></i></a> 100% <i class="fas fa-battery-full"></i> <i class="fas fa-wifi"></i> <span id="timeNow">00:00:00</span></span>
     <script>
 function currentTime() {
@@ -43,36 +42,17 @@ currentTime();
 
     <div id="participants">
         <input id="search">
-        <button onclick="createNew()">Test</button> <button onclick="createNewBig()">Test 2</button>
         <li><img id="participantAvatar" src="https://png.pngitem.com/pimgs/s/338-3388366_meme-for-steam-avatars-hd-png-download.png"> <span id="participantName">Sad Pepe</span></li>
         <li><img id="participantAvatar" src="https://monolithservers.com/forums/data/avatars/l/6/6473.jpg"> <span id="participantName">Jacub Andersson</span></li>
-    </div>
-
-    <script>
-      function createNew() {
-       
-        var pParent = document.getElementById("messageContainer");
-        var pMessage = document.createElement("li");
-
-        pMessage.innerHTML = "This is an example message, how cool is that?";
-        pParent.appendChild(pMessage);
-      }
-
-      function createNewBig() {
-       
-       var pParent = document.getElementById("messageContainer");
-       var pMessage = document.createElement("li");
-
-       pMessage.innerHTML = "Now this is a more bigger message with ton of more text, this is to text the maximum height of a message, pretty pog isn't it? Is this message to long per chance? I do not really know.........";
-       pParent.appendChild(pMessage);
-     }
-    </script>
+    </div>    
 
     <div id="messages">
         <div id="messageAuthor">
             <img id="AuthorAvatar" src="https://png.pngitem.com/pimgs/s/338-3388366_meme-for-steam-avatars-hd-png-download.png"> <h2 id="AuthorName">Sad Pepe</h2>
         </div>   
-        <div id="messageContainer"></div>     
+        <div id="messageContainer">
+         
+        </div>     
 
     </div>
 
