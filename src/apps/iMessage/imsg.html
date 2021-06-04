@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="monotablet.css">
+  <link rel="stylesheet" href="imsg.css">
   <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
   <script src="monotablet.js" crossorigin="anonymous"></script>
 </head>
@@ -15,7 +15,7 @@
 
 <body>
     <span id="reee" style="color: red;">I'm not finished so of-course things are out of place and are gonna be messed up...<br>Just make the window full-screen for now.</span>
-    <span id="actionBar">100% <i class="fas fa-battery-full"></i> <i class="fas fa-wifi"></i> <span id="timeNow">00:00:00</span></span>
+    <span id="actionBar"><a onclick="window.location.href='../../monotablet.html'"><i class="fas fa-chevron-circle-left"></i></a> 100% <i class="fas fa-battery-full"></i> <i class="fas fa-wifi"></i> <span id="timeNow">00:00:00</span></span>
     <script>
 function currentTime() {
   var date = new Date(); 
@@ -41,13 +41,15 @@ function updateTime(k) {
 currentTime();
         </script>
 
-    <div id="tabletContainer">
-        <button id="iMsg" class="app" onclick="window.location.href='apps/IMessage/imsg.html'"><i class="fas fa-comment" style="color: white; font-size: xx-large;"></i><br><span style="text-align: center;padding-top: 3px; color: white;">IMessage</span></button>
+    <div id="participants">
+        <input id="search">
     </div>
 
-    <span id="participants">
-
-    </span>
+    <div id="messages">
+        <div id="messageAuthor">
+            <img id="AuthorAvatar" src="https://png.pngitem.com/pimgs/s/338-3388366_meme-for-steam-avatars-hd-png-download.png"> <h2 id="AuthorName">Sad Pepe</h2>
+        </div>
+    </div>
 
     <script>
 

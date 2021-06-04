@@ -1,167 +1,41 @@
-.greenbttn {
-    width: 100px;
-    height: 100px;
-    background-image: linear-gradient(to bottom right, black, black, green);
-    border: green;
-    border-style: solid;
-    border-width: 2px;
+.app {
+    width: 90px;
+    height: 90px;
+    background-image: linear-gradient(to bottom left, #322a35, #342c3b);
+    border: none;
+    border-radius: 15%;
+    color: white;
 }
 
-.redbttn {
-    width: 100px;
-    height: 100px;
-    background-image: linear-gradient(to bottom right, black, black, darkred);
-    border: darkred;
-    border-style: solid;
-    border-width: 2px;
-
+.fas {
+    font-size: xx-large;
 }
 
-.purplebttn {
-    width: 100px;
-    height: 100px;
-    background-image: linear-gradient(to bottom right, black, black, purple);
-    border: purple;
-    border-style: solid;
-    border-width: 2px;
-
+.fab {
+    font-size: xx-large;
 }
 
-.goldbttn {
-    width: 100px;
-    height: 100px;
-    background-image: linear-gradient(to bottom right, black, black, goldenrod);
-    border: goldenrod;
-    border-style: solid;
-    border-width: 2px;
+.app:hover {    
+    background: linear-gradient(270deg, #bb4519, #246655, #342c3b);
+    background-size: 600% 600%;
 
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
 }
 
-.graybttn {
-    width: 100px;
-    height: 100px;
-    background-image: linear-gradient(to bottom right, black, black, gray);
-    border: gray;
-    border-style: solid;
-    border-width: 2px;
-
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
-
-.orangebttn {
-    width: 100px;
-    height: 100px;
-    background-image: linear-gradient(to bottom right, black, black, darkorange);
-    border: darkorange;
-    border-style: solid;
-    border-width: 2px;
-
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
-
-.bluebttn {
-    width: 100px;
-    height: 100px;
-    background-image: linear-gradient(to bottom right, black, black, darkblue);
-    border: darkblue;
-    border-style: solid;
-    border-width: 2px;
-
-}
-
-
-.sgraybttn {
-    width: 100px;
-    height: 100px;
-    background-image: url("imgs/monobuttons/graystripes.png") , linear-gradient(to bottom right, black, black, gray);
-    background-size: 100%, 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: gray;
-    border-style: solid;
-    border-width: 2px;
-
-}
-
-.sredbttn {
-    width: 100px;
-    height: 100px;
-    background-image: url("imgs/monobuttons/redstripes.png") , linear-gradient(to bottom right, black, black, darkred);
-    background-size: 100%, 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: darkred;
-    border-style: solid;
-    border-width: 2px;
-
-}
-
-.sbluebttn {
-    width: 100px;
-    height: 100px;
-    background-image: url("imgs/monobuttons/bluestripes.png") , linear-gradient(to bottom right, black, black, darkblue);
-    background-size: 100%, 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: darkblue;
-    border-style: solid;
-    border-width: 2px;
-
-}
-
-.slbluebttn {
-    width: 100px;
-    height: 100px;
-    background-image: url("imgs/monobuttons/lightbluestripes.png") , linear-gradient(to bottom right, black, black, teal);
-    background-size: 100%, 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: teal;
-    border-style: solid;
-    border-width: 2px;
-
-}
-
-.sgreenbttn {
-    width: 100px;
-    height: 100px;
-    background-image: url("imgs/monobuttons/greenstripes.png") , linear-gradient(to bottom right, black, black, green);
-    background-size: 100%, 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: green;
-    border-style: solid;
-    border-width: 2px;
-
-}
-
-.spurplebttn {
-    width: 100px;
-    height: 100px;
-    background-image: url("imgs/monobuttons/purplestripes.png") , linear-gradient(to bottom right, black, black, purple);
-    background-size: 100%, 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: purple;
-    border-style: solid;
-    border-width: 2px;
-
-}
-
-.sgoldbttn {
-    width: 100px;
-    height: 100px;
-    background-image: url("imgs/monobuttons/orangestripes.png") , linear-gradient(to bottom right, black, black, goldenrod);
-    background-size: 100%, 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: goldenrod;
-    border-style: solid;
-    border-width: 2px;
-
-}
-
-.h {
-    transition-duration: 500ms;
-}
-.h:hover {
-    opacity: 80%;
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }

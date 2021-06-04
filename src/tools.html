@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="tools.css">
   <link rel="stylesheet" href="menu.css">
   <link rel="stylesheet" href="monobuttons.css">
+  <script src="tools.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
 </head>
@@ -21,15 +23,15 @@
   <div id="toolscontainer">
     <h1>Unavailable</h1>
     <p id="description">These tools are unavailable, probably haven't been started on yet..</p>
-    <button class="greenbttn h"><img src="imgs/calculator.png" style="width: 75%;height: 75%;"></button>
-    <button class="sgoldbttn h"><img src="imgs/misc_unicorn.png" style="width: 75%;height: 75%;"></button>
+    <button class="app" title="Unknown App"><i class="fas fa-calculator"></i></button>
+    <button class="app" title="Unknown App"><i class="fas fa-question"></i></button>
   </div>
   <div id="toolscontainer">
     <h1>Available</h1>
     <p id="description">These are tools that are somewhat functional right now!</p>
-    <button class="orangebttn h" onclick="window.location.href='inventory.html'"><img src="imgs/invicon.png" style="width: 75%;height: 75%;"></button>
-    <button class="orangebttn h" onclick="window.location.href='monotablet.html'"><img src="imgs/weeeee.png" style="width: 75%;height: 75%;"></button>
-    <button class="orangebttn h" onclick="window.location.href='dev.html'"><img src="imgs/usericon.png" style="width: 75%;height: 75%;"></button>
+    <button class="app" onclick="window.location.href='inventory.html'" title="Inventory Preview"><i class="fas fa-suitcase-rolling"></i></button>
+    <button class="app" onclick="MonoTablet()" title="Monotablet"><i class="fas fa-tablet-alt"></i></button>
+    <button class="app" onclick="window.location.href='dev.html'" title="Dev"><i class="fab fa-dev"></i></button>
   </div>
   <script src="header.ui.js"></script>
 </body>

@@ -1,5 +1,5 @@
 const clientId = '810552076304121866';
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 var fs = require('fs');
 const ipc = require('electron').ipcMain;
@@ -50,11 +50,13 @@ const createWindow = async () => {
 		width: 800,
 		height: 600,
 		title: 'MonoLauncher - Launching',
+		toolbar: false,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false
 		}
 	});
+	Menu.setApplicationMenu(null)
 	mainWindow.setMenuBarVisibility(false);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'launcher.html'));
