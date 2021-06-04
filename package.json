@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "discord-rpc": "^3.2.0",
+    "discord.js": "^12.5.3",
     "electron-builder-squirrel-windows": "^22.10.5",
     "electron-squirrel-startup": "^1.0.0",
     "find-steam-app": "^1.0.2",
