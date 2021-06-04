@@ -1,8 +1,8 @@
 
 body {
-    background-image: url('imgs/monotablet.png');
-    background-repeat: no-repeat;
-    background-color: black;
+    background-image: url('imgs/monotablet.png') !important;
+    background-repeat: no-repeat !important;
+    background-color: black !important;
 }
 
 #reee {
@@ -16,7 +16,7 @@ body {
     position: fixed;
     top: 4rem;
     left: 50rem;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 #tabletContainer {
