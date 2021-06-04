@@ -7,6 +7,7 @@ const { findSteam } = require('find-steam-app');
 const cp = require('child_process');
 var window;
 var os = require('os');
+var { Collection } = require('discord.js');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
 	// eslint-disable-line global-require
@@ -18,6 +19,26 @@ const startTimestamp = new Date();
 async function launchMonolith() {
 	var SteamLocation = await findSteam();
 	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
+}
+
+async function getConversations() {
+	return new Promise(async (resolve, reject) => {
+		var SteamLocation = await findSteam();
+		var chatsC = new Collection();
+		try {
+			var datadir = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'garrysmod', 'data');
+			var chatdir = path.join(datadir, 'chats');
+			var chats = fs.readdirSync(chatdir);
+			chats.forEach((chatFile) => {
+				var chat = JSON.parse(fs.readFileSync(path.join(chatdir, chatFile)).toString());
+				chat.chats = chat.chats.reverse();
+				chatsC.set(chatFile.split('.txt')[0], chat);
+			});
+			resolve(chatsC);
+		} catch (e) {
+			resolve('404');
+		}
+	});
 }
 
 function getramusage() {
@@ -56,7 +77,7 @@ const createWindow = async () => {
 			contextIsolation: false
 		}
 	});
-	Menu.setApplicationMenu(null)
+	Menu.setApplicationMenu(null);
 	mainWindow.setMenuBarVisibility(false);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'launcher.html'));
@@ -99,6 +120,10 @@ ipc.handle('request-discord', async (event) => {
 });
 ipc.handle('request-pkgjson', async (event) => {
 	var result = JSON.parse(fs.readFileSync('package.json').toString());
+	return result;
+});
+ipc.handle('request-imsgs', async (event) => {
+	var result = await getConversations();
 	return result;
 });
 ipc.on('join-discord', async () => {
