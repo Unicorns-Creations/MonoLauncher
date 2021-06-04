@@ -56,7 +56,7 @@ const createWindow = async () => {
 			contextIsolation: false
 		}
 	});
-	//Menu.setApplicationMenu(null)
+	Menu.setApplicationMenu(null)
 	mainWindow.setMenuBarVisibility(false);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'launcher.html'));
