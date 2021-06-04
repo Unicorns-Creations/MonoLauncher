@@ -42,6 +42,7 @@ currentTime();
 
     <div id="participants">
         <input id="search">
+        <button onclick="createNew()">New participants</button> <button onclick="createMsg()">New Msg</button>
         <li><img id="participantAvatar" src="https://png.pngitem.com/pimgs/s/338-3388366_meme-for-steam-avatars-hd-png-download.png"> <span id="participantName">Sad Pepe</span></li>
         <li><img id="participantAvatar" src="https://monolithservers.com/forums/data/avatars/l/6/6473.jpg"> <span id="participantName">Jacub Andersson</span></li>
     </div>    
@@ -56,8 +57,31 @@ currentTime();
 
     </div>
 
-    <script>
+    <script>      
+      function createNew() {
+      var pParent = document.getElementById("participants");
+      var pNew = document.createElement("li");
+      var pAvatar = document.createElement("img");
+      var pName = document.createElement("span")
 
+      pAvatar.src = "https://picsum.photos/200";
+      pAvatar.id = "participantAvatar";
+      pName.id = "participantName";
+      pName.innerHTML = " Unknown Name";
+
+      pNew.appendChild(pAvatar);
+      pNew.appendChild(pName);
+      pParent.appendChild(pNew);
+      }
+
+      function createMsg() {
+        var mParent = document.getElementById("messages");
+        var mNew = document.createElement("li");
+
+        mNew.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis metus quis eros suscipit suscipit eu rhoncus metus. Etiam rutrum iaculis sollicitudin. Praesent lacus purus, hendrerit in felis nec, feugiat ultrices nisi. Maecenas lacinia diam enim, scelerisque porta purus placerat nec. Maecenas eu libero hendrerit, placerat nulla quis, suscipit urna. Morbi ornare metus sit amet suscipit imperdiet. Pellentesque lorem quam, suscipit quis blandit id, egestas nec massa. Sed laoreet nunc et lacus congue faucibus. Integer mattis justo vitae maximus pellentesque. Nunc sit amet tellus commodo, euismod nisl ut, consectetur libero. Mauris mattis neque in elit placerat varius. Quisque gravida magna mauris, in feugiat dolor mollis ac. Vestibulum hendrerit massa non ligula interdum, ac dapibus lacus luctus. Suspendisse velit nisi, consectetur ac fringilla in, aliquam et quam. Maecenas nunc quam, placerat vitae est vel, cursus rhoncus massa. In condimentum felis augue, nec rhoncus velit ornare vel."
+
+        mParent.appendChild(mNew);
+      }
     </script>
 
 </body>
