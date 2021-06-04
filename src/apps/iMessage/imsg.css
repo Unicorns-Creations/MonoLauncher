@@ -27,6 +27,46 @@ body {
     height: 29rem;
     top: 5.4rem;
     left: 3.8rem;
+    list-style-type: none;
+    min-height: 29rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+background-color: #242424;
+}
+
+::-webkit-scrollbar-thumb {
+background-color: #2f2f2f;
+}
+
+::-webkit-scrollbar-button {
+background-color: #4a4a4a;
+}
+
+#participants li {
+    padding: 1rem;
+}
+
+#participants li:nth-child(odd) {
+    background-color: #333333;
+}
+
+#participantAvatar {
+    width: 18%;
+    border-radius: 100%;
+    vertical-align: middle;
+}
+
+#participantName {
+    display: inline;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
 }
 
 #messages {
@@ -37,34 +77,57 @@ body {
     height: 29rem;
     top: 5.4rem;
     left: 18.6rem;
+    list-style-type: none;
+    min-height: 29rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#messages li {
+    margin-top: 0.5rem;
+    padding: 1rem;   
+    min-width: 5rem;
+    min-height: 3rem;    
+    max-width: 16rem;
+    max-height: 16rem;
+    border-radius: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #179c5e;
+}
+
+#messages li:nth-child(even) {
+    background-color: #1b75b5;
+}
+
+#messageContainer {
+    padding: 1rem;
 }
 
 #search {
     background-color: #3a3939;
     border: black;
     border-style: solid;
-    width: 14.1rem;
+    border-width: 1px;
+    width: 14.3rem;
     color: white;
 }
 
 #messageAuthor {
     background-color: #303030;
     height: 5rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
 }
 
 #AuthorAvatar {
     width: 4rem;
     border-radius: 75%;
-    position: fixed;
-    top: 6rem;
-    left: 21rem;
+    vertical-align: middle;
 }
 
 #AuthorName {
     font-family: Arial, Helvetica, sans-serif;
-    position: fixed;
-    top: 5.5rem;
-    left: 25.5rem;
+    display: inline;
 }
 
 .app {
