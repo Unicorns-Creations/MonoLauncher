@@ -17,16 +17,55 @@ const DiscordRPC = require('discord-rpc');
 var rpc = new DiscordRPC.Client({ transport: 'ipc' });
 const startTimestamp = new Date();
 
+function nthMostCommon(string, amount) {
+	var wordsArrayr = string.split(/\s/);
+	var wordsArray = wordsArrayr.filter((f) => f.length > 0).map((f) => String(f).toLowerCase());
+	var wordOccurrences = {};
+	for (var i = 0; i < wordsArray.length; i++) {
+		wordOccurrences['_' + wordsArray[i]] = (wordOccurrences['_' + wordsArray[i]] || 0) + 1;
+	}
+	var result = Object.keys(wordOccurrences).reduce(function(acc, currentKey) {
+		/* you may want to include a binary search here */
+		for (var i = 0; i < amount; i++) {
+			if (!acc[i]) {
+				acc[i] = { word: currentKey.slice(1, currentKey.length), occurences: wordOccurrences[currentKey] };
+				break;
+			} else if (acc[i].occurences < wordOccurrences[currentKey]) {
+				acc.splice(i, 0, {
+					word: currentKey.slice(1, currentKey.length),
+					occurences: wordOccurrences[currentKey]
+				});
+				if (acc.length > amount) acc.pop();
+				break;
+			}
+		}
+		return acc;
+	}, []);
+	return result;
+}
+
 async function getConvInfo() {
-	var convos = await getConversations();
-	var bigmsg = convos.map((c) => c.chats.map((f) => f.msg).join(' ')).join(' ');
-	var camount = convos.size;
+	return new Promise(async (resolve, reject) => {
+		var convos = await getConversations();
+		if (convos == '404') {
+			resolve(
+				`An error occured in the process of retrieving iMessages. It could possibly be that we simply couldn't find your Garry's Mod installation.`
+			);
+		}
+		var bigmsg = await convos.map((c) => c.chats.map((f) => f.msg).join(' ')).join(' ');
+		var camount = convos.size;
+		var mostcommonw = nthMostCommon(bigmsg, 20).map((f) => `${f.word} [${f.occurences}]`).join('\n');
+		var bignames = await convos.map((c) => c.name).join(' ');
+		var mostcommonn = nthMostCommon(bignames, 5).map((f) => `${f.word} [${f.occurences}]`).join('\n');
+		resolve(
+			`Found ${camount} conversations. Where the 20 most common words are:\n\n${mostcommonw}\nAnd the 5 most common first names/last names are:\n\n${mostcommonn}`.replaceAll("\n", "<br>")
+		);
+	});
 }
 
 async function launchMonolith() {
-	//var SteamLocation = await findSteam();
-	//cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
-	getConvInfo();
+	var SteamLocation = await findSteam();
+	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
 }
 
 async function getConversations() {
@@ -85,8 +124,8 @@ const createWindow = async () => {
 			contextIsolation: false
 		}
 	});
-	Menu.setApplicationMenu(null);
-	mainWindow.setMenuBarVisibility(false);
+	//Menu.setApplicationMenu(null);
+	mainWindow.setMenuBarVisibility(true);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'launcher.html'));
 	mainWindow.setTitle('MonoLauncher');
@@ -132,6 +171,10 @@ ipc.handle('request-pkgjson', async (event) => {
 });
 ipc.handle('request-imsgs', async (event) => {
 	var result = await getConversations();
+	return result;
+});
+ipc.handle('request-convinfo', async (event) => {
+	var result = await getConvInfo();
 	return result;
 });
 ipc.on('join-discord', async () => {
