@@ -16,9 +16,17 @@ if (require('electron-squirrel-startup')) {
 const DiscordRPC = require('discord-rpc');
 var rpc = new DiscordRPC.Client({ transport: 'ipc' });
 const startTimestamp = new Date();
+
+async function getConvInfo() {
+	var convos = await getConversations();
+	var bigmsg = convos.map((c) => c.chats.map((f) => f.msg).join(' ')).join(' ');
+	var camount = convos.size;
+}
+
 async function launchMonolith() {
-	var SteamLocation = await findSteam();
-	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
+	//var SteamLocation = await findSteam();
+	//cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
+	getConvInfo();
 }
 
 async function getConversations() {
