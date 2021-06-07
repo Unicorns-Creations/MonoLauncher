@@ -48,7 +48,7 @@
   </script>
 
   <div id="participants">
-    <input id="search">
+    <input id="search" onChange="addUsers(this.value);">
     <button onclick="createMsg()">New Msg</button>
   </div>
 
@@ -89,9 +89,7 @@
         result.forEach(rs => {
           if (rs.id != id) return
           authorElement.innerText = rs.name
-          console.log(rs)
           rs.chats.forEach(chat => {
-            console.log(chat)
             createMsg(chat.msg, chat.isLocal)
           })
         })
@@ -117,15 +115,21 @@
       pNew.appendChild(pName);
       pParent.appendChild(pNew);
     }
-    ipcRenderer.invoke('request-imsgs').then(function (result) {
-      if (result == "404") {
-        createNew("Couldn't find Gmod")
-      }
-      result.forEach(rs => {
-        console.log(rs)
-        createNew(rs.name, rs.id)
-      })
-    });
+
+    function addUsers(search) {
+      if (!search) search = ""
+      document.querySelectorAll("#participants > li").forEach(f => f.remove())
+      ipcRenderer.invoke('request-imsgs').then(function (result) {
+        if (result == "404") {
+          createNew("Couldn't find Gmod")
+        }
+        result.forEach(rs => {
+          if (String(rs.name).toLowerCase().includes(String(search).toLowerCase())) {
+            createNew(rs.name, rs.id)
+          }
+        })
+      });
+    }
 
     function createMsg(message, self) {
       var mParent = document.getElementById("messageContainer");
@@ -139,6 +143,8 @@
       }
       mParent.appendChild(mNew);
     }
+
+    addUsers()
   </script>
 
 </body>
