@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="imsg.css">
   <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
-  <script src="monotablet.js" crossorigin="anonymous"></script>
+  <script src="imsg.js" crossorigin="anonymous"></script>
 </head>
 
 <header>
@@ -18,6 +18,10 @@
         class="fas fa-chevron-circle-left"></i></a> 100% <i class="fas fa-battery-full"></i> <i class="fas fa-wifi"></i>
     <span id="timeNow">00:00:00</span></span>
   <script>
+    const {
+      ipcRenderer
+    } = require('electron');
+
     function currentTime() {
       var date = new Date();
       var hour = date.getHours();
@@ -45,13 +49,12 @@
 
   <div id="participants">
     <input id="search">
-    <button onclick="createNew()">New participants</button> <button onclick="createMsg()">New Msg</button>
+    <button onclick="createMsg()">New Msg</button>
   </div>
 
   <div id="messages">
     <div id="messageAuthor">
-      <img id="AuthorAvatar"
-        src="https://png.pngitem.com/pimgs/s/338-3388366_meme-for-steam-avatars-hd-png-download.png">
+      <img id="AuthorAvatar" src="../../imgs/squestion.jpg">
       <h2 id="AuthorName">WIP</h2>
     </div>
     <div id="messageContainer">
@@ -61,21 +64,41 @@
   </div>
 
   <script>
-    function createNew() {
+    function map(fn, map) {
+      if (typeof thisArg !== 'undefined')
+        fn = fn.bind(thisArg);
+      const iter = map.entries();
+      return Array.from({
+        length: map.size
+      }, () => {
+        const [key, value] = iter.next().value;
+        return fn(value, key, this);
+      });
+    }
+
+    function createNew(name) {
       var pParent = document.getElementById("participants");
       var pNew = document.createElement("li");
       var pAvatar = document.createElement("img");
       var pName = document.createElement("span")
 
-      pAvatar.src = "https://picsum.photos/200";
+      pAvatar.src = "../../imgs/squestion.jpg";
       pAvatar.id = "participantAvatar";
       pName.id = "participantName";
-      pName.innerHTML = " Unknown Name";
+      pName.innerHTML = ` ${name}`;
 
       pNew.appendChild(pAvatar);
       pNew.appendChild(pName);
       pParent.appendChild(pNew);
     }
+    ipcRenderer.invoke('request-imsgs').then(function (result) {
+      if (result == "404") {
+        createNew("Couldn't find Gmod")
+      }
+      map(f => f.name, result).forEach(name => {
+        createNew(name)
+      })
+    });
 
     function createMsg() {
       var mParent = document.getElementById("messages");
