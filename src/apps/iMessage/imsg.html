@@ -89,9 +89,7 @@
         result.forEach(rs => {
           if (rs.id != id) return
           authorElement.innerText = rs.name
-          console.log(rs)
           rs.chats.forEach(chat => {
-            console.log(chat)
             createMsg(chat.msg, chat.isLocal)
           })
         })
@@ -127,7 +125,6 @@
         }
         result.forEach(rs => {
           if (String(rs.name).toLowerCase().includes(String(search).toLowerCase())) {
-            console.log(rs)
             createNew(rs.name, rs.id)
           }
         })
