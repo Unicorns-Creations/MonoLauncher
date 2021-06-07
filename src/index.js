@@ -79,6 +79,7 @@ async function getConversations() {
 			chats.forEach((chatFile) => {
 				var chat = JSON.parse(fs.readFileSync(path.join(chatdir, chatFile)).toString());
 				chat.chats = chat.chats.reverse();
+				chat.id = chatFile.split(".txt")[0]
 				chatsC.set(chatFile.split('.txt')[0], chat);
 			});
 			resolve(chatsC);

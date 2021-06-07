@@ -76,7 +76,29 @@
       });
     }
 
-    function createNew(name) {
+    async function getMessages(id) {
+      ipcRenderer.invoke('request-imsgs').then(function (result) {
+        if (result == "404") {
+          createMsg("Couldn't find Gmod", true)
+          return
+        }
+        var mParent = document.getElementById("messageContainer");
+        var authorElement = document.getElementById("AuthorName");
+
+        mParent.innerHTML = ""
+        result.forEach(rs => {
+          if (rs.id != id) return
+          authorElement.innerText = rs.name
+          console.log(rs)
+          rs.chats.forEach(chat => {
+            console.log(chat)
+            createMsg(chat.msg, chat.isLocal)
+          })
+        })
+      });
+    }
+
+    function createNew(name, id) {
       var pParent = document.getElementById("participants");
       var pNew = document.createElement("li");
       var pAvatar = document.createElement("img");
@@ -86,7 +108,11 @@
       pAvatar.id = "participantAvatar";
       pName.className = "participantName";
       pName.innerHTML = ` ${name}`;
+      pName.id = id
 
+      pNew.onclick = function () {
+        getMessages(id)
+      }
       pNew.appendChild(pAvatar);
       pNew.appendChild(pName);
       pParent.appendChild(pNew);
@@ -95,8 +121,9 @@
       if (result == "404") {
         createNew("Couldn't find Gmod")
       }
-      map(f => f.name, result).forEach(name => {
-        createNew(name)
+      result.forEach(rs => {
+        console.log(rs)
+        createNew(rs.name, rs.id)
       })
     });
 
