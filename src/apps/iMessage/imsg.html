@@ -100,13 +100,16 @@
       })
     });
 
-    function createMsg() {
+    function createMsg(message, self) {
       var mParent = document.getElementById("messageContainer");
       var mNew = document.createElement("li");
 
-      mNew.innerHTML =
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis metus quis eros suscipit suscipit eu rhoncus metus. Etiam rutrum iaculis sollicitudin. Praesent lacus purus, hendrerit in felis nec, feugiat ultrices nisi. Maecenas lacinia diam enim, scelerisque porta purus placerat nec. Maecenas eu libero hendrerit, placerat nulla quis, suscipit urna. Morbi ornare metus sit amet suscipit imperdiet. Pellentesque lorem quam, suscipit quis blandit id, egestas nec massa. Sed laoreet nunc et lacus congue faucibus. Integer mattis justo vitae maximus pellentesque. Nunc sit amet tellus commodo, euismod nisl ut, consectetur libero. Mauris mattis neque in elit placerat varius. Quisque gravida magna mauris, in feugiat dolor mollis ac. Vestibulum hendrerit massa non ligula interdum, ac dapibus lacus luctus. Suspendisse velit nisi, consectetur ac fringilla in, aliquam et quam. Maecenas nunc quam, placerat vitae est vel, cursus rhoncus massa. In condimentum felis augue, nec rhoncus velit ornare vel."
-
+      mNew.innerHTML = message
+      if (self) {
+        mNew.className = "self"
+      } else {
+        mNew.className = "opp"
+      }
       mParent.appendChild(mNew);
     }
   </script>

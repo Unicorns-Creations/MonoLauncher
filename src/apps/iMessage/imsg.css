@@ -62,7 +62,7 @@ background-color: #4a4a4a;
     padding: 1rem;
 }
 
-#participants li:nth-child(odd) {
+#participants .opp {
     background-color: #333333;
 }
 
@@ -123,7 +123,7 @@ background-color: #4a4a4a;
     visibility: hidden;
 }
 
-#messages li:nth-child(even) {
+#messages .self {
     background-color: #1b75b5;
 }
 
