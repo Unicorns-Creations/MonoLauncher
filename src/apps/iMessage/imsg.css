@@ -60,6 +60,7 @@ background-color: #4a4a4a;
 
 #participants li {
     padding: 1rem;
+    cursor: pointer;
 }
 
 #participants .opp {
@@ -103,7 +104,7 @@ background-color: #4a4a4a;
     max-height: 16rem;
     border-radius: 1rem;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #179c5e;
+    background-color: #1b75b5;
     overflow-y: auto;
 }
 
@@ -125,7 +126,7 @@ background-color: #4a4a4a;
 }
 
 #messages .self {
-    background-color: #1b75b5;
+    background-color: #179c5e;
 }
 
 #messageContainer {
