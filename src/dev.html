@@ -23,7 +23,7 @@
       showLoaderOnConfirm: true,
       preConfirm: (login) => {
         return ipcRenderer.invoke('request-convinfo').then((result) => {
-         return result
+          return result
         });
       },
       allowOutsideClick: () => !Swal.isLoading()

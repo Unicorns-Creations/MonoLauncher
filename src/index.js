@@ -58,7 +58,10 @@ async function getConvInfo() {
 		var bignames = await convos.map((c) => c.name).join(' ');
 		var mostcommonn = nthMostCommon(bignames, 5).map((f) => `${f.word} [${f.occurences}]`).join('\n');
 		resolve(
-			`Found ${camount} conversations. Where the 20 most common words are:\n\n${mostcommonw}\nAnd the 5 most common first names/last names are:\n\n${mostcommonn}`.replaceAll("\n", "<br>")
+			`Found ${camount} conversations. Where the 20 most common words are:\n\n${mostcommonw}\nAnd the 5 most common first names/last names are:\n\n${mostcommonn}`.replaceAll(
+				'\n',
+				'<br>'
+			)
 		);
 	});
 }
@@ -79,7 +82,7 @@ async function getConversations() {
 			chats.forEach((chatFile) => {
 				var chat = JSON.parse(fs.readFileSync(path.join(chatdir, chatFile)).toString());
 				chat.chats = chat.chats.reverse();
-				chat.id = chatFile.split(".txt")[0]
+				chat.id = chatFile.split('.txt')[0];
 				chatsC.set(chatFile.split('.txt')[0], chat);
 			});
 			resolve(chatsC);

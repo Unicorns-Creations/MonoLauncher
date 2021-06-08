@@ -32,7 +32,8 @@
 
 <script>
   ipcRenderer.invoke('request-pkgjson').then((result) => {
-    document.getElementById("info").innerText = `Monolith Ver. ${result.monoversion} - App Ver. ${result.version} - Background by Hawke`
+    document.getElementById("info").innerText =
+      `Monolith Ver. ${result.monoversion} - App Ver. ${result.version} - Background by Hawke`
   })
 </script>
 
