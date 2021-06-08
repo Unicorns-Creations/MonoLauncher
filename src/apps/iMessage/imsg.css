@@ -127,6 +127,7 @@ background-color: #4a4a4a;
 
 #messages .self {
     background-color: #179c5e;
+    margin-left: 333px;
 }
 
 #messageContainer {
