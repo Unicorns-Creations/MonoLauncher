@@ -120,13 +120,14 @@ const createWindow = async () => {
 		height: 600,
 		title: 'MonoLauncher - Launching',
 		toolbar: false,
+		autoHideMenuBar: true,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false
 		}
 	});
-	//Menu.setApplicationMenu(null);
-	mainWindow.setMenuBarVisibility(true);
+	Menu.setApplicationMenu(null);
+	mainWindow.setMenuBarVisibility(false);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'launcher.html'));
 	mainWindow.setTitle('MonoLauncher');
