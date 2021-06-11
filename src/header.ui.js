@@ -54,9 +54,9 @@ var NavBar = function (_React$Component) {
 					React.createElement(
 						"button",
 						{ className: "navbutton", onClick: function onClick() {
-								return window.location.href = "tools.html";
+								return window.location.href = "Menu.html";
 							} },
-						"Tools"
+						"Menu"
 					)
 				)
 			);
