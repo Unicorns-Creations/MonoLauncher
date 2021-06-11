@@ -21,8 +21,8 @@ class NavBar extends React.Component {
 					<button className="navbutton" onClick={() => window.location.href="players.html"}>
 						Players
 					</button>
-					<button className="navbutton" onClick={() => window.location.href="tools.html"}>
-						Tools
+					<button className="navbutton" onClick={() => window.location.href="Menu.html"}>
+						Menu
 					</button>
 				</div>
 			</div>
