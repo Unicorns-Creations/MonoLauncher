@@ -114,7 +114,7 @@ async function setgmodlocation() {
 	try {
 		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
 	} catch (e) {}
-	console.log('passed');
+	return {success: true, path: settings.gmod}
 }
 
 async function launchMonolith() {
