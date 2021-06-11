@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="settings.css">
+  <link rel="stylesheet" href="../../badges.css">
+  <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
+  <script src="settings.js" crossorigin="anonymous"></script>
+</head>
+
+<header>
+  <div id="header-root"></div>
+</header>
+
+<body>
+  <span id="actionBar"><a onclick="window.location.href='../../monotablet.html'"><i
+        class="fas fa-chevron-circle-left"></i></a> 100% <i class="fas fa-battery-full"></i> <i class="fas fa-wifi"></i>
+    <span id="timeNow">00:00:00</span></span>
+  <script>
+    const {
+      ipcRenderer
+    } = require('electron');
+
+    function currentTime() {
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      hour = updateTime(hour);
+      min = updateTime(min);
+      sec = updateTime(sec);
+      document.getElementById("timeNow").innerText = hour + ":" + min + ":" + sec;
+      var t = setTimeout(function () {
+        currentTime()
+      }, 1000);
+    }
+
+    function updateTime(k) {
+      if (k < 10) {
+        return "0" + k;
+      } else {
+        return k;
+      }
+    }
+
+    currentTime();
+  </script>
+
+  <div id="settingsContainer">
+    <ol id="settings">
+      <li>Example <input type="checkbox"></li>
+    </ol>
+  </div>
+
+</body>
+
+
+</html>
