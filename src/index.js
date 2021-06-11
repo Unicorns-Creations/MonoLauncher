@@ -1,5 +1,5 @@
 const clientId = '810552076304121866';
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, dialog } = require('electron');
 const path = require('path');
 var fs = require('fs');
 const ipc = require('electron').ipcMain;
@@ -66,6 +66,57 @@ async function getConvInfo() {
 	});
 }
 
+async function getgmodlocation() {
+	var SteamLocation = await findSteam();
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex
+		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
+		: {
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod')
+			};
+	return settings.gmod;
+}
+
+async function setgmodlocation() {
+	var location = dialog.showOpenDialogSync(null, {
+		title: "MonoLauncher - Select Garry's Mod Directory",
+		properties: [ 'openDirectory' ]
+	});
+	if (!location) return 'cancelled';
+	var SteamLocation = await findSteam();
+	location = location[0];
+	var locationex = fs.existsSync(location);
+	if (!locationex) return 'location404';
+	var folders = fs.readdirSync(location);
+	if (!folders) return 'failedread';
+	if (!folders.includes('garrysmod')) return 'notgmod';
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex
+		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
+		: {
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod')
+			};
+	settings.gmod = location;
+	try {
+		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
+	} catch (e) {}
+	console.log('passed');
+}
+
 async function launchMonolith() {
 	var SteamLocation = await findSteam();
 	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
@@ -73,10 +124,10 @@ async function launchMonolith() {
 
 async function getConversations() {
 	return new Promise(async (resolve, reject) => {
-		var SteamLocation = await findSteam();
+		var GmodLocation = await getgmodlocation();
 		var chatsC = new Collection();
 		try {
-			var datadir = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'garrysmod', 'data');
+			var datadir = path.join(GmodLocation, 'garrysmod', 'data');
 			var chatdir = path.join(datadir, 'chats');
 			var chats = fs.readdirSync(chatdir);
 			chats.forEach((chatFile) => {
@@ -180,6 +231,14 @@ ipc.handle('request-imsgs', async (event) => {
 });
 ipc.handle('request-convinfo', async (event) => {
 	var result = await getConvInfo();
+	return result;
+});
+ipc.handle('request-gmod', async (event) => {
+	var result = await getgmodlocation();
+	return result;
+});
+ipc.handle('set-gmod', async (event) => {
+	var result = await setgmodlocation();
 	return result;
 });
 ipc.on('join-discord', async () => {
