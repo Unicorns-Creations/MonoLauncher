@@ -20,5 +20,5 @@ ipcRenderer.on('discord', (event, message) => {
 
 setInterval(() => {
 	requestram();
-	requestdiscord();	
+	requestdiscord();
 }, 500);
