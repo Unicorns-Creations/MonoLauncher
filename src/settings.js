@@ -43,5 +43,8 @@ function setlocation(location) {
 	var gld = document.getElementById('gmodLocationDisplay');
 	gld.value = String(location);
 }
-setInterval(requestgmod, 5000);
 window.onload = requestgmod;
+
+ipcRenderer.on('gmod-changed', (event, message) => {
+	setlocation(message);
+});

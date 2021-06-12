@@ -113,6 +113,7 @@ async function setgmodlocation() {
 	settings.gmod = location;
 	try {
 		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
+		window.webContents.send('gmod-changed', settings.gmod);
 	} catch (e) {}
 	return { success: true, path: settings.gmod };
 }
