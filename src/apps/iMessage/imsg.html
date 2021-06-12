@@ -63,18 +63,6 @@
   </div>
 
   <script>
-    function map(fn, map) {
-      if (typeof thisArg !== 'undefined')
-        fn = fn.bind(thisArg);
-      const iter = map.entries();
-      return Array.from({
-        length: map.size
-      }, () => {
-        const [key, value] = iter.next().value;
-        return fn(value, key, this);
-      });
-    }
-
     async function getMessages(id) {
       ipcRenderer.invoke('request-imsgs').then(function (result) {
         if (result == "404") {

@@ -221,10 +221,6 @@ ipc.handle('request-discord', async (event) => {
 	var result = `${rpc.user.username}#${rpc.user.discriminator}`;
 	return result;
 });
-ipc.handle('request-pkgjson', async (event) => {
-	var result = JSON.parse(fs.readFileSync('package.json').toString());
-	return result;
-});
 ipc.handle('request-imsgs', async (event) => {
 	var result = await getConversations();
 	return result;
