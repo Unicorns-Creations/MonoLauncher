@@ -49,6 +49,16 @@
   left: 3%;
 }
 
+#info a {
+  text-decoration: none;
+  color: gray;
+  transition-duration: 500ms;
+}
+
+#info a:hover {
+  color: #dfa70f;
+}
+
 #videoframe {
   position: absolute;
   top: 25%;
