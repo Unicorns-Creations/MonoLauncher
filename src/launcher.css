@@ -1,26 +1,49 @@
 .gamelaunch {
-  position: absolute;
-  font-family: nexalight;
-  bottom: 25px;
-  right: 15px;
-  width: 150px;
-  height: 50px;
-  background-color: black;
-  border: 0;
+  position: fixed;
+  top: 35rem;
+  left: 45%;
+  min-width: 20vh;
+  min-height: 5vh;
+  background-color: #e9b62b;
+  border-style: none;
+  opacity: 50%;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
-  transition-duration: 500ms;
-  opacity: 75%;
+  transition-duration: 200ms;
 }
 
 .gamelaunch:hover {
-  opacity: 90%;
+  opacity: 100%;
+  background-color: #dfa70f;
+}
+
+#newsBox {
+  position:fixed;
+  top: 9rem;
+  left: 2rem;
+  font-size: 12px;
+  color: white;
+  overflow-x: auto;
+  overflow-y: auto;
+  min-width: 1vh;
+  min-height: 1vh;
+  max-width: 95%;
+  max-height: 45%;
+}
+
+#newsBox div {
+  margin: 1rem;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 
 #info {
   color: gray;
   font-family: nexalight;
-  font-size: 12px;
+  font-size: 14px;
   position: absolute;
   bottom: 3%;
   left: 3%;

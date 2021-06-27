@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
 			{ color: 'primary', variant: 'contained', onClick: function onClick() {
 					return launchMonolith();
 				} },
-			'Launch Monolith'
+			'LAUNCH MONOLITH'
 		)
 	);
 	// ReactDOM.render(element, document.getElementById('launch-mono-root'));

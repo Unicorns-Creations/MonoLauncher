@@ -36,20 +36,13 @@ var NavBar = function (_React$Component) {
 								return window.location.href = "launcher.html";
 							} },
 						"Home"
-					),
-					React.createElement(
-						"button",
-						{ className: "navbutton", onClick: function onClick() {
-								return window.location.href = "dev.html";
-							} },
-						"Dev"
-					),
+					),					
 					React.createElement(
 						"button",
 						{ className: "navbutton", onClick: function onClick() {
 								return window.location.href = "players.html";
 							} },
-						"Players"
+						"Status"
 					),
 					React.createElement(
 						"button",
