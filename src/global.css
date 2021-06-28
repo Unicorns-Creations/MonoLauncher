@@ -58,3 +58,13 @@ body {
 .text-xlarge {
   font-size: x-large;
 }
+
+a {
+  text-decoration: none !important;
+  color: gray !important;
+  transition-duration: 500ms !important;
+}
+
+a:hover {
+  color: #dfa70f !important;
+}

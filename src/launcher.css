@@ -30,7 +30,7 @@
   min-width: 1vh;
   min-height: 1vh;
   max-width: 95%;
-  max-height: 45%;
+  max-height: 55%;
 }
 
 #newsBox div {
@@ -49,18 +49,32 @@
   left: 3%;
 }
 
-#info a {
-  text-decoration: none;
-  color: gray;
-  transition-duration: 500ms;
-}
-
-#info a:hover {
-  color: #dfa70f;
-}
-
 #videoframe {
   position: absolute;
   top: 25%;
   left: 3%;
+}
+
+#owo {
+  margin-top: 6rem;
+  color: white;
+}
+
+#eaBanner {
+  color: white;
+  background-color: #dfa70f;
+  position: fixed;
+  bottom: 15px;
+  right: -35px;
+  text-align: center;
+  width: 200px;
+  height: 30px;
+  padding: 0.2rem;
+  transform: rotate(-25deg);
+  opacity: 50%;
+  transition-duration: 500ms;
+}
+
+#eaBanner:hover {
+  opacity: 100%;
 }

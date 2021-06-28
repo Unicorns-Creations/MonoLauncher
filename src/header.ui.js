@@ -50,7 +50,7 @@ var NavBar = function (_React$Component) {
 								return window.location.href = "Menu.html";
 							} },
 						"Menu"
-					)
+					)					
 				)
 			);
 		}

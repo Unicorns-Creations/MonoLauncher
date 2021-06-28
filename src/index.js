@@ -182,7 +182,6 @@ const createWindow = async () => {
 			contextIsolation: false
 		}
 	});
-	Menu.setApplicationMenu(null);
 	mainWindow.setResizable(false);
 	mainWindow.setMenuBarVisibility(false);
 	// and load the index.html of the app.
