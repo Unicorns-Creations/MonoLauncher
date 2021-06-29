@@ -119,8 +119,10 @@ async function setgmodlocation() {
 }
 
 async function launchMonolith() {
+
 	var SteamLocation = await findSteam();
 	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
+
 }
 
 async function getConversations() {

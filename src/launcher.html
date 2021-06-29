@@ -29,4 +29,55 @@
   <link rel="stylesheet" href="menu.css">
 </body>
 
+<footer>
+  <a href="version.html"><p id="info">Version 1.2.0B</a> - Game Version 1.10.3</p>
+  <div id="eaBanner">Early Access</div>
+</footer>
+
+<script>
+  function fetchUpdates() {
+    var url = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Frss.app%2Ffeeds%2FBQ7DzlIEUWuvkYba.xml"
+
+    fetch(url)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (obj) {
+        
+        document
+        .getElementById("newsBox")
+        .innerHTML = ""
+        
+        const html = obj.items.map(feed => {
+            return `
+            <div class="card bg-dark" style="width: 18rem;">
+            <img src="https://i.postimg.cc/T2nBwVJS/Platform-Update-Banner1.png" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">${feed.title}</h5>
+            <p class="card-text">${feed.description}</p>
+            <a href="${feed.link}" class="btn text-white">Read More</a>
+            </div>
+            </div>
+            `
+        })
+        .join('')
+        .replaceAll('UPDATE - ', `<span class="badge bg-warning">Update</span> `)
+
+        document
+        .querySelector("#newsBox")
+        .insertAdjacentHTML("afterbegin", html)
+    })
+    .catch(function (error) {              
+        Swal.fire({
+          title: `Problem occurred!`,
+          html: error,
+          icon: "error"
+        })
+    })
+
+  }
+
+  fetchUpdates()
+</script>
+
 </html>
