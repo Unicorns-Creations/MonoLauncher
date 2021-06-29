@@ -1,5 +1,5 @@
 function fetchUpdates() {
-    var url = "https://raw.githubusercontent.com/Unicorns-Creations/publicFiles/main/monolauncher-changelog.json"
+    var url = "https://raw.githubusercontent.com/Unicorns-Creations/MonoLauncher/master/src/version.json"
 
     fetch(url)
     .then(function (response) {
