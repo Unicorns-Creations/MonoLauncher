@@ -1,0 +1,24 @@
+#header-control {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.controlBttn {
+    height: 1.5rem;
+    width: 2rem;
+    background-color: transparent;
+    border: none;
+    color: gray;
+    transition-duration: 500ms;
+    -webkit-app-region: no-drag;
+}
+
+.controlBttn:hover {
+    color: white;
+}
+
+.close:hover {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
