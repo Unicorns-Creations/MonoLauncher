@@ -17,6 +17,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="https://github.com/sweetalert2/sweetalert2/releases/download/v11.0.16/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="controlbox.css">
+  <script src="version.js"></script>
 </head>
 
 <header>
@@ -31,31 +32,15 @@
     <button class="controlBttn close" onclick="window.close()">x</button>
   </div>
   <div id="owo" class="container">
-    Normally changelogs would be posted here... But we're still working on that :p<br>
-    <a href="launcher.html">Return back</a>
+    <h1 id="title">Unknown - Version <span id="version">Null</span></h1>
+    <span style="color: orange;">Authors: </span> <span id="authors">Unknown</span>
+    <hr>
+    <div id="changes">
+      <li>Either MonoLauncher is taking too-long to load results, or an error occurred during the process.</li>
+    </div>
   </div>
   <script src="header.ui.js"></script>
   <link rel="stylesheet" href="menu.css">
 </body>
 
 </html>
-
-<script>
-var info = "/package.json"
-
-fetch(info)
-.then(function (response) {
-    return response.json();
-})
-.then(function (obj) {
-    
-  document.getElementById("version").innerHTML = obj.version
-
-    //document
-    //.querySelector("#newsBox")
-    //.insertAdjacentHTML("afterbegin", html)
-})
-.catch(function (error) {              
-    
-})
-</script>
