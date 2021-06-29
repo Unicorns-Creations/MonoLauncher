@@ -171,17 +171,18 @@ const createWindow = async () => {
 	});
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
-		width: 800,
-		height: 600,
+		width: 1100,
+		height: 725,
 		title: 'MonoLauncher - Launching',
 		toolbar: false,
+		frame: false,
 		autoHideMenuBar: true,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false
 		}
 	});
-	Menu.setApplicationMenu(null);
+	mainWindow.setResizable(false);
 	mainWindow.setMenuBarVisibility(false);
 	// and load the index.html of the app.
 	await mainWindow.loadFile(path.join(__dirname, 'launcher.html'));

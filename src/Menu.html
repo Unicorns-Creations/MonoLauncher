@@ -12,6 +12,10 @@
   <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <link rel="stylesheet" href="controlbox.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
 
 <header>
@@ -19,14 +23,20 @@
 </header>
 
 <body>
-  <div id="toolscontainer">
-    <h2>MonoLauncher Menu</h2>
-    <p>Additional MonoLauncher Tools & Settings</p>
-    <br>
-    <button class="app" onclick="MonoTablet()" title="Monotablet"><i class="fas fa-tablet-alt"></i><br><span class="text-medium">MonoTablet</span></button>
-    <button class="app" onclick="window.location.href='dev.html'" title="Dev"><i class="fab fa-dev"></i><br><span class="text-medium">Dev</span></button>
-    <button class="app" onclick="window.location.href='settings.html'" title="Settings"><i class="fas fa-cogs"></i><br><span class="text-medium">Settings</span></button>
+  <div id="header-control">
+    <!-- Idk how to implement this in react, so i'll leave it up to you Jacubbi. -->
+    <button class="controlBttn" onclick="window.minimize()">_</button>
+    <button class="controlBttn close" onclick="window.close()">x</button>
   </div>
+  <div class="container">
+    <strong>MonoLauncher Tools</strong><br>
+    List of Tools, Resources, and more, to help better your experience with Monolith!!<br>
+    <hr>
+    <li><a class="text-white" href="dev.html">Development (Basic information for Development Purposes)</a></li>
+    <li><a class="text-white" onclick="MonoTablet()">Monotablet <span class="badge bg-primary">Beta</span> (Recreated Monotablet with Apps)</a></li>  
+    <li><a class="text-white" href="settings.html">Settings (Modify your MonoLauncher settings here)</a></li>
+  </div>
+   
   <script src="header.ui.js"></script>
 </body>
 
