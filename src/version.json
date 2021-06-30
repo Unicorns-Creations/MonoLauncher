@@ -1,13 +1,12 @@
 {
   "name": "MonoLauncher",
-  "version": "1.2.0B",
+  "version": "v1.2.1",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0001"
   ],
   "changeLogs": [
-    "Full UI redesign",
-    "Implemented Control box.",
-    "Update/News integration on the main page."
+    "Remade the controlbox in React :)",
+    "Implemented auto updating."
   ]
 }
