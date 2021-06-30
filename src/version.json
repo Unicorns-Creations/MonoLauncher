@@ -1,12 +1,11 @@
 {
   "name": "MonoLauncher",
-  "version": "v1.2.2",
+  "version": "v1.2.3",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0001"
   ],
   "changeLogs": [
-    "Remade the controlbox in React :)",
-    "Implemented auto updating."
+    "Hopefully fix the auto updater :angry:"
   ]
 }
