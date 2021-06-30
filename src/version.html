@@ -18,6 +18,7 @@
   <script src="https://github.com/sweetalert2/sweetalert2/releases/download/v11.0.16/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="controlbox.css">
   <script src="version.js"></script>
+  <script src="controlbox.ui.js"></script>
 </head>
 
 <header>
@@ -26,11 +27,7 @@
 </header>
 
 <body>
-  <div id="header-control">
-    <!-- Idk how to implement this in react, so i'll leave it up to you Jacubbi. -->
-    <button class="controlBttn" onclick="window.minimize()">_</button>
-    <button class="controlBttn close" onclick="window.close()">x</button>
-  </div>
+  <div id="controlbox-root"></div>
   <div id="owo" class="container">
     <h1 id="title">Unknown - Version <span id="version">Null</span></h1>
     <span style="color: orange;">Authors: </span> <span id="authors">Unknown</span>
