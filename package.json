@@ -1,7 +1,7 @@
 {
   "name": "monolauncher",
   "productName": "monolauncher",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "monoversion": "1.10.3",
   "description": "Load into Monolith Servers, or use the tools, entirely up to you!",
   "main": "src/index.js",
