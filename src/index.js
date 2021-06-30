@@ -14,15 +14,15 @@ if (require('electron-squirrel-startup')) {
 	app.quit();
 }
 if (app.isPackaged) {
-	const server = "https://hazel-jacubrstnc.vercel.app"
-	const feed = `${server}/update/${process.platform}/${app.getVersion()}`
+	const server = 'https://hazel-jacubrstnc.vercel.app';
+	const feed = `${server}/update/${process.platform}/${app.getVersion()}`;
 
-	autoUpdater.setFeedURL(feed)
+	autoUpdater.setFeedURL(feed);
 }
 
-async function checkForUpdates(){
+async function checkForUpdates() {
 	if (app.isPackaged) {
-		autoUpdater.checkForUpdates()
+		autoUpdater.checkForUpdates();
 	}
 }
 
@@ -132,10 +132,8 @@ async function setgmodlocation() {
 }
 
 async function launchMonolith() {
-
 	var SteamLocation = await findSteam();
 	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
-
 }
 
 async function getConversations() {
@@ -204,7 +202,7 @@ const createWindow = async () => {
 	mainWindow.setTitle('MonoLauncher');
 	setActivity();
 	window = mainWindow;
-	checkForUpdates()
+	checkForUpdates();
 };
 
 // This method will be called when Electron has finished
@@ -255,8 +253,8 @@ ipc.handle('set-gmod', async (event) => {
 	var result = await setgmodlocation();
 	return result;
 });
-ipc.handle('controlbox-action', async (event,arg) => {
-	switch(arg) {
+ipc.handle('controlbox-action', async (event, arg) => {
+	switch (arg) {
 		case `minimize`:
 			window.isMinimizable() ? window.minimize() : null;
 			return;
@@ -264,9 +262,9 @@ ipc.handle('controlbox-action', async (event,arg) => {
 			window.isClosable() ? window.close() : null;
 			return;
 		default:
-			return
+			return;
 	}
-})
+});
 ipc.on('join-discord', async () => {
 	const secondWindow = new BrowserWindow({
 		width: 50,
@@ -289,17 +287,22 @@ ipc.on('join-discord', async () => {
 
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
 	const dialogOpts = {
-	  type: 'info',
-	  buttons: ['Restart', 'Later'],
-	  title: 'Application Update',
-	  message: process.platform === 'win32' ? releaseNotes : releaseName,
-	  detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-	}
-  
+		type: 'info',
+		buttons: [ 'Restart', 'Later' ],
+		title: 'Application Update',
+		message: process.platform === 'win32' ? releaseNotes : releaseName,
+		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+	};
+
 	dialog.showMessageBox(dialogOpts).then((returnValue) => {
-	  if (returnValue.response === 0) autoUpdater.quitAndInstall()
-	})
-  })
+		if (returnValue.response === 0) autoUpdater.quitAndInstall();
+	});
+});
+
+autoUpdater.on('error', (message) => {
+	console.error('There was a problem updating the application');
+	console.error(message);
+});
 
 setInterval(setActivity, 16000);
-setInterval(checkForUpdates, 60000)
+setInterval(checkForUpdates, 60000);
