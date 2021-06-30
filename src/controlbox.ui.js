@@ -45,4 +45,6 @@ var ControlBox = function (_React$Component) {
 	return ControlBox;
 }(React.Component);
 
-ReactDOM.render(React.createElement(ControlBox, null), document.getElementById('controlbox-root'));
+window.addEventListener('load', function () {
+	ReactDOM.render(React.createElement(ControlBox, null), document.getElementById('controlbox-root'));
+});

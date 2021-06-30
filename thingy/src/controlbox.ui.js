@@ -16,4 +16,6 @@ class ControlBox extends React.Component {
 		);
 	}
 }
-ReactDOM.render(<ControlBox />, document.getElementById('controlbox-root'));
+window.addEventListener('load', function() {
+	ReactDOM.render(<ControlBox />, document.getElementById('controlbox-root'));
+});
