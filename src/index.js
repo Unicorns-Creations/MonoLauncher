@@ -13,7 +13,7 @@ if (require('electron-squirrel-startup')) {
 	// eslint-disable-line global-require
 	app.quit();
 }
-if (app.isPackaged()) {
+if (app.isPackaged) {
 	const server = "https://hazel-eiik04euk-jacubrstnc.vercel.app/"
 	const feed = `${server}/update/${process.platform}/${app.getVersion()}`
 
