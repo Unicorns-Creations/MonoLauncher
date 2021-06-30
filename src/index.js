@@ -14,7 +14,7 @@ if (require('electron-squirrel-startup')) {
 	app.quit();
 }
 if (app.isPackaged) {
-	const server = "https://hazel-eiik04euk-jacubrstnc.vercel.app/"
+	const server = "https://hazel-jacubrstnc.vercel.app"
 	const feed = `${server}/update/${process.platform}/${app.getVersion()}`
 
 	autoUpdater.setFeedURL(feed)
