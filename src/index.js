@@ -1,5 +1,5 @@
 const clientId = '810552076304121866';
-const { app, BrowserWindow, Menu, dialog } = require('electron');
+const { app, BrowserWindow, Menu, dialog, autoUpdater } = require('electron');
 const path = require('path');
 var fs = require('fs');
 const ipc = require('electron').ipcMain;
@@ -13,6 +13,13 @@ if (require('electron-squirrel-startup')) {
 	// eslint-disable-line global-require
 	app.quit();
 }
+if (app.isPackaged()) {
+	const server = "https://hazel-eiik04euk-jacubrstnc.vercel.app/"
+	const feed = `${server}/update/${process.platform}/${app.getVersion()}`
+
+	autoUpdater.setFeedURL(feed)
+}
+
 const DiscordRPC = require('discord-rpc');
 var rpc = new DiscordRPC.Client({ transport: 'ipc' });
 const startTimestamp = new Date();
