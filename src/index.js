@@ -241,6 +241,18 @@ ipc.handle('set-gmod', async (event) => {
 	var result = await setgmodlocation();
 	return result;
 });
+ipc.handle('controlbox-action', async (event,arg) => {
+	switch(arg) {
+		case `minimize`:
+			window.isMinimizable() ? window.minimize() : null;
+			return;
+		case `close`:
+			window.isClosable() ? window.close() : null;
+			return;
+		default:
+			return
+	}
+})
 ipc.on('join-discord', async () => {
 	const secondWindow = new BrowserWindow({
 		width: 50,
