@@ -20,6 +20,12 @@ if (app.isPackaged) {
 	autoUpdater.setFeedURL(feed)
 }
 
+async function checkForUpdates(){
+	if (app.isPackaged) {
+		autoUpdater.checkForUpdates()
+	}
+}
+
 const DiscordRPC = require('discord-rpc');
 var rpc = new DiscordRPC.Client({ transport: 'ipc' });
 const startTimestamp = new Date();
@@ -198,6 +204,7 @@ const createWindow = async () => {
 	mainWindow.setTitle('MonoLauncher');
 	setActivity();
 	window = mainWindow;
+	checkForUpdates()
 };
 
 // This method will be called when Electron has finished
@@ -280,4 +287,19 @@ ipc.on('join-discord', async () => {
 	});
 });
 
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+	const dialogOpts = {
+	  type: 'info',
+	  buttons: ['Restart', 'Later'],
+	  title: 'Application Update',
+	  message: process.platform === 'win32' ? releaseNotes : releaseName,
+	  detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+	}
+  
+	dialog.showMessageBox(dialogOpts).then((returnValue) => {
+	  if (returnValue.response === 0) autoUpdater.quitAndInstall()
+	})
+  })
+
 setInterval(setActivity, 16000);
+setInterval(checkForUpdates, 60000)
