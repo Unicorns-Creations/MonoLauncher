@@ -11,7 +11,6 @@ function fetchUpdates() {
             return `<li>${feed}</li>`
         })
         .join('')
-        .replaceAll('UPDATE - ', `<span class="badge bg-warning">Update</span> `)
 
         document.getElementById("changes").innerHTML = "";
 
