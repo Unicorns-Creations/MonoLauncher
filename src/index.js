@@ -302,6 +302,13 @@ autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
 autoUpdater.on('error', (message) => {
 	console.error('There was a problem updating the application');
 	console.error(message);
+	const dialogOpts = {
+		type: 'error',
+		title: 'Application Update Error',
+		message: "Error",
+		detail: message
+	};
+	dialog.showMessageBox(dialogOpts);
 });
 
 setInterval(setActivity, 16000);
