@@ -70,13 +70,25 @@
 
 #messageContainer li {
     list-style: none;
-    background-color: rgba(0, 0, 139, 0.34);
     width: 15rem;
     padding: 1rem;
     border-radius: 1rem;
     margin: 1rem;
 }
 
+#messageContainer .opp {
+    background-color: rgba(0, 0, 139, 0.34);
+    margin-left: 333px;
+}
+
 #messageContainer .self {
     background-color: rgba(0, 100, 0, 0.34);
+}
+
+#messageContainer .err {
+    background-color: rgba(255, 0, 0, 0.34);
+}
+
+#AuthorName {
+    font-size: 24px;
 }
