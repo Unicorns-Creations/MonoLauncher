@@ -75,6 +75,7 @@
     padding: 1rem;
     border-radius: 1rem;
     margin: 1rem;
+    word-wrap: break-word;
 }
 
 #messageContainer .opp {
@@ -98,6 +99,7 @@
     color: gray;
     transition-duration: 500ms;
     font-size: 12px;
+    cursor: default;
 }
 
 #note:hover {
