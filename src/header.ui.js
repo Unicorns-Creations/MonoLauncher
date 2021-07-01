@@ -50,6 +50,20 @@ var NavBar = function (_React$Component) {
 								return window.location.href = "Menu.html";
 							} },
 						"Menu"
+					),
+					React.createElement(
+						"button",
+						{ className: "navbutton", onClick: function onClick() {
+								return window.location.href = "settings.html";
+							} },
+						"Settings"
+					),
+					React.createElement(
+						"button",
+						{ className: "navbutton", onClick: function onClick() {
+								return window.location.href = "contributions.html";
+							} },
+						"Contributors"
 					)
 				)
 			);
