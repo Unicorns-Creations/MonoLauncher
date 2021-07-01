@@ -1,0 +1,23 @@
+.container {
+    margin: 6rem;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  width: 500px;
+  align-content: center;
+  justify-content: center;
+}
+
+.Contributor {
+    background-color: rgba(0, 0, 0, 0.34);
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.ContributorAvatar {
+    border-radius: 100%;
+}
+
+.ContributorName {
+    font-size: 18px;
+}
