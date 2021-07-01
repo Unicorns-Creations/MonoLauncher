@@ -6,9 +6,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _require = require('electron'),
-    clipboard = _require.clipboard;
-
+var electron = require('electron');
+var clipboard = electron.clipboard;
+var ipcRenderer = electron.ipcRenderer;
 var gamedig = require('gamedig');
 var Button = MaterialUI.Button;
 function toTimeFormat(totalSeconds) {
@@ -56,13 +56,15 @@ var PlayerList = function (_React$Component) {
 		value: function updatePlayers() {
 			var _this2 = this;
 
-			gamedig.query({
-				type: 'garrysmod',
-				host: '208.103.169.58',
-				maxAttempts: 3
-			}).then(function (state) {
-				_this2.setState({ query: state });
-				_this2.intervalID = setTimeout(_this2.updatePlayers.bind(_this2), 5000);
+			ipcRenderer.invoke('request-server').then(function (result) {
+				gamedig.query({
+					type: 'garrysmod',
+					host: result.split(":")[0],
+					maxAttempts: 3
+				}).then(function (state) {
+					_this2.setState({ query: state });
+					_this2.intervalID = setTimeout(_this2.updatePlayers.bind(_this2), 5000);
+				});
 			});
 		}
 	}, {
