@@ -1,3 +1,11 @@
+async function getAvatar(id) {
+    return new Promise((resolve, reject) => {
+      ipcRenderer.invoke('steam-avatar', id).then(function (result) {
+        resolve(result)
+      })
+    })
+  }
+  
 async function getMessages(id) {
     ipcRenderer.invoke('request-imsgs').then(function (result) {
       if (result == "404") {
