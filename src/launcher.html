@@ -44,7 +44,8 @@
 <footer>
   <a href="version.html">
     <p id="info">Version 1.2.4
-  </a> <a href="update.html"><span id="updatedisplay" class="badge bg-secondary">Update Unavailable</span></a>- Game Version 1.10.3</p>
+  </a> <a href="update.html"><span id="updatedisplay" class="badge bg-secondary">Update Unavailable</span></a>- Game
+  Version 1.10.3</p>
   <div id="eaBanner">Early Access</div>
 </footer>
 
@@ -57,7 +58,7 @@
       .getElementById("newsBox")
       .innerHTML = "";
     const html = feed.items.slice(0, 3).map(feed => {
-        return `
+      return `
             <div class="card bg-dark" style="width: 18rem;">
             <img src="https://i.postimg.cc/T2nBwVJS/Platform-Update-Banner1.png" class="card-img-top" alt="...">
             <div class="card-body">
@@ -66,10 +67,10 @@
             <a onclick="require('electron').shell.openExternal('${feed.link}')" class="btn text-white">Read More</a>
             </div>
             </div>
-            `
-      })
-      .join('')
-      .replaceAll('UPDATE - ', `<span class="badge bg-warning">Update</span> `)
+            `.replaceAll('Platform Update ', `<span class="badge bg-warning">Update</span> `).replaceAll('Read more',
+        '')
+    })
+
 
     document
       .querySelector("#newsBox")
