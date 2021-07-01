@@ -6,8 +6,7 @@
     "Jacub#0001"
   ],
   "changeLogs": [
-    "Removed MonoTablet",
-    "Recreated iMessages",
-    "Fixed news card saying it was \"Expired\"."
+    "Added option to select US or FR Server in Settings.",
+    ""
   ]
 }

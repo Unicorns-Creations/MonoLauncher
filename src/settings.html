@@ -39,20 +39,18 @@
         <a onclick="setGmodDir()" class="card-link">Browse</a>
       </div>
     </div>
+      <div id="serverSelector" class="card bg-dark text-white" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Select Server</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Select a Monolith server</h6>
+          <select class="form-select form-select-sm" onchange="changeServer(this.value)">
+            <option selected disabled>Select Server</option>
+            <option id="208.103.169.58:27015" value="208.103.169.58:27015">Monolith - US</option>
+            <option id="208.103.169.233:27015" value="208.103.169.233:27015">Monolith - French</option>
+          </select>
+        </div>  
     </div>
-  </div>
-  <div class="container">
-    <div id="serverSelector" class="card bg-dark text-white" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Select Server</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Select a Monolith server</h6>
-        <select class="form-select form-select-sm" onchange="changeServer(this.value)">
-          <option selected disabled>Select Server</option>
-          <option id="208.103.169.58:27015" value="208.103.169.58:27015">Monolith - US</option>
-          <option id="208.103.169.233:27015" value="208.103.169.233:27015">Monolith - French</option>
-        </select>
-      </div>
-  </div>
+    </div>
 </body>
 
 <script src="header.ui.js"></script>
