@@ -80,6 +80,49 @@ async function getConvInfo() {
 	});
 }
 
+async function getServer() {
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex
+		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
+		: {
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+				ip: '208.103.169.58:27015'
+			};
+	if (!settings.ip) settings.ip = '208.103.169.58:27015';
+	return settings.ip;
+}
+
+async function setServer(server) {
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex
+		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
+		: {
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+				ip: server || '208.103.169.58:27015'
+			};
+	if (!settings.ip) settings.ip = server || '208.103.169.58:27015';
+	settings.ip = server;
+	try {
+		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
+		window.webContents.send('server-changed', settings.ip);
+	} catch (e) {}
+	return { success: true, ip: settings.ip };
+}
+
 async function getgmodlocation() {
 	var SteamLocation = await findSteam();
 	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
@@ -93,7 +136,8 @@ async function getgmodlocation() {
 	var settings = monoappsfileex
 		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
 		: {
-				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod')
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+				ip: '208.103.169.58:27015'
 			};
 	return settings.gmod;
 }
@@ -122,7 +166,8 @@ async function setgmodlocation() {
 	var settings = monoappsfileex
 		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
 		: {
-				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod')
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+				ip: '208.103.169.58:27015'
 			};
 	settings.gmod = location;
 	try {
@@ -134,7 +179,8 @@ async function setgmodlocation() {
 
 async function launchMonolith() {
 	var SteamLocation = await findSteam();
-	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
+	var ip = await getServer();
+	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', ip ]);
 }
 
 async function getConversations() {
@@ -265,6 +311,14 @@ ipc.handle('controlbox-action', async (event, arg) => {
 		default:
 			return;
 	}
+});
+ipc.handle('request-server', async (event) => {
+	var result = await getServer();
+	return result;
+});
+ipc.handle('change-server', async (event, arg) => {
+	var result = await setServer(arg);
+	return result;
 });
 ipc.handle('steam-avatar', async (event, arg) => {
 	var response = await fetch(`https://www.steamidfinder.com/lookup/${arg}/`)

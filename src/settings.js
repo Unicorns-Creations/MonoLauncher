@@ -39,12 +39,45 @@ function requestgmod() {
 		setlocation(result);
 	});
 }
+function requestserver() {
+	ipcRenderer.invoke('request-server').then(async (result) => {
+		setserver(result);
+	});
+}
 function setlocation(location) {
 	var gld = document.getElementById('gmodLocationDisplay');
 	gld.value = String(location);
 }
-window.onload = requestgmod;
+
+function setserver(server) {
+	var gld = document.getElementById(server);
+	gld.selected = 'selected';
+}
+
+function changeServer(server) {
+	ipcRenderer.invoke('change-server', server).then(async (result) => {
+		if (result == '404') {
+			return swal(
+				'Ahh sheet',
+				"Seems like we couldn't change the server for some reason, I usually like to blame Jet for issues like this.",
+				'error'
+			);
+		}
+		if (result.success) {
+			return swal('Wooh!', 'We managed to change the server successfully!', 'success');
+		}
+	});
+}
+
+window.onload = function() {
+	requestgmod();
+	requestserver();
+};
 
 ipcRenderer.on('gmod-changed', (event, message) => {
 	setlocation(message);
+});
+
+ipcRenderer.on('server-changed', (event, message) => {
+	setserver(message);
 });
