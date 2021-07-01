@@ -1,11 +1,13 @@
 {
   "name": "MonoLauncher",
-  "version": "v1.2.3",
+  "version": "v1.2.4",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0001"
   ],
   "changeLogs": [
-    "Hopefully fix the auto updater :angry:"
+    "Removed MonoTablet",
+    "Recreated iMessages",
+    "Fixed news card saying it was \"Expired\"."
   ]
 }
