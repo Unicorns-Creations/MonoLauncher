@@ -80,11 +80,11 @@
 
 #messageContainer .opp {
     background-color: rgba(0, 0, 139, 0.34);
-    margin-left: 333px;
 }
 
 #messageContainer .self {
     background-color: rgba(0, 100, 0, 0.34);
+    margin-left: 333px;
 }
 
 #messageContainer .err {
