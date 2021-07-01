@@ -30,13 +30,14 @@
   min-width: 1vh;
   min-height: 1vh;
   max-width: 95%;
-  max-height: 55%;
+  max-height: 60%;
 }
 
 #newsBox div {
   margin: 1rem;
   display: inline-block;
-  vertical-align: middle;
+  align-items: center;
+  vertical-align: top;
 }
 
 
