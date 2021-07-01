@@ -1,0 +1,24 @@
+.container {
+    margin-top: 6rem;
+    color: white;
+}
+
+#Status {
+    font-size: 20px;
+}
+
+#StatusImg {
+    font-size: 25px;
+}
+
+#UpdateContainer {
+    margin-top: 1rem;
+    background-color: rgba(0, 0, 0, 0.34);
+    min-width: 500px;
+    min-height: 550px;
+    padding: 2rem;
+}
+
+#Changes {
+    padding: 1rem;
+}
