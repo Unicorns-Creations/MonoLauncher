@@ -1,12 +1,12 @@
 {
   "name": "MonoLauncher",
-  "version": "v1.2.4",
+  "version": "v1.2.5",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0001"
   ],
   "changeLogs": [
     "Added option to select US or FR Server in Settings.",
-    ""
+    "Added a Update menu"
   ]
 }
