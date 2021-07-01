@@ -6,6 +6,8 @@
     "Jacub#0001"
   ],
   "changeLogs": [
-    "Align messages properly in iMessage."
+    "Align messages properly in iMessage.",
+    "Add Contributors tab.",
+    "Move items from Menu to Navbar."
   ]
 }
