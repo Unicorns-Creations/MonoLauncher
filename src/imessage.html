@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="launcher.css">
+  <link rel="stylesheet" href="monobuttons.css">
+  <link rel="stylesheet" href="global.css">
+  <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js" crossorigin></script>
+  <script src="launcher.ui.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://github.com/sweetalert2/sweetalert2/releases/download/v11.0.16/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="controlbox.css">
+  <script src="controlbox.ui.js"></script>
+  <link rel="stylesheet" href="imessage.css">
+</head>
+
+<header>
+  <div id="header-root"></div>
+
+</header>
+
+<body>
+  <div id="controlbox-root"></div>
+  <script src="header.ui.js"></script>
+  <script src="imessage.js"></script>
+  <link rel="stylesheet" href="menu.css">
+
+  <div class="container">
+    <h1>Monolith iMessages</h1>
+    <input id="search" onChange="addUsers(this.value);" placeholder="Search Conversations"><br>
+    <div id="participants">
+      <li><img src="/src/imgs/squestion.jpg"> Jetaime Alexandria</li>    </div>
+    <div id="messages">
+      <span id="AuthorName">
+        Click on a name on the left.
+      </span>  
+      <div id="messageContainer">
+        <li>You: Hi</li>
+        <li>Example: Hello</li>
+        <li>You: Hi</li>
+        <li>Example: Hello</li>
+        <li>You: Hi</li>
+        <li>Example: Hello</li>
+        <li>You: Hi</li>
+        <li>Example: Hello</li>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

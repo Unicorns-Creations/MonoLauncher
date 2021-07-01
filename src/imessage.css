@@ -1,0 +1,79 @@
+.container {
+    margin-top: 6rem;
+    color: white;
+}
+
+#search {
+    background-color: black;
+    color: white;
+    opacity: 50%;
+    width: 310px;
+    border: none;
+    padding: 5px;
+    transition-duration: 500ms;
+}
+
+#search:hover {
+    opacity: 75%;
+}
+
+#participants {
+    background-color: rgba(0, 0, 0, 0.295);
+    margin-top: 1rem;
+    padding: 10px;
+    width: 19.5rem;
+}
+
+#participants li{
+    list-style: none;
+    border-top-style: solid;
+    border-top-color: rgba(0, 0, 0, 0.178);
+    margin-top: 5px;
+    padding-top: 5px;
+    color: lightgray;
+    cursor: pointer;
+    transition-duration: 500ms;
+}
+
+#participants li:first-child {
+    border-top-style: none;
+}
+
+#participants li:hover {
+    color: gold;
+}
+
+#participants img {
+    width: 45px;
+    border-radius: 100%;
+}
+
+#messages {
+    position: fixed;
+    top: 9.5rem;
+    left: 25rem;
+    background-color: rgba(0,0,0,0.178);
+    padding: 15px;
+    min-width: 650px;
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#messageContainer {
+    margin-top: 2rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#messageContainer li {
+    list-style: none;
+    background-color: rgba(32, 100, 0, 0.342);
+    width: 15rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+#messageContainer li:nth-child(2n) {
+    background-color: rgba(0, 0, 139, 0.349);
+}
