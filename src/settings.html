@@ -14,8 +14,11 @@
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
   <link rel="stylesheet" href="controlbox.css">
   <script src="controlbox.ui.js"></script>
 
@@ -36,9 +39,21 @@
         <a onclick="setGmodDir()" class="card-link">Browse</a>
       </div>
     </div>
-  </div>
+      <div id="serverSelector" class="card bg-dark text-white" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Select Server</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Select a Monolith server</h6>
+          <select class="form-select form-select-sm" onchange="changeServer(this.value)">
+            <option selected disabled>Select Server</option>
+            <option id="208.103.169.58:27015" value="208.103.169.58:27015">Monolith - US</option>
+            <option id="208.103.169.233:27015" value="208.103.169.233:27015">Monolith - French</option>
+          </select>
+        </div>  
+    </div>
+    </div>
 </body>
 
 <script src="header.ui.js"></script>
 <script src="settings.js"></script>
+
 </html>

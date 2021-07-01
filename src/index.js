@@ -1,5 +1,5 @@
 const clientId = '810552076304121866';
-const { app, BrowserWindow, Menu, dialog, autoUpdater } = require('electron');
+const { app, BrowserWindow, Menu, dialog, autoUpdater, ipcMain } = require('electron');
 const path = require('path');
 var fs = require('fs');
 const ipc = require('electron').ipcMain;
@@ -9,6 +9,7 @@ var window;
 var os = require('os');
 const fetch = require('node-fetch');
 var { Collection } = require('discord.js');
+var updateStatus = "none";
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
 	// eslint-disable-line global-require
@@ -27,6 +28,25 @@ async function checkForUpdates() {
 	}
 }
 
+autoUpdater.on("checking-for-update", () => {
+	updateStatus = "none"
+	window.webContents.send('update-changed', updateStatus);
+})
+
+autoUpdater.on("update-available", () => {
+	updateStatus = "downloading"
+	window.webContents.send('update-changed', updateStatus);
+})
+
+autoUpdater.on("update-downloaded", (ehm) => {
+	updateStatus = "ready"
+	window.webContents.send('update-changed', updateStatus);
+})
+
+autoUpdater.on("update-not-available", () => {
+	updateStatus = "none"
+	window.webContents.send('update-changed', updateStatus);
+})
 const DiscordRPC = require('discord-rpc');
 var rpc = new DiscordRPC.Client({ transport: 'ipc' });
 const startTimestamp = new Date();
@@ -80,6 +100,49 @@ async function getConvInfo() {
 	});
 }
 
+async function getServer() {
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex
+		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
+		: {
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+				ip: '208.103.169.58:27015'
+			};
+	if (!settings.ip) settings.ip = '208.103.169.58:27015';
+	return settings.ip;
+}
+
+async function setServer(server) {
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex
+		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
+		: {
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+				ip: server || '208.103.169.58:27015'
+			};
+	if (!settings.ip) settings.ip = server || '208.103.169.58:27015';
+	settings.ip = server;
+	try {
+		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
+		window.webContents.send('server-changed', settings.ip);
+	} catch (e) {}
+	return { success: true, ip: settings.ip };
+}
+
 async function getgmodlocation() {
 	var SteamLocation = await findSteam();
 	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
@@ -93,7 +156,8 @@ async function getgmodlocation() {
 	var settings = monoappsfileex
 		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
 		: {
-				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod')
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+				ip: '208.103.169.58:27015'
 			};
 	return settings.gmod;
 }
@@ -122,7 +186,8 @@ async function setgmodlocation() {
 	var settings = monoappsfileex
 		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
 		: {
-				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod')
+				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+				ip: '208.103.169.58:27015'
 			};
 	settings.gmod = location;
 	try {
@@ -134,7 +199,8 @@ async function setgmodlocation() {
 
 async function launchMonolith() {
 	var SteamLocation = await findSteam();
-	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', '208.103.169.58:27015' ]);
+	var ip = await getServer();
+	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', ip ]);
 }
 
 async function getConversations() {
@@ -266,6 +332,14 @@ ipc.handle('controlbox-action', async (event, arg) => {
 			return;
 	}
 });
+ipc.handle('request-server', async (event) => {
+	var result = await getServer();
+	return result;
+});
+ipc.handle('change-server', async (event, arg) => {
+	var result = await setServer(arg);
+	return result;
+});
 ipc.handle('steam-avatar', async (event, arg) => {
 	var response = await fetch(`https://www.steamidfinder.com/lookup/${arg}/`)
 		.then((f) => f.text())
@@ -273,6 +347,12 @@ ipc.handle('steam-avatar', async (event, arg) => {
 		.then((f) => f.split(`" alt="`)[0]);
 	return response;
 });
+ipc.handle('request-update', async (event) => {
+	return updateStatus;
+})
+ipc.on("restartupdate", async () => {
+	autoUpdater.quitAndInstall();
+})
 ipc.on('join-discord', async () => {
 	const secondWindow = new BrowserWindow({
 		width: 50,
@@ -293,19 +373,19 @@ ipc.on('join-discord', async () => {
 	});
 });
 
-autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-	const dialogOpts = {
-		type: 'info',
-		buttons: [ 'Restart', 'Later' ],
-		title: 'Application Update',
-		message: process.platform === 'win32' ? releaseNotes : releaseName,
-		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-	};
+// autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+// 	const dialogOpts = {
+// 		type: 'info',
+// 		buttons: [ 'Restart', 'Later' ],
+// 		title: 'Application Update',
+// 		message: process.platform === 'win32' ? releaseNotes : releaseName,
+// 		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+// 	};
 
-	dialog.showMessageBox(dialogOpts).then((returnValue) => {
-		if (returnValue.response === 0) autoUpdater.quitAndInstall();
-	});
-});
+// 	dialog.showMessageBox(dialogOpts).then((returnValue) => {
+// 		if (returnValue.response === 0) autoUpdater.quitAndInstall();
+// 	});
+// });
 
 autoUpdater.on('error', (message) => {
 	console.error('There was a problem updating the application');

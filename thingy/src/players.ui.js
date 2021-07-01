@@ -1,4 +1,6 @@
-const { clipboard } = require('electron');
+const electron = require('electron');
+var clipboard = electron.clipboard;
+var ipcRenderer = electron.ipcRenderer;
 var gamedig = require('gamedig');
 var Button = MaterialUI.Button;
 function toTimeFormat(totalSeconds) {
@@ -25,16 +27,18 @@ class PlayerList extends React.Component {
 	}
 
 	updatePlayers() {
-		gamedig
-			.query({
-				type: 'garrysmod',
-				host: '208.103.169.58',
-				maxAttempts: 3
-			})
-			.then((state) => {
-				this.setState({ query: state });
-				this.intervalID = setTimeout(this.updatePlayers.bind(this), 5000);
-			});
+		ipcRenderer.invoke('request-server').then((result) => {
+			gamedig
+				.query({
+					type: 'garrysmod',
+					host: result.split(":")[0],
+					maxAttempts: 3
+				})
+				.then((state) => {
+					this.setState({ query: state });
+					this.intervalID = setTimeout(this.updatePlayers.bind(this), 5000);
+				});
+		});
 	}
 	render() {
 		return (

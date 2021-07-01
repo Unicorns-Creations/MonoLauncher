@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="launcher.css">
+  <link rel="stylesheet" href="update.css">
   <link rel="stylesheet" href="monobuttons.css">
   <link rel="stylesheet" href="global.css">
   <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
@@ -12,7 +12,6 @@
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   <script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js" crossorigin></script>
-  <script src="launcher.ui.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -30,70 +29,40 @@
 
 <body>
   <div id="controlbox-root"></div>
-  <div id="newsBox" class="container">
-
+  <div id="owo" class="container">
+    <span style="font-size: 22px">Current Update Status:</span>
+    <br />
+    <span id="Status"></span><br><br>
+    <a id="updateButton" class="btn btn-secondary text-white disabled" onclick="restartandupdate()"
+      role="button">Restart & Install</a>
   </div>
-  <!-- Script Lines -->
-  <button class="gamelaunch" onclick="launchMonolith()">START</button>
-  <div id="launch-mono-root"></div>
-  <div id="root"></div>
   <script src="header.ui.js"></script>
   <link rel="stylesheet" href="menu.css">
 </body>
-
-<footer>
-  <a href="version.html">
-    <p id="info">Version 1.2.5
-  </a> <a href="update.html"><span id="updatedisplay" class="badge bg-secondary">Update Unavailable</span></a>- Game
-  Version 1.10.3</p>
-  <div id="eaBanner">Early Access</div>
-</footer>
-
 <script>
-  var Parser = require('rss-parser');
-  var parser = new Parser();
-  async function fetchUpdates() {
-    let feed = await parser.parseURL("https://monolithservers.com/forums/forums/updates.43/index.rss");
-    document
-      .getElementById("newsBox")
-      .innerHTML = "";
-    const html = feed.items.slice(0, 3).map(feed => {
-      return `
-            <div class="card bg-dark" style="width: 18rem;">
-            <img src="https://i.postimg.cc/T2nBwVJS/Platform-Update-Banner1.png" class="card-img-top" alt="...">
-            <div class="card-body">
-            <h5 class="card-title">${feed.title}</h5>
-            <p class="card-text">${feed["content:encodedSnippet"]}</p>
-            <a onclick="require('electron').shell.openExternal('${feed.link}')" class="btn text-white">Read More</a>
-            </div>
-            </div>
-            `.replaceAll('Platform Update ', `<span class="badge bg-warning">Update</span> `).replaceAll('Read more',
-        '')
-    }).join("")
-
-
-    document
-      .querySelector("#newsBox")
-      .insertAdjacentHTML("afterbegin", html)
-
+  function restartandupdate() {
+    ipcRenderer.send('restartupdate')
   }
 
   function setUpdate(result) {
-    var updateElement = document.getElementById("updatedisplay")
+    var updateElement = document.getElementById("Status")
+    var updateButton = document.getElementById("updateButton")
     switch (result) {
       case `none`:
         updateElement.innerText = "Update Unavailable"
+        updateButton.className = "btn btn-secondary text-white disabled"
         return
       case `downloading`:
         updateElement.innerText = "Downloading Update..."
-        updateElement.className = "badge bg-warning"
+        updateButton.className = "btn btn-warning text-white disabled"
         return;
       case `ready`:
-        updateElement.innerText = "Update Ready, click here."
-        updateElement.className = "badge bg-primary"
+        updateElement.innerText = "Update Ready."
+        updateButton.className = "btn btn-primary text-white"
         return;
       default:
-        updateElement.innerText = "Update Unavailable"
+        updateElement.innerText = ""
+        updateButton.className = "btn btn-secondary text-white disabled"
         return
     }
   }
@@ -104,7 +73,6 @@
   ipcRenderer.invoke('request-update').then((result) => {
     setUpdate(result)
   })
-  fetchUpdates()
 </script>
 
 </html>
