@@ -44,7 +44,7 @@
 <footer>
   <a href="version.html">
     <p id="info">Version 1.2.6
-  </a> <a href="update.html"><span id="updatedisplay" class="badge bg-secondary">Update Unavailable</span></a>- Game
+  </a> <a href="update.html"><span id="updatedisplay" class="badge bg-secondary"></span></a>- Game
   Version 1.10.3</p>
   <div id="eaBanner">Early Access</div>
 </footer>
@@ -82,7 +82,7 @@
     var updateElement = document.getElementById("updatedisplay")
     switch (result) {
       case `none`:
-        updateElement.innerText = "Update Unavailable"
+        updateElement.innerText = ""
         return
       case `downloading`:
         updateElement.innerText = "Downloading Update..."
@@ -93,7 +93,7 @@
         updateElement.className = "badge bg-primary"
         return;
       default:
-        updateElement.innerText = "Update Unavailable"
+        updateElement.innerText = ""
         return
     }
   }
