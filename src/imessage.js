@@ -13,12 +13,6 @@ async function getMessages(id) {
     }
     var mParent = document.getElementById("messageContainer");
     var authorElement = document.getElementById("AuthorName");
-    var authorAvatar = document.getElementById("AuthorAvatar");
-    if (!id) {
-      authorAvatar.src = "https://pbs.twimg.com/profile_images/891726146252832768/iH9vBiwD.jpg"
-    } else {
-      authorAvatar.src = await getAvatar(id)
-    }
     mParent.innerHTML = ""
     result.forEach(rs => {
       if (rs.id != id) return
