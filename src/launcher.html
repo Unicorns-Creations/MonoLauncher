@@ -43,8 +43,9 @@
 
 <footer>
   <a href="version.html">
-    <p id="info">Version 1.2.4
-  </a> <a href="update.html"><span class="badge bg-success">Update Available, Click to install!</span></a>- Game Version 1.10.3</p>
+    <p id="info">Version 1.2.5
+  </a> <a href="update.html"><span id="updatedisplay" class="badge bg-secondary">Update Unavailable</span></a>- Game
+  Version 1.10.3</p>
   <div id="eaBanner">Early Access</div>
 </footer>
 
@@ -53,12 +54,11 @@
   var parser = new Parser();
   async function fetchUpdates() {
     let feed = await parser.parseURL("https://monolithservers.com/forums/forums/updates.43/index.rss");
-    console.log(feed)
     document
       .getElementById("newsBox")
       .innerHTML = "";
-    const html = feed.items.slice(0,3).map(feed => {
-        return `
+    const html = feed.items.slice(0, 3).map(feed => {
+      return `
             <div class="card bg-dark" style="width: 18rem;">
             <img src="https://i.postimg.cc/T2nBwVJS/Platform-Update-Banner1.png" class="card-img-top" alt="...">
             <div class="card-body">
@@ -67,10 +67,10 @@
             <a onclick="require('electron').shell.openExternal('${feed.link}')" class="btn text-white">Read More</a>
             </div>
             </div>
-            `
-      })
-      .join('')
-      .replaceAll('UPDATE - ', `<span class="badge bg-warning">Update</span> `)
+            `.replaceAll('Platform Update ', `<span class="badge bg-warning">Update</span> `).replaceAll('Read more',
+        '')
+    }).join("")
+
 
     document
       .querySelector("#newsBox")
@@ -78,6 +78,32 @@
 
   }
 
+  function setUpdate(result) {
+    var updateElement = document.getElementById("updatedisplay")
+    switch (result) {
+      case `none`:
+        updateElement.innerText = "Update Unavailable"
+        return
+      case `downloading`:
+        updateElement.innerText = "Downloading Update..."
+        updateElement.className = "badge bg-warning"
+        return;
+      case `ready`:
+        updateElement.innerText = "Update Ready, click here."
+        updateElement.className = "badge bg-primary"
+        return;
+      default:
+        updateElement.innerText = "Update Unavailable"
+        return
+    }
+  }
+  ipcRenderer.on('update-changed', (event, message) => {
+    setUpdate(message);
+  });
+
+  ipcRenderer.invoke('request-update').then((result) => {
+    setUpdate(result)
+  })
   fetchUpdates()
 </script>
 
