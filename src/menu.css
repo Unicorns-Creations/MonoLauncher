@@ -33,12 +33,12 @@ header button {
 #navbar {
   position: fixed;
   top: 0;
-  right: 35%;
+  right: 32%;
   text-align: center;
 }
 
 .navbutton {
-  width: 75px;
+  width: 80px;
   height: 50px;
   font-family: nexalight;
   background-color: rgba(41, 41, 41, 0);
