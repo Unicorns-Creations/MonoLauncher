@@ -22,6 +22,8 @@
     margin-top: 1rem;
     padding: 10px;
     width: 19.5rem;
+    max-height: 450px;
+    overflow-y: auto;
 }
 
 #participants li{
@@ -68,12 +70,13 @@
 
 #messageContainer li {
     list-style: none;
-    background-color: rgba(32, 100, 0, 0.342);
+    background-color: rgba(0, 0, 139, 0.34);
     width: 15rem;
     padding: 1rem;
     border-radius: 1rem;
     margin: 1rem;
 }
-#messageContainer li:nth-child(2n) {
-    background-color: rgba(0, 0, 139, 0.349);
+
+#messageContainer .self {
+    background-color: rgba(0, 100, 0, 0.34);
 }
