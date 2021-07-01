@@ -53,6 +53,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "find-steam-app": "^1.0.2",
     "gamedig": "^2.0.27",
+    "node-fetch": "^2.6.1",
     "yarn": "^1.22.10"
   },
   "devDependencies": {
