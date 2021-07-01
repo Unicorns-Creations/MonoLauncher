@@ -7,6 +7,7 @@ const { findSteam } = require('find-steam-app');
 const cp = require('child_process');
 var window;
 var os = require('os');
+const fetch = require('node-fetch');
 var { Collection } = require('discord.js');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -265,6 +266,13 @@ ipc.handle('controlbox-action', async (event, arg) => {
 			return;
 	}
 });
+ipc.handle('steam-avatar', async (event, arg) => {
+	var response = await fetch(`https://www.steamidfinder.com/lookup/${arg}/`)
+		.then((f) => f.text())
+		.then((f) => f.split(`<img class="img-rounded avatar" src="`)[1])
+		.then((f) => f.split(`" alt="`)[0]);
+	return response;
+});
 ipc.on('join-discord', async () => {
 	const secondWindow = new BrowserWindow({
 		width: 50,
@@ -305,7 +313,7 @@ autoUpdater.on('error', (message) => {
 	const dialogOpts = {
 		type: 'error',
 		title: 'Application Update Error',
-		message: "Error",
+		message: 'Error',
 		detail: message
 	};
 	dialog.showMessageBox(dialogOpts);
