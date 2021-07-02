@@ -1,13 +1,12 @@
 {
   "name": "MonoLauncher",
-  "version": "v1.2.6",
+  "version": "v1.2.7",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0001"
   ],
   "changeLogs": [
-    "Align messages properly in iMessage.",
-    "Add Contributors tab.",
-    "Move items from Menu to Navbar."
+    "Repositioned Contributors.",
+    ""
   ]
 }
