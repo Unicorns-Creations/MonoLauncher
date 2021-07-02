@@ -23,10 +23,7 @@ class NavBar extends React.Component {
 					</button>
 					<button className="navbutton" onClick={() => window.location.href="settings.html"}>
 						Settings
-					</button>
-					<button className="navbutton" onClick={() => window.location.href="contributions.html"}>
-						Contributors
-					</button>
+					</button>					
 				</div>
 			</div>
 		);
