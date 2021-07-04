@@ -74,6 +74,7 @@
   transform: rotate(-25deg);
   opacity: 50%;
   transition-duration: 500ms;
+  cursor: default;
 }
 
 #eaBanner:hover {

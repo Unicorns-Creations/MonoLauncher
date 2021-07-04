@@ -1,7 +1,15 @@
-function MonoTablet() {
+function MPDC() {
 	window.open(
-		'monotablet.html',
-		'MonoTablet',
-		'top=0,left=0,frame=true,nodeIntegration=true,contextIsolation=false,resizable=false,width=1045,height=645'
+		'https://monolith.wombos.xyz/police/calculator',
+		'MPD Calculator',
+		'top=0,left=0,frame=true,nodeIntegration=false,contextIsolation=true,resizable=false,width=1045,height=645'
+	);
+}
+
+function FTW1() {
+	window.open(
+		'https://clutchmasterftw.github.io/Monolith-Crafting-Calculator',
+		'Crafting Calculator interactive website - Clutch Master FTW',
+		'top=0,left=0,frame=true,nodeIntegration=false,contextIsolation=true,resizable=true,width=1700,height=1400'
 	);
 }

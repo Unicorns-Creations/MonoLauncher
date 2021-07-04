@@ -49,3 +49,12 @@ hr {
   margin-bottom: 1rem;
   opacity: 10%;
 }
+
+.fas {
+  cursor:pointer;
+  transition-duration: 500ms;
+}
+
+.fas:hover {
+  color: gold;
+}

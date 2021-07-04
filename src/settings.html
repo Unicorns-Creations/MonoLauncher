@@ -5,10 +5,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="settings.css">
-  <link rel="stylesheet" href="monobuttons.css">
   <link rel="stylesheet" href="global.css">
   <link rel="stylesheet" href="menu.css">
-  <link rel="stylesheet" href="badges.css">
   <script src="https://kit.fontawesome.com/2c4b435336.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
@@ -43,7 +41,7 @@
         <div class="card-body">
           <h5 class="card-title">Select Server</h5>
           <h6 class="card-subtitle mb-2 text-muted">Select a Monolith server</h6>
-          <select class="form-select form-select-sm" onchange="changeServer(this.value)">
+          <select class="form-select form-select-sm bg-dark text-white" onchange="changeServer(this.value)">
             <option selected disabled>Select Server</option>
             <option id="208.103.169.58:27015" value="208.103.169.58:27015">Monolith - US</option>
             <option id="208.103.169.233:27015" value="208.103.169.233:27015">Monolith - French</option>
