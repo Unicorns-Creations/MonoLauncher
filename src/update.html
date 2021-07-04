@@ -30,13 +30,17 @@
 <body>
   <div id="controlbox-root"></div>
   <div id="owo" class="container">
-    <span style="font-size: 22px">Current Update Status:</span>
-    <br />
+    <h3>Current Update Status:</h3>
     <span id="Status"></span><br><br>
-    <a id="updateButton" class="btn btn-secondary text-white disabled" onclick="restartandupdate()"
-      role="button">Restart & Install</a>
+    <a id="updateButton" class="btn btn-secondary text-white disabled" onclick="restartandupdate()" role="button">Restart & Install</a>
+      <br><br>
+      <h3>What's new in this update?</h3>
+      <div id="changes">
+
+      </div>
   </div>
   <script src="header.ui.js"></script>
+  <script src="version.js"></script>
   <link rel="stylesheet" href="menu.css">
 </body>
 <script>
@@ -73,6 +77,9 @@
   ipcRenderer.invoke('request-update').then((result) => {
     setUpdate(result)
   })
+</script>
+<script>
+  fetchDevUpdates()
 </script>
 
 </html>
