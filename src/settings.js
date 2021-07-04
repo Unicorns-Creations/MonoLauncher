@@ -81,3 +81,10 @@ ipcRenderer.on('gmod-changed', (event, message) => {
 ipcRenderer.on('server-changed', (event, message) => {
 	setserver(message);
 });
+
+function DRPCInfo() {
+	swal(
+		'Discord RPC',
+		'This enables/disables the Rich Presence that MonoLauncher displays in your profile on Discord.'
+	)
+}
