@@ -101,6 +101,7 @@ async function getConvInfo() {
 }
 
 async function getServer() {
+	var SteamLocation = await findSteam();
 	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
 	var monoappdataex = fs.existsSync(monoappdatapath);
 	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
@@ -120,6 +121,7 @@ async function getServer() {
 }
 
 async function setServer(server) {
+	var SteamLocation = await findSteam();
 	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
 	var monoappdataex = fs.existsSync(monoappdatapath);
 	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
