@@ -128,8 +128,7 @@ async function getServer() {
 	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
 	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
 	var settings = monoappsfileex ?
-		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) :
-		{
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
 			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
 			ip: '208.103.169.58:27015'
 		};
@@ -148,8 +147,7 @@ async function setServer(server) {
 	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
 	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
 	var settings = monoappsfileex ?
-		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) :
-		{
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
 			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
 			ip: server || '208.103.169.58:27015'
 		};
@@ -176,8 +174,7 @@ async function getgmodlocation() {
 	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
 	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
 	var settings = monoappsfileex ?
-		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) :
-		{
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
 			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
 			ip: '208.103.169.58:27015'
 		};
@@ -206,8 +203,7 @@ async function setgmodlocation() {
 	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
 	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
 	var settings = monoappsfileex ?
-		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) :
-		{
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
 			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
 			ip: '208.103.169.58:27015'
 		};
