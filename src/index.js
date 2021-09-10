@@ -118,10 +118,7 @@ async function getConvInfo() {
 
 async function getServer() {
 	var SteamLocation = await findSteam();
-<<<<<<< Updated upstream
-=======
 	if (!SteamLocation) SteamLocation = __dirname
->>>>>>> Stashed changes
 	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
 	var monoappdataex = fs.existsSync(monoappdatapath);
 	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
