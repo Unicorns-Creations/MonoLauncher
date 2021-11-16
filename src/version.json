@@ -1,16 +1,13 @@
 {
   "name": "MonoLauncher",
-  "version": "v1.2.7",
+  "version": "v1.3.0",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0001"
   ],
   "changeLogs": [
-    "Repositioned Contributors.",
-    "Redesigned Menu",
-    "Implemented Apecengo's Police Calculator",
-    "Implemented Clutch Master FTW's \"Crafting Calculator interactive website\"",
-    "Fixed minor typos",
-    "Removed unused resources, files, & code."
+    "Updated electron version.",
+    "Implemented a new api for retrieving steam user information.",
+    "Added MonoPhone support."
   ]
 }

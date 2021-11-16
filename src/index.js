@@ -156,7 +156,7 @@ async function setServer(server) {
 	try {
 		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
 		window.webContents.send('server-changed', settings.ip);
-	} catch (e) {}
+	} catch (e) { }
 	return {
 		success: true,
 		ip: settings.ip
@@ -211,7 +211,7 @@ async function setgmodlocation() {
 	try {
 		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
 		window.webContents.send('gmod-changed', settings.gmod);
-	} catch (e) {}
+	} catch (e) { }
 	return {
 		success: true,
 		path: settings.gmod
@@ -255,6 +255,23 @@ async function getConversations() {
 	});
 }
 
+async function getMPContacts() {
+	return new Promise(async (resolve, reject) => {
+		var GmodLocation = await getgmodlocation();
+		try {
+			var monofolder = path.join(GmodLocation, 'garrysmod', 'data', 'monolith');
+			if (!fs.existsSync(monofolder)) fs.mkdirSync(monofolder);
+			var contactfile = path.join(monofolder, 'monophone_contacts.json');
+			if (!fs.existsSync(contactfile)) fs.writeFileSync(contactfile, JSON.stringify({}));
+			
+			var contacts = JSON.parse(fs.readFileSync(contactfile).toString());
+			resolve(contacts);
+		} catch (e) {
+			resolve('404');
+		}
+	});
+}
+
 function getramusage() {
 	var owo = os.totalmem() - os.freemem();
 	var awa = owo / 1024 / 1024 / 1024;
@@ -280,7 +297,7 @@ const createWindow = async () => {
 	}).catch((err) => {
 		if (err) {
 			rpc = {
-				setActivity: function () {},
+				setActivity: function () { },
 				user: {
 					username: 'Username',
 					discriminator: '0000'
@@ -309,6 +326,9 @@ const createWindow = async () => {
 	setActivity();
 	window = mainWindow;
 	checkForUpdates();
+
+	let xx = await getMPContacts();
+	console.log(xx)
 };
 
 // This method will be called when Electron has finished
