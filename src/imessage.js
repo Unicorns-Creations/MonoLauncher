@@ -1,10 +1,3 @@
-// async function getAvatar(id) {
-//   return new Promise((resolve, reject) => {
-//     ipcRenderer.invoke('steam-avatar', id).then(function (result) {
-//       resolve(result)
-//     })
-//   })
-// }
 async function getMessages(id) {
   ipcRenderer.invoke('request-imsgs-nofetch', id).then(async (result) => {
     if (result == "404") {
@@ -21,14 +14,6 @@ async function getMessages(id) {
       rs.self = rs.Who != contact.id
       createMsg(rs.Message, rs.self)
     })
-    // result.forEach(rs => {
-    //   if (rs.id != id) return
-    //   authorElement.innerText = rs.name
-    //   rs.chats.forEach(chat => {
-    //     createMsg(chat.msg, chat.isLocal)
-    //   })
-    // })
-    console.log(result)
   });
 }
 async function createNew(name, id, avatar) {
