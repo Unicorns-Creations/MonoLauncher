@@ -93,7 +93,26 @@ function nthMostCommon(string, amount) {
 	}, []);
 	return result;
 }
+async function getSteamInfo(steamid, notfetch) {
 
+	var rawsteaminfo = await fetch(`https://api.unicorn.wombos.xyz/api/mlauncher/steam/${steamid}`).then(f => f.json());
+	let steaminfo;
+	if (rawsteaminfo.status == "success" && rawsteaminfo.data.length > 0 && !notfetch) {
+		rawsteaminfo = rawsteaminfo.data[0];
+		steaminfo = {
+			steamid,
+			steamname: rawsteaminfo.personaname,
+			avatar: rawsteaminfo.avatarfull
+		}
+	} else {
+		steaminfo = {
+			steamid: steamid,
+			steamname: "not found",
+			avatar: ""
+		}
+	}
+	return steaminfo;
+}
 async function getConvInfo() {
 	return new Promise(async (resolve, reject) => {
 		var convos = await getConversations();
@@ -254,8 +273,38 @@ async function getConversations() {
 		}
 	});
 }
+function formatMPNumber(number) {
+	let rnumb = number.replace("7656119", "")
+	let fnumb = `${rnumb.slice(0, 3)}-${rnumb.slice(3, 6)}-${rnumb.slice(6, 10)}`
+	return fnumb
+}
 
-async function getMPContacts() {
+async function getMPContact(sid, nf) {
+	return new Promise(async (resolve, reject) => {
+		var GmodLocation = await getgmodlocation();
+		var monofolder = path.join(GmodLocation, 'garrysmod', 'data', 'monolith');
+		if (!fs.existsSync(monofolder)) fs.mkdirSync(monofolder);
+		var contactfile = path.join(monofolder, 'monophone_contacts.json');
+		if (!fs.existsSync(contactfile)) fs.writeFileSync(contactfile, JSON.stringify({}));
+		var contacts = JSON.parse(fs.readFileSync(contactfile).toString());
+		var rcontact = contacts[sid] || contacts[sid + "_"];
+		var contact = {}
+		let steaminfo = await getSteamInfo(sid, nf);
+		if (!rcontact) {
+			contact.id = sid.replaceAll("_", "");
+			contact.number = formatMPNumber(sid);
+			contact.name = `Unknown | ${contact.number}` ;
+			contact.image = steaminfo.avatar;
+		} else {
+			contact.id = sid.replaceAll("_", "");
+			contact.number = formatMPNumber(sid);
+			contact.name =  `${rcontact.Name} | ${contact.number}` ;
+			contact.image = steaminfo.avatar;
+		}
+		resolve(contact)
+	});
+}
+async function getMPContacts(nf) {
 	return new Promise(async (resolve, reject) => {
 		var GmodLocation = await getgmodlocation();
 		try {
@@ -263,11 +312,60 @@ async function getMPContacts() {
 			if (!fs.existsSync(monofolder)) fs.mkdirSync(monofolder);
 			var contactfile = path.join(monofolder, 'monophone_contacts.json');
 			if (!fs.existsSync(contactfile)) fs.writeFileSync(contactfile, JSON.stringify({}));
-			
 			var contacts = JSON.parse(fs.readFileSync(contactfile).toString());
-			resolve(contacts);
+			ncontacts = {}
+			for (let k in contacts) {
+				k = k.split(".json")[0]
+				var contact = getMPContact(k)
+				ncontacts[k] = contact
+			}
+
+			resolve(ncontacts);
 		} catch (e) {
-			resolve('404');
+			resolve("404")
+		}
+	});
+}
+async function getMPConversation(sid, nf) {
+	return new Promise(async (resolve, reject) => {
+		var GmodLocation = await getgmodlocation();
+		try {
+			var monofolder = path.join(GmodLocation, 'garrysmod', 'data', 'monolith');
+			if (!fs.existsSync(monofolder)) fs.mkdirSync(monofolder);
+			var conversationfolder = path.join(monofolder, 'mono_message');
+			if (!fs.existsSync(conversationfolder)) fs.mkdirSync(conversationfolder);
+			var convo = JSON.parse(fs.readFileSync(path.join(conversationfolder, `${sid}.json`)).toString());
+			var contact = await getMPContact(sid, nf);
+			convo.contact = contact;
+			resolve(convo)
+		} catch (e) {
+			resolve("404")
+			console.error(e)
+		}
+	});
+}
+async function getMPConversations(nf) {
+	return new Promise(async (resolve, reject) => {
+		var GmodLocation = await getgmodlocation();
+		try {
+			var monofolder = path.join(GmodLocation, 'garrysmod', 'data', 'monolith');
+			if (!fs.existsSync(monofolder)) fs.mkdirSync(monofolder);
+			var conversationfolder = path.join(monofolder, 'mono_message');
+			if (!fs.existsSync(conversationfolder)) fs.mkdirSync(conversationfolder);
+			var conversations = fs.readdirSync(conversationfolder);
+			convos = [];
+			for (let k in conversations) {
+				var convfile = conversations[k];
+				var convo = JSON.parse(fs.readFileSync(path.join(conversationfolder, convfile)).toString());
+				var sid = convfile.split(".json")[0]
+				var contact = await getMPContact(sid, nf);
+				convo.contact = contact;
+				convos.push(convo)
+			}
+			resolve(convos)
+		} catch (e) {
+			resolve("404")
+			console.error(e)
 		}
 	});
 }
@@ -326,9 +424,6 @@ const createWindow = async () => {
 	setActivity();
 	window = mainWindow;
 	checkForUpdates();
-
-	let xx = await getMPContacts();
-	console.log(xx)
 };
 
 // This method will be called when Electron has finished
@@ -364,7 +459,11 @@ ipc.handle('request-discord', async (event) => {
 	return result;
 });
 ipc.handle('request-imsgs', async (event) => {
-	var result = await getConversations();
+	var result = await getMPConversations();
+	return result;
+});
+ipc.handle('request-imsgs-nofetch', async (event, arg) => {
+	var result = await getMPConversation(arg, true);
 	return result;
 });
 ipc.handle('request-convinfo', async (event) => {
@@ -400,8 +499,8 @@ ipc.handle('change-server', async (event, arg) => {
 	return result;
 });
 ipc.handle('steam-avatar', async (event, arg) => {
-	var response = await fetch(`https://api.unicorn.wombos.xyz/api/mlauncher/steam/${arg}`).then(f => f.json());
-	return response;
+	var response = await getSteamInfo(arg)
+	return response.avatar;
 });
 ipc.handle('request-update', async (event) => {
 	return updateStatus;
