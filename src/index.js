@@ -380,10 +380,7 @@ ipc.handle('change-server', async (event, arg) => {
 	return result;
 });
 ipc.handle('steam-avatar', async (event, arg) => {
-	var response = await fetch(`https://www.steamidfinder.com/lookup/${arg}/`)
-		.then((f) => f.text())
-		.then((f) => f.split(`<img class="img-rounded avatar" src="`)[1])
-		.then((f) => f.split(`" alt="`)[0]);
+	var response = await fetch(`https://api.unicorn.wombos.xyz/api/mlauncher/steam/${arg}`).then(f => f.json());
 	return response;
 });
 ipc.handle('request-update', async (event) => {
