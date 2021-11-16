@@ -58,7 +58,9 @@ async function createNew(name, id, avatar) {
 function addUsers(search) {
   if (!search) search = ""
   document.querySelectorAll("#participants > li").forEach(f => f.remove())
+  createNew("Loading...")
   ipcRenderer.invoke('request-imsgs').then(function (result) {
+    document.querySelectorAll("#participants > li").forEach(f => f.remove())
     if (result == "404") {
       createNew("Couldn't find Gmod")
     }
