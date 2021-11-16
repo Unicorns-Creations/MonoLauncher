@@ -1,14 +1,25 @@
 const clientId = '810552076304121866';
-const { app, BrowserWindow, Menu, dialog, autoUpdater, ipcMain } = require('electron');
+const {
+	app,
+	BrowserWindow,
+	Menu,
+	dialog,
+	autoUpdater,
+	ipcMain
+} = require('electron');
 const path = require('path');
 var fs = require('fs');
 const ipc = require('electron').ipcMain;
-const { findSteam } = require('find-steam-app');
+const {
+	findSteam
+} = require('find-steam-app');
 const cp = require('child_process');
 var window;
 var os = require('os');
 const fetch = require('node-fetch');
-var { Collection } = require('discord.js');
+var {
+	Collection
+} = require('discord.js');
 var updateStatus = "none";
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -48,7 +59,9 @@ autoUpdater.on("update-not-available", () => {
 	window.webContents.send('update-changed', updateStatus);
 })
 const DiscordRPC = require('discord-rpc');
-var rpc = new DiscordRPC.Client({ transport: 'ipc' });
+var rpc = new DiscordRPC.Client({
+	transport: 'ipc'
+});
 const startTimestamp = new Date();
 
 function nthMostCommon(string, amount) {
@@ -58,11 +71,14 @@ function nthMostCommon(string, amount) {
 	for (var i = 0; i < wordsArray.length; i++) {
 		wordOccurrences['_' + wordsArray[i]] = (wordOccurrences['_' + wordsArray[i]] || 0) + 1;
 	}
-	var result = Object.keys(wordOccurrences).reduce(function(acc, currentKey) {
+	var result = Object.keys(wordOccurrences).reduce(function (acc, currentKey) {
 		/* you may want to include a binary search here */
 		for (var i = 0; i < amount; i++) {
 			if (!acc[i]) {
-				acc[i] = { word: currentKey.slice(1, currentKey.length), occurences: wordOccurrences[currentKey] };
+				acc[i] = {
+					word: currentKey.slice(1, currentKey.length),
+					occurences: wordOccurrences[currentKey]
+				};
 				break;
 			} else if (acc[i].occurences < wordOccurrences[currentKey]) {
 				acc.splice(i, 0, {
@@ -77,7 +93,26 @@ function nthMostCommon(string, amount) {
 	}, []);
 	return result;
 }
+async function getSteamInfo(steamid, notfetch) {
 
+	var rawsteaminfo = await fetch(`https://api.unicorn.wombos.xyz/api/mlauncher/steam/${steamid}`).then(f => f.json());
+	let steaminfo;
+	if (rawsteaminfo.status == "success" && rawsteaminfo.data.length > 0 && !notfetch) {
+		rawsteaminfo = rawsteaminfo.data[0];
+		steaminfo = {
+			steamid,
+			steamname: rawsteaminfo.personaname,
+			avatar: rawsteaminfo.avatarfull
+		}
+	} else {
+		steaminfo = {
+			steamid: steamid,
+			steamname: "not found",
+			avatar: ""
+		}
+	}
+	return steaminfo;
+}
 async function getConvInfo() {
 	return new Promise(async (resolve, reject) => {
 		var convos = await getConversations();
@@ -101,6 +136,8 @@ async function getConvInfo() {
 }
 
 async function getServer() {
+	var SteamLocation = await findSteam();
+	if (!SteamLocation) SteamLocation = __dirname
 	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
 	var monoappdataex = fs.existsSync(monoappdatapath);
 	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
@@ -109,17 +146,17 @@ async function getServer() {
 	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
 	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
 	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
-	var settings = monoappsfileex
-		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
-		: {
-				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
-				ip: '208.103.169.58:27015'
-			};
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+			ip: '208.103.169.58:27015'
+		};
 	if (!settings.ip) settings.ip = '208.103.169.58:27015';
 	return settings.ip;
 }
 
 async function setServer(server) {
+	var SteamLocation = await findSteam();
 	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
 	var monoappdataex = fs.existsSync(monoappdatapath);
 	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
@@ -128,19 +165,21 @@ async function setServer(server) {
 	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
 	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
 	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
-	var settings = monoappsfileex
-		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
-		: {
-				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
-				ip: server || '208.103.169.58:27015'
-			};
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+			ip: server || '208.103.169.58:27015'
+		};
 	if (!settings.ip) settings.ip = server || '208.103.169.58:27015';
 	settings.ip = server;
 	try {
 		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
 		window.webContents.send('server-changed', settings.ip);
-	} catch (e) {}
-	return { success: true, ip: settings.ip };
+	} catch (e) { }
+	return {
+		success: true,
+		ip: settings.ip
+	};
 }
 
 async function getgmodlocation() {
@@ -153,19 +192,18 @@ async function getgmodlocation() {
 	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
 	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
 	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
-	var settings = monoappsfileex
-		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
-		: {
-				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
-				ip: '208.103.169.58:27015'
-			};
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+			ip: '208.103.169.58:27015'
+		};
 	return settings.gmod;
 }
 
 async function setgmodlocation() {
 	var location = dialog.showOpenDialogSync(null, {
 		title: "MonoLauncher - Select Garry's Mod Directory",
-		properties: [ 'openDirectory' ]
+		properties: ['openDirectory']
 	});
 	if (!location) return 'cancelled';
 	var SteamLocation = await findSteam();
@@ -183,24 +221,36 @@ async function setgmodlocation() {
 	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
 	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
 	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
-	var settings = monoappsfileex
-		? JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString())
-		: {
-				gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
-				ip: '208.103.169.58:27015'
-			};
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+			ip: '208.103.169.58:27015'
+		};
 	settings.gmod = location;
 	try {
 		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
 		window.webContents.send('gmod-changed', settings.gmod);
-	} catch (e) {}
-	return { success: true, path: settings.gmod };
+	} catch (e) { }
+	return {
+		success: true,
+		path: settings.gmod
+	};
 }
 
 async function launchMonolith() {
 	var SteamLocation = await findSteam();
 	var ip = await getServer();
-	cp.spawn(`${SteamLocation}/steam.exe`, [ '-applaunch', '4000', '+connect', ip ]);
+	if (!SteamLocation || !ip) {
+		const dialogOpts = {
+			type: 'error',
+			title: 'Error',
+			message: "We can't launch Garry's Mod",
+			detail: 'Hey yeah.. We had some issues trying to start monolith. This could be because either, we couldnt find the server ip or Steams installation path'
+		};
+
+		return dialog.showMessageBox(dialogOpts);
+	}
+	cp.spawn(`${SteamLocation}/steam.exe`, ['-applaunch', '4000', '+connect', ip]);
 }
 
 async function getConversations() {
@@ -220,6 +270,102 @@ async function getConversations() {
 			resolve(chatsC);
 		} catch (e) {
 			resolve('404');
+		}
+	});
+}
+function formatMPNumber(number) {
+	let rnumb = number.replace("7656119", "")
+	let fnumb = `${rnumb.slice(0, 3)}-${rnumb.slice(3, 6)}-${rnumb.slice(6, 10)}`
+	return fnumb
+}
+
+async function getMPContact(sid, nf) {
+	return new Promise(async (resolve, reject) => {
+		var GmodLocation = await getgmodlocation();
+		var monofolder = path.join(GmodLocation, 'garrysmod', 'data', 'monolith');
+		if (!fs.existsSync(monofolder)) fs.mkdirSync(monofolder);
+		var contactfile = path.join(monofolder, 'monophone_contacts.json');
+		if (!fs.existsSync(contactfile)) fs.writeFileSync(contactfile, JSON.stringify({}));
+		var contacts = JSON.parse(fs.readFileSync(contactfile).toString());
+		var rcontact = contacts[sid] || contacts[sid + "_"];
+		var contact = {}
+		let steaminfo = await getSteamInfo(sid, nf);
+		if (!rcontact) {
+			contact.id = sid.replaceAll("_", "");
+			contact.number = formatMPNumber(sid);
+			contact.name = `Unknown | ${contact.number}` ;
+			contact.image = steaminfo.avatar;
+		} else {
+			contact.id = sid.replaceAll("_", "");
+			contact.number = formatMPNumber(sid);
+			contact.name =  `${rcontact.Name} | ${contact.number}` ;
+			contact.image = steaminfo.avatar;
+		}
+		resolve(contact)
+	});
+}
+async function getMPContacts(nf) {
+	return new Promise(async (resolve, reject) => {
+		var GmodLocation = await getgmodlocation();
+		try {
+			var monofolder = path.join(GmodLocation, 'garrysmod', 'data', 'monolith');
+			if (!fs.existsSync(monofolder)) fs.mkdirSync(monofolder);
+			var contactfile = path.join(monofolder, 'monophone_contacts.json');
+			if (!fs.existsSync(contactfile)) fs.writeFileSync(contactfile, JSON.stringify({}));
+			var contacts = JSON.parse(fs.readFileSync(contactfile).toString());
+			ncontacts = {}
+			for (let k in contacts) {
+				k = k.split(".json")[0]
+				var contact = getMPContact(k)
+				ncontacts[k] = contact
+			}
+
+			resolve(ncontacts);
+		} catch (e) {
+			resolve("404")
+		}
+	});
+}
+async function getMPConversation(sid, nf) {
+	return new Promise(async (resolve, reject) => {
+		var GmodLocation = await getgmodlocation();
+		try {
+			var monofolder = path.join(GmodLocation, 'garrysmod', 'data', 'monolith');
+			if (!fs.existsSync(monofolder)) fs.mkdirSync(monofolder);
+			var conversationfolder = path.join(monofolder, 'mono_message');
+			if (!fs.existsSync(conversationfolder)) fs.mkdirSync(conversationfolder);
+			var convo = JSON.parse(fs.readFileSync(path.join(conversationfolder, `${sid}.json`)).toString());
+			var contact = await getMPContact(sid, nf);
+			convo.contact = contact;
+			resolve(convo)
+		} catch (e) {
+			resolve("404")
+			console.error(e)
+		}
+	});
+}
+async function getMPConversations(nf) {
+	return new Promise(async (resolve, reject) => {
+		var GmodLocation = await getgmodlocation();
+		try {
+			var monofolder = path.join(GmodLocation, 'garrysmod', 'data', 'monolith');
+			if (!fs.existsSync(monofolder)) fs.mkdirSync(monofolder);
+			var conversationfolder = path.join(monofolder, 'mono_message');
+			if (!fs.existsSync(conversationfolder)) fs.mkdirSync(conversationfolder);
+			var conversations = fs.readdirSync(conversationfolder);
+			convos = [];
+			for (let k in conversations) {
+				var convfile = conversations[k];
+				var convo = JSON.parse(fs.readFileSync(path.join(conversationfolder, convfile)).toString());
+				var sid = convfile.split(".json")[0]
+				var contact = await getMPContact(sid, nf);
+				convo.contact = contact;
+				convos.push(convo)
+			}
+			resolve(convos)
+		} catch (e) {
+			resolve("404")
+			console.error(e)
 		}
 	});
 }
@@ -244,9 +390,17 @@ async function setActivity() {
 }
 
 const createWindow = async () => {
-	rpc.login({ clientId }).catch((err) => {
+	rpc.login({
+		clientId
+	}).catch((err) => {
 		if (err) {
-			rpc = { setActivity: function() {}, user: { username: 'Username', discriminator: '0000' } };
+			rpc = {
+				setActivity: function () { },
+				user: {
+					username: 'Username',
+					discriminator: '0000'
+				}
+			};
 		}
 	});
 	// Create the browser window.
@@ -305,7 +459,11 @@ ipc.handle('request-discord', async (event) => {
 	return result;
 });
 ipc.handle('request-imsgs', async (event) => {
-	var result = await getConversations();
+	var result = await getMPConversations();
+	return result;
+});
+ipc.handle('request-imsgs-nofetch', async (event, arg) => {
+	var result = await getMPConversation(arg, true);
 	return result;
 });
 ipc.handle('request-convinfo', async (event) => {
@@ -341,11 +499,8 @@ ipc.handle('change-server', async (event, arg) => {
 	return result;
 });
 ipc.handle('steam-avatar', async (event, arg) => {
-	var response = await fetch(`https://www.steamidfinder.com/lookup/${arg}/`)
-		.then((f) => f.text())
-		.then((f) => f.split(`<img class="img-rounded avatar" src="`)[1])
-		.then((f) => f.split(`" alt="`)[0]);
-	return response;
+	var response = await getSteamInfo(arg)
+	return response.avatar;
 });
 ipc.handle('request-update', async (event) => {
 	return updateStatus;
@@ -367,25 +522,11 @@ ipc.on('join-discord', async () => {
 	secondWindow.loadURL('https://discord.gg/RcAdxHXJ');
 	secondWindow.setMenuBarVisibility(false);
 	secondWindow.setTitle('Discord Prompt');
-	secondWindow.webContents.on('did-finish-load', function() {
+	secondWindow.webContents.on('did-finish-load', function () {
 		secondWindow.show();
 		secondWindow.hide();
 	});
 });
-
-// autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-// 	const dialogOpts = {
-// 		type: 'info',
-// 		buttons: [ 'Restart', 'Later' ],
-// 		title: 'Application Update',
-// 		message: process.platform === 'win32' ? releaseNotes : releaseName,
-// 		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-// 	};
-
-// 	dialog.showMessageBox(dialogOpts).then((returnValue) => {
-// 		if (returnValue.response === 0) autoUpdater.quitAndInstall();
-// 	});
-// });
 
 autoUpdater.on('error', (message) => {
 	console.error('There was a problem updating the application');
