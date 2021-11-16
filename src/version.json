@@ -8,6 +8,7 @@
   "changeLogs": [
     "Updated electron version.",
     "Implemented a new api for retrieving steam user information.",
-    "Added MonoPhone support."
+    "Added MonoPhone support.",
+    "Fix errors when Steam isn't installed."
   ]
 }
