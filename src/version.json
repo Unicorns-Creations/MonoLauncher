@@ -1,14 +1,11 @@
 {
   "name": "MonoLauncher",
-  "version": "v1.3.0",
+  "version": "v1.3.1",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0001"
   ],
   "changeLogs": [
-    "Updated electron version.",
-    "Implemented a new api for retrieving steam user information.",
-    "Added MonoPhone support.",
-    "Fix errors when Steam isn't installed."
+    "Added a MultiCore enabled toggle"
   ]
 }
