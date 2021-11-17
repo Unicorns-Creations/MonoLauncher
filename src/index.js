@@ -176,6 +176,24 @@ async function getGame() {
 	return { game: settings.game, gamepath: settings.gamepath };
 }
 
+async function getMultiCore() {
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			multicore: 'false'
+		};
+	if (!settings.multicore) settings.multicore = 'false';
+	return settings.multicore
+}
+
+
 async function setServer(server) {
 	var SteamLocation = await findSteam();
 	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
@@ -200,6 +218,30 @@ async function setServer(server) {
 	return {
 		success: true,
 		ip: settings.ip
+	};
+}
+async function setMultiCore(multicore) {
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			multicore: 'false'
+		};
+	if (!settings.multicore) settings.multicore = multicore || 'false';
+	settings.multicore = multicore;
+	try {
+		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
+		window.webContents.send('multicore-changed', settings.multicore);
+	} catch (e) { }
+	return {
+		success: true,
+		multicore: settings.multicore
 	};
 }
 
@@ -304,6 +346,7 @@ async function setgmodlocation() {
 async function launchMonolith() {
 	var GameLocation = await getGame();
 	var ip = await getServer();
+	var multicore = await getMultiCore();
 	if (!GameLocation || !ip || !GameLocation.gamepath || !GameLocation.game) {
 		const dialogOpts = {
 			type: 'error',
@@ -314,7 +357,14 @@ async function launchMonolith() {
 
 		return dialog.showMessageBox(dialogOpts);
 	}
-	cp.spawn(`${GameLocation.gamepath}`, ['+connect', ip]);
+	StartArgs = [
+		"+connect", ip
+	]
+	if (multicore) {
+		StartArgs.push("+gmod_mcore_test");
+		StartArgs.push("1");
+	}
+	cp.spawn(`${GameLocation.gamepath}`, StartArgs);
 }
 
 async function getConversations() {
@@ -554,6 +604,7 @@ ipc.handle('controlbox-action', async (event, arg) => {
 			return;
 	}
 });
+
 ipc.handle('request-server', async (event) => {
 	var result = await getServer();
 	return result;
@@ -562,12 +613,20 @@ ipc.handle('request-game', async (event) => {
 	var result = await getGame();
 	return result;
 });
+ipc.handle('request-multicore', async (event) => {
+	var result = await getMultiCore();
+	return result;
+});
 ipc.handle('change-server', async (event, arg) => {
 	var result = await setServer(arg);
 	return result;
 });
 ipc.handle('change-game', async (event, arg) => {
 	var result = await setGame(arg);
+	return result;
+});
+ipc.handle('change-multicore', async (event, arg) => {
+	var result = await setMultiCore(arg);
 	return result;
 });
 ipc.handle('steam-avatar', async (event, arg) => {

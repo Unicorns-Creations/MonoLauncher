@@ -61,6 +61,18 @@
         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 2px; text-align: center;">These options require you to have enabled the x86-64 beta option in Steam for Garry's Mod</h6>
       </div>
     </div>
+    <div id="multicoreSelector" class="card bg-dark text-white" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Multicore Enabled</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Choose if you'd like Multicore enabled/disabled in Garry's Mod.</h6>
+        <select class="form-select form-select-sm bg-dark text-white" onchange="changeMulticore(this.value)">
+          <option selected disabled>Multicore Enabled/Disabled</option>
+          <option id="true" value="true">Enabled</option>
+          <option id="false" value="false">Disabled</option>
+        </select>
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 2px; text-align: center;">This simply runs "gmod_mcore_test 1" if enabled, disabling it will simply just not run the command.</h6>
+      </div>
+    </div>
   </div>
 </body>
 

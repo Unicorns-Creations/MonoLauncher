@@ -49,6 +49,11 @@ function requestgame() {
 		setgame(result.game);
 	});
 }
+function requestmulticore() {
+	ipcRenderer.invoke('request-multicore').then(async (result) => {
+		setmulticore(result);
+	});
+}
 function setlocation(location) {
 	var gld = document.getElementById('gmodLocationDisplay');
 	gld.value = String(location);
@@ -61,6 +66,11 @@ function setserver(server) {
 
 function setgame(game) {
 	var gld = document.getElementById(game);
+	gld.selected = 'selected';
+}
+
+function setmulticore(multicore) {
+	var gld = document.getElementById(String(multicore));
 	gld.selected = 'selected';
 }
 
@@ -94,10 +104,26 @@ function changeGame(game) {
 	});
 }
 
+function changeMulticore(multicore) {
+	ipcRenderer.invoke('change-multicore', multicore).then(async (result) => {
+		if (result == '404') {
+			return swal(
+				'Ahh sheet',
+				"Seems like we couldn't change the MultiCore status for some reason.",
+				'error'
+			);
+		}
+		if (result.success) {
+			return swal('Wooh!', 'We managed to change the MultiCore status successfully!', 'success');
+		}
+	});
+}
+
 window.onload = function() {
 	requestgmod();
 	requestserver();
 	requestgame();
+	requestmulticore();
 };
 
 ipcRenderer.on('gmod-changed', (event, message) => {
@@ -110,6 +136,10 @@ ipcRenderer.on('server-changed', (event, message) => {
 
 ipcRenderer.on('game-changed', (event, message) => {
 	setgame(message);
+});
+
+ipcRenderer.on('multicore-changed', (event, message) => {
+	setmulticore(message);
 });
 
 function DRPCInfo() {
