@@ -492,15 +492,28 @@ function getramusage() {
 }
 
 async function setActivity() {
-	rpc.setActivity({
-		details: 'Thinking about joining Monolith',
-		state: 'Exploring menus',
-		startTimestamp,
-		largeImageKey: 'monolith',
-		largeImageText: 'Monolith Servers',
-		smallImageKey: 'discord',
-		smallImageText: 'discord.gg/uj6NRBS'
-	});
+	if (app.isPackaged) {
+		rpc.setActivity({
+			details: 'Thinking about joining Monolith',
+			state: 'Exploring menus',
+			startTimestamp,
+			largeImageKey: 'monolith',
+			largeImageText: 'Monolith Servers',
+			smallImageKey: 'discord',
+			smallImageText: 'discord.gg/uj6NRBS'
+		});
+	}else {
+		rpc.setActivity({
+			details: 'Adding new features',
+			state: 'Improving MonoLauncher',
+			startTimestamp,
+			largeImageKey: 'monolith',
+			largeImageText: 'Monolith Servers',
+			smallImageKey: 'discord',
+			smallImageText: 'discord.gg/uj6NRBS'
+		});
+	}
+	
 }
 
 const createWindow = async () => {
