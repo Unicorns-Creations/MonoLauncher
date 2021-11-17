@@ -6,6 +6,8 @@
     "Jacub#0001"
   ],
   "changeLogs": [
-    "Added a MultiCore enabled toggle"
+    "Added a MultiCore enabled toggle.",
+    "Added the ability to select which version of the game to launch.",
+    "Removed useless button in the Status tab."
   ]
 }
