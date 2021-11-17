@@ -581,6 +581,10 @@ ipc.handle('request-ram', async (event) => {
 	var result = getramusage();
 	return result;
 });
+ipc.handle('is-development', async (event) => {
+	var result = !app.isPackaged;
+	return result;
+});
 ipc.handle('request-discord', async (event) => {
 	var result = `${rpc.user.username}#${rpc.user.discriminator}`;
 	return result;
