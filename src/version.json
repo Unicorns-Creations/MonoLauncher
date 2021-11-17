@@ -8,6 +8,7 @@
   "changeLogs": [
     "Added a MultiCore enabled toggle.",
     "Added the ability to select which version of the game to launch.",
-    "Removed useless button in the Status tab."
+    "Removed useless button in the Status tab.",
+    "Removed Early Access banner"
   ]
 }
