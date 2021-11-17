@@ -44,6 +44,11 @@ function requestserver() {
 		setserver(result);
 	});
 }
+function requestgame() {
+	ipcRenderer.invoke('request-game').then(async (result) => {
+		setgame(result.game);
+	});
+}
 function setlocation(location) {
 	var gld = document.getElementById('gmodLocationDisplay');
 	gld.value = String(location);
@@ -51,6 +56,11 @@ function setlocation(location) {
 
 function setserver(server) {
 	var gld = document.getElementById(server);
+	gld.selected = 'selected';
+}
+
+function setgame(game) {
+	var gld = document.getElementById(game);
 	gld.selected = 'selected';
 }
 
@@ -69,9 +79,25 @@ function changeServer(server) {
 	});
 }
 
+function changeGame(game) {
+	ipcRenderer.invoke('change-game', game).then(async (result) => {
+		if (result == '404') {
+			return swal(
+				'Ahh sheet',
+				"Seems like we couldn't change the game version for some reason, I usually like to blame Jet for issues like this.",
+				'error'
+			);
+		}
+		if (result.success) {
+			return swal('Wooh!', 'We managed to change the game version successfully!', 'success');
+		}
+	});
+}
+
 window.onload = function() {
 	requestgmod();
 	requestserver();
+	requestgame();
 };
 
 ipcRenderer.on('gmod-changed', (event, message) => {
@@ -80,6 +106,10 @@ ipcRenderer.on('gmod-changed', (event, message) => {
 
 ipcRenderer.on('server-changed', (event, message) => {
 	setserver(message);
+});
+
+ipcRenderer.on('game-changed', (event, message) => {
+	setgame(message);
 });
 
 function DRPCInfo() {
