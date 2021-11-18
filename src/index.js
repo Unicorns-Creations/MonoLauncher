@@ -17,9 +17,9 @@ const cp = require('child_process');
 var window;
 var os = require('os');
 const fetch = require('node-fetch');
-var {
-	Collection
-} = require('discord.js');
+// var {
+// 	Collection
+// } = require('discord.js');
 var updateStatus = "none";
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -367,26 +367,26 @@ async function launchMonolith() {
 	cp.spawn(`${GameLocation.gamepath}`, StartArgs);
 }
 
-async function getConversations() {
-	return new Promise(async (resolve, reject) => {
-		var GmodLocation = await getgmodlocation();
-		var chatsC = new Collection();
-		try {
-			var datadir = path.join(GmodLocation, 'garrysmod', 'data');
-			var chatdir = path.join(datadir, 'chats');
-			var chats = fs.readdirSync(chatdir);
-			chats.forEach((chatFile) => {
-				var chat = JSON.parse(fs.readFileSync(path.join(chatdir, chatFile)).toString());
-				chat.chats = chat.chats.reverse();
-				chat.id = chatFile.split('.txt')[0];
-				chatsC.set(chatFile.split('.txt')[0], chat);
-			});
-			resolve(chatsC);
-		} catch (e) {
-			resolve('404');
-		}
-	});
-}
+// async function getConversations() {
+// 	return new Promise(async (resolve, reject) => {
+// 		var GmodLocation = await getgmodlocation();
+// 		var chatsC = new Collection();
+// 		try {
+// 			var datadir = path.join(GmodLocation, 'garrysmod', 'data');
+// 			var chatdir = path.join(datadir, 'chats');
+// 			var chats = fs.readdirSync(chatdir);
+// 			chats.forEach((chatFile) => {
+// 				var chat = JSON.parse(fs.readFileSync(path.join(chatdir, chatFile)).toString());
+// 				chat.chats = chat.chats.reverse();
+// 				chat.id = chatFile.split('.txt')[0];
+// 				chatsC.set(chatFile.split('.txt')[0], chat);
+// 			});
+// 			resolve(chatsC);
+// 		} catch (e) {
+// 			resolve('404');
+// 		}
+// 	});
+// }
 function formatMPNumber(number) {
 	let rnumb = number.replace("7656119", "")
 	let fnumb = `${rnumb.slice(0, 3)}-${rnumb.slice(3, 6)}-${rnumb.slice(6, 10)}`
