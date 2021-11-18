@@ -10,9 +10,9 @@ header {
   bottom: 0;
   left: 0;
   right: 0;
-  opacity: 0.7;
   width: 100%;
   height: 4rem;
+  opacity: 1;
   line-height: 4rem;
   border-radius: 2px;
   -webkit-app-region: drag;
