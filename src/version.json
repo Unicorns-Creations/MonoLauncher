@@ -13,6 +13,7 @@
     "Removed Early Access banner.",
     "Fixed styling issues with the navbar on Dev info and Status pages.",
     "Fixed styling of the header on the \"Menu\" page.",
-    "Fixed button size when hovering over them."
+    "Fixed button size when hovering over them.",
+    "Fixed styling and centering on main page."
   ]
 }
