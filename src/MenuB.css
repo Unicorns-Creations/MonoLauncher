@@ -23,6 +23,7 @@
     transition-duration: 500ms;
     cursor: pointer;
     margin: 1rem;
+    border-radius: .25rem;
   }
 
   .toolscontainer > a > img:hover {
