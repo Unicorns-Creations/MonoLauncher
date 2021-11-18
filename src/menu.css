@@ -39,7 +39,7 @@ header button {
 
 .navbutton {
   width: 80px;
-  height: 50px;
+  height: 100%;
   font-family: nexalight;
   background-color: rgba(41, 41, 41, 0);
   color: white;
