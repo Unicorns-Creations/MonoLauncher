@@ -10,7 +10,8 @@
     "Added a MultiCore enabled toggle.",
     "Added the ability to select which version of the game to launch.",
     "Removed useless button in the Status tab.",
-    "Removed Early Access banner",
-    "Fixed styling issues with the navbar on Dev info and Status pages."
+    "Removed Early Access banner.",
+    "Fixed styling issues with the navbar on Dev info and Status pages.",
+    "Fixed styling of the header on the \"Menu\" page."
   ]
 }
