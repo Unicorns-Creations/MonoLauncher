@@ -12,6 +12,7 @@
     "Removed useless button in the Status tab.",
     "Removed Early Access banner.",
     "Fixed styling issues with the navbar on Dev info and Status pages.",
-    "Fixed styling of the header on the \"Menu\" page."
+    "Fixed styling of the header on the \"Menu\" page.",
+    "Fixed button size when hovering over them."
   ]
 }
