@@ -3,12 +3,14 @@
   "version": "v1.3.1",
   "versionAuthors": [
     "Jetty#9451",
-    "Jacub#0001"
+    "Jacub#0520",
+    "squid#5091"
   ],
   "changeLogs": [
     "Added a MultiCore enabled toggle.",
     "Added the ability to select which version of the game to launch.",
     "Removed useless button in the Status tab.",
-    "Removed Early Access banner"
+    "Removed Early Access banner",
+    "Fixed styling issues with the navbar on Dev info and Status pages."
   ]
 }
