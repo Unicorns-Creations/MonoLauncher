@@ -16,7 +16,7 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-  </script>
+    </script>
   <link rel="stylesheet" href="controlbox.css">
   <script src="controlbox.ui.js"></script>
 
@@ -32,23 +32,48 @@
     <div id="gmodLoc" class="card bg-dark text-white" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Garry's Mod Location</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Required for Monotablet & Monolauncher to properly work.</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Required for MonoPhone & Monolauncher to properly work.</h6>
         <input id="gmodLocationDisplay" type="text" value="" placeholder="Gmod Location" disabled><br><br>
         <a onclick="setGmodDir()" class="card-link">Browse</a>
       </div>
     </div>
-      <div id="serverSelector" class="card bg-dark text-white" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Select Server</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Select a Monolith server</h6>
-          <select class="form-select form-select-sm bg-dark text-white" onchange="changeServer(this.value)">
-            <option selected disabled>Select Server</option>
-            <option id="208.103.169.58:27015" value="208.103.169.58:27015">Monolith - US</option>
-            <option id="208.103.169.233:27015" value="208.103.169.233:27015">Monolith - French</option>
-          </select>
-        </div>  
+    <div id="serverSelector" class="card bg-dark text-white" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Select Server</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Select a Monolith server</h6>
+        <select class="form-select form-select-sm bg-dark text-white" onchange="changeServer(this.value)">
+          <option selected disabled>Select Server</option>
+          <option id="208.103.169.58:27015" value="208.103.169.58:27015">Monolith - US</option>
+          <option id="208.103.169.233:27015" value="208.103.169.233:27015">Monolith - French</option>
+        </select>
+      </div>
     </div>
+    <div id="gameSelector" class="card bg-dark text-white" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Game Version</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Select which version of Garry's Mod to use.</h6>
+        <select class="form-select form-select-sm bg-dark text-white" onchange="changeGame(this.value)">
+          <option selected disabled>Game Version</option>
+          <option id="64gmod" value="64gmod">64-bit</option>
+          <option id="32gmod" value="32gmod">32-bit</option>
+          <option id="defgmod" value="defgmod">Default</option>
+        </select>
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 2px; text-align: center;">These options require you to have enabled the x86-64 beta option in Steam for Garry's Mod</h6>
+      </div>
     </div>
+    <div id="multicoreSelector" class="card bg-dark text-white" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Multicore Enabled</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Choose if you'd like Multicore enabled/disabled in Garry's Mod.</h6>
+        <select class="form-select form-select-sm bg-dark text-white" onchange="changeMulticore(this.value)">
+          <option selected disabled>Multicore Enabled/Disabled</option>
+          <option id="true" value="true">Enabled</option>
+          <option id="false" value="false">Disabled</option>
+        </select>
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 2px; text-align: center;">This simply runs "gmod_mcore_test 1" if enabled, disabling it will simply just not run the command.</h6>
+      </div>
+    </div>
+  </div>
 </body>
 
 <script src="header.ui.js"></script>

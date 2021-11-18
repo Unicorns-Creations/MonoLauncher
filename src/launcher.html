@@ -43,10 +43,10 @@
 
 <footer>
   <a href="version.html">
-    <p id="info">Version 1.3.0
+    <p id="info">Version 1.3.1
   </a> <a href="update.html"><span id="updatedisplay" class="badge bg-secondary"></span></a>- Game
   Version 2.0.9 - <a href="contributions.html">View Contributors</a></p>
-  <div id="eaBanner">Early Access</div>
+  
 </footer>
 
 <script>
@@ -103,6 +103,16 @@
 
   ipcRenderer.invoke('request-update').then((result) => {
     setUpdate(result)
+  })
+
+  ipcRenderer.invoke('is-development').then((result) => {
+    if (result) {
+      var eaBanner = document.createElement("div");
+      eaBanner.id = "eaBanner";
+      eaBanner.innerText = "Dev Build";
+      var footer = document.getElementsByTagName("footer")[0];
+      footer.appendChild(eaBanner); 
+    }
   })
   fetchUpdates()
 </script>

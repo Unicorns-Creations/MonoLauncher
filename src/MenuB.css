@@ -17,14 +17,15 @@
     overflow-y: auto;
   }
 
-  img {
+  .toolscontainer > a > img {
     width: 400px;
-    opacity: 50%;
-    transition-duration: 500ms;
+    transition-duration: 250ms;
     cursor: pointer;
     margin: 1rem;
+    border-radius: .25rem;
+    filter: brightness(80%);
   }
 
-  img:hover {
-    opacity: 100%;
+  .toolscontainer > a > img:hover {
+    filter: brightness(100%);
   }

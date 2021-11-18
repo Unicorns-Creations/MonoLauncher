@@ -10,7 +10,6 @@ var electron = require('electron');
 var clipboard = electron.clipboard;
 var ipcRenderer = electron.ipcRenderer;
 var gamedig = require('gamedig');
-var Button = MaterialUI.Button;
 function toTimeFormat(totalSeconds) {
 	hours = Math.floor(totalSeconds / 3600);
 	totalSeconds %= 3600;
@@ -70,8 +69,6 @@ var PlayerList = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this3 = this;
-
 			return React.createElement(
 				'div',
 				{ id: 'player-holder' },
@@ -96,23 +93,6 @@ var PlayerList = function (_React$Component) {
 					'h3',
 					{ style: { textAlign: 'center', marginBottom: '10px' } },
 					'Player List'
-				),
-				React.createElement(
-					Button,
-					{
-						variant: 'contained',
-						color: 'primary',
-						onClick: function onClick() {
-							clipboard.writeText(_this3.state.query.players.filter(function (f) {
-								return f.name && f.name.length > 1;
-							}).filter(function (f) {
-								return f.time < 86400;
-							}).map(function (f) {
-								return f.name + ' | ' + toTimeFormat(Math.ceil(f.time));
-							}).join('\n'));
-						}
-					},
-					'Copy Players to Clipboard'
 				),
 				React.createElement(
 					'div',

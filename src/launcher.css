@@ -1,36 +1,38 @@
 .gamelaunch {
   position: fixed;
-  top: 35rem;
-  left: 45%;
+  top: 36rem;
   min-width: 20vh;
   min-height: 5vh;
-  background-color: #e9b62b;
+  background-color: #d3a528;
   border-style: none;
-  opacity: 50%;
   border-radius: 5px;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
   transition-duration: 200ms;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, 0)
 }
 
 .gamelaunch:hover {
-  opacity: 100%;
-  background-color: #dfa70f;
+  background-color: #b6890d;
 }
 
 #newsBox {
   position:fixed;
-  top: 9rem;
-  left: 2rem;
+  top: 6.8rem;
   font-size: 12px;
   color: white;
   overflow-x: auto;
   overflow-y: auto;
   min-width: 1vh;
   min-height: 1vh;
-  max-width: 95%;
-  max-height: 60%;
+  max-width: 100%;
+  max-height: 65%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
 }
 
 #newsBox div {
@@ -40,6 +42,11 @@
   vertical-align: top;
 }
 
+p.card-text {
+  line-height: 1.5em;
+  height: 15em;
+  overflow: hidden;
+}
 
 #info {
   color: gray;

@@ -44,6 +44,16 @@ function requestserver() {
 		setserver(result);
 	});
 }
+function requestgame() {
+	ipcRenderer.invoke('request-game').then(async (result) => {
+		setgame(result.game);
+	});
+}
+function requestmulticore() {
+	ipcRenderer.invoke('request-multicore').then(async (result) => {
+		setmulticore(result);
+	});
+}
 function setlocation(location) {
 	var gld = document.getElementById('gmodLocationDisplay');
 	gld.value = String(location);
@@ -51,6 +61,16 @@ function setlocation(location) {
 
 function setserver(server) {
 	var gld = document.getElementById(server);
+	gld.selected = 'selected';
+}
+
+function setgame(game) {
+	var gld = document.getElementById(game);
+	gld.selected = 'selected';
+}
+
+function setmulticore(multicore) {
+	var gld = document.getElementById(String(multicore));
 	gld.selected = 'selected';
 }
 
@@ -69,9 +89,41 @@ function changeServer(server) {
 	});
 }
 
+function changeGame(game) {
+	ipcRenderer.invoke('change-game', game).then(async (result) => {
+		if (result == '404') {
+			return swal(
+				'Ahh sheet',
+				"Seems like we couldn't change the game version for some reason, I usually like to blame Jet for issues like this.",
+				'error'
+			);
+		}
+		if (result.success) {
+			return swal('Wooh!', 'We managed to change the game version successfully!', 'success');
+		}
+	});
+}
+
+function changeMulticore(multicore) {
+	ipcRenderer.invoke('change-multicore', multicore).then(async (result) => {
+		if (result == '404') {
+			return swal(
+				'Ahh sheet',
+				"Seems like we couldn't change the MultiCore status for some reason.",
+				'error'
+			);
+		}
+		if (result.success) {
+			return swal('Wooh!', 'We managed to change the MultiCore status successfully!', 'success');
+		}
+	});
+}
+
 window.onload = function() {
 	requestgmod();
 	requestserver();
+	requestgame();
+	requestmulticore();
 };
 
 ipcRenderer.on('gmod-changed', (event, message) => {
@@ -80,6 +132,14 @@ ipcRenderer.on('gmod-changed', (event, message) => {
 
 ipcRenderer.on('server-changed', (event, message) => {
 	setserver(message);
+});
+
+ipcRenderer.on('game-changed', (event, message) => {
+	setgame(message);
+});
+
+ipcRenderer.on('multicore-changed', (event, message) => {
+	setmulticore(message);
 });
 
 function DRPCInfo() {

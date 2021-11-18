@@ -17,9 +17,9 @@ const cp = require('child_process');
 var window;
 var os = require('os');
 const fetch = require('node-fetch');
-var {
-	Collection
-} = require('discord.js');
+// var {
+// 	Collection
+// } = require('discord.js');
 var updateStatus = "none";
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -155,6 +155,45 @@ async function getServer() {
 	return settings.ip;
 }
 
+async function getGame() {
+	var SteamLocation = await findSteam();
+	if (!SteamLocation) SteamLocation = __dirname
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+			gamepath: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'hl2.exe'),
+			game: 'defgmod'
+		};
+	if (!settings.game || !settings.gamepath) { settings.game = 'defgmod'; settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'hl2.exe'); }
+	return { game: settings.game, gamepath: settings.gamepath };
+}
+
+async function getMultiCore() {
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			multicore: 'false'
+		};
+	if (!settings.multicore) settings.multicore = 'false';
+	return settings.multicore
+}
+
+
 async function setServer(server) {
 	var SteamLocation = await findSteam();
 	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
@@ -181,6 +220,31 @@ async function setServer(server) {
 		ip: settings.ip
 	};
 }
+async function setMultiCore(multicore) {
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			multicore: 'false'
+		};
+	if (!settings.multicore) settings.multicore = multicore || 'false';
+	settings.multicore = multicore;
+	try {
+		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
+		window.webContents.send('multicore-changed', settings.multicore);
+	} catch (e) { }
+	return {
+		success: true,
+		multicore: settings.multicore
+	};
+}
+
 
 async function getgmodlocation() {
 	var SteamLocation = await findSteam();
@@ -198,6 +262,48 @@ async function getgmodlocation() {
 			ip: '208.103.169.58:27015'
 		};
 	return settings.gmod;
+}
+
+async function setGame(game) {
+	var SteamLocation = await findSteam();
+	var monoappdatapath = path.join(process.env.APPDATA, 'monolauncher');
+	var monoappdataex = fs.existsSync(monoappdatapath);
+	if (!monoappdataex) fs.mkdirSync(monoappdatapath);
+	var monoappsettingspath = path.join(monoappdatapath, 'settings');
+	var monoappsettex = fs.existsSync(monoappsettingspath);
+	if (!monoappsettex) fs.mkdirSync(monoappsettingspath);
+	var monoappsettingsfilepath = path.join(monoappsettingspath, 'settings.json');
+	var monoappsfileex = fs.existsSync(monoappsettingsfilepath);
+	var settings = monoappsfileex ?
+		JSON.parse(fs.readFileSync(monoappsettingsfilepath).toString()) : {
+			gmod: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod'),
+			game: game || "defgmod",
+			gamepath: path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'hl2.exe'),
+		};
+	if (!settings.game) settings.game = game || 'defgmod';
+	settings.game = game;
+	if (settings.game == '64gmod') {
+		settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'bin', 'win64', 'gmod.exe');
+	} else if (settings.game == '32gmod') {
+		settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'bin', 'gmod.exe');
+	} else if (settings.game == 'defgmod') {
+		settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'hl2.exe');
+	}
+	if (!fs.existsSync(settings.gamepath)) {
+		return {
+			success: false,
+			error: 'Game not found'
+		};
+	}
+	try {
+		fs.writeFileSync(monoappsettingsfilepath, JSON.stringify(settings));
+		window.webContents.send('game-changed', settings.game);
+	} catch (e) { }
+	return {
+		success: true,
+		game: settings.game,
+		gamepath: settings.gamepath
+	};
 }
 
 async function setgmodlocation() {
@@ -238,41 +344,49 @@ async function setgmodlocation() {
 }
 
 async function launchMonolith() {
-	var SteamLocation = await findSteam();
+	var GameLocation = await getGame();
 	var ip = await getServer();
-	if (!SteamLocation || !ip) {
+	var multicore = await getMultiCore();
+	if (!GameLocation || !ip || !GameLocation.gamepath || !GameLocation.game) {
 		const dialogOpts = {
 			type: 'error',
 			title: 'Error',
 			message: "We can't launch Garry's Mod",
-			detail: 'Hey yeah.. We had some issues trying to start monolith. This could be because either, we couldnt find the server ip or Steams installation path'
+			detail: 'Hey yeah.. We had some issues trying to start monolith. This could be because either, we couldnt find the server ip or Garry\'s Mods installation path'
 		};
 
 		return dialog.showMessageBox(dialogOpts);
 	}
-	cp.spawn(`${SteamLocation}/steam.exe`, ['-applaunch', '4000', '+connect', ip]);
+	StartArgs = [
+		"+connect", ip
+	]
+	if (multicore) {
+		StartArgs.push("+gmod_mcore_test");
+		StartArgs.push("1");
+	}
+	cp.spawn(`${GameLocation.gamepath}`, StartArgs);
 }
 
-async function getConversations() {
-	return new Promise(async (resolve, reject) => {
-		var GmodLocation = await getgmodlocation();
-		var chatsC = new Collection();
-		try {
-			var datadir = path.join(GmodLocation, 'garrysmod', 'data');
-			var chatdir = path.join(datadir, 'chats');
-			var chats = fs.readdirSync(chatdir);
-			chats.forEach((chatFile) => {
-				var chat = JSON.parse(fs.readFileSync(path.join(chatdir, chatFile)).toString());
-				chat.chats = chat.chats.reverse();
-				chat.id = chatFile.split('.txt')[0];
-				chatsC.set(chatFile.split('.txt')[0], chat);
-			});
-			resolve(chatsC);
-		} catch (e) {
-			resolve('404');
-		}
-	});
-}
+// async function getConversations() {
+// 	return new Promise(async (resolve, reject) => {
+// 		var GmodLocation = await getgmodlocation();
+// 		var chatsC = new Collection();
+// 		try {
+// 			var datadir = path.join(GmodLocation, 'garrysmod', 'data');
+// 			var chatdir = path.join(datadir, 'chats');
+// 			var chats = fs.readdirSync(chatdir);
+// 			chats.forEach((chatFile) => {
+// 				var chat = JSON.parse(fs.readFileSync(path.join(chatdir, chatFile)).toString());
+// 				chat.chats = chat.chats.reverse();
+// 				chat.id = chatFile.split('.txt')[0];
+// 				chatsC.set(chatFile.split('.txt')[0], chat);
+// 			});
+// 			resolve(chatsC);
+// 		} catch (e) {
+// 			resolve('404');
+// 		}
+// 	});
+// }
 function formatMPNumber(number) {
 	let rnumb = number.replace("7656119", "")
 	let fnumb = `${rnumb.slice(0, 3)}-${rnumb.slice(3, 6)}-${rnumb.slice(6, 10)}`
@@ -293,12 +407,12 @@ async function getMPContact(sid, nf) {
 		if (!rcontact) {
 			contact.id = sid.replaceAll("_", "");
 			contact.number = formatMPNumber(sid);
-			contact.name = `Unknown | ${contact.number}` ;
+			contact.name = `Unknown | ${contact.number}`;
 			contact.image = steaminfo.avatar;
 		} else {
 			contact.id = sid.replaceAll("_", "");
 			contact.number = formatMPNumber(sid);
-			contact.name =  `${rcontact.Name} | ${contact.number}` ;
+			contact.name = `${rcontact.Name} | ${contact.number}`;
 			contact.image = steaminfo.avatar;
 		}
 		resolve(contact)
@@ -378,15 +492,28 @@ function getramusage() {
 }
 
 async function setActivity() {
-	rpc.setActivity({
-		details: 'Thinking about joining Monolith',
-		state: 'Exploring menus',
-		startTimestamp,
-		largeImageKey: 'monolith',
-		largeImageText: 'Monolith Servers',
-		smallImageKey: 'discord',
-		smallImageText: 'discord.gg/uj6NRBS'
-	});
+	if (app.isPackaged) {
+		rpc.setActivity({
+			details: 'Thinking about joining Monolith',
+			state: 'Exploring menus',
+			startTimestamp,
+			largeImageKey: 'monolith',
+			largeImageText: 'Monolith Servers',
+			smallImageKey: 'discord',
+			smallImageText: 'discord.gg/uj6NRBS'
+		});
+	}else {
+		rpc.setActivity({
+			details: 'Adding new features',
+			state: 'Improving MonoLauncher',
+			startTimestamp,
+			largeImageKey: 'monolith',
+			largeImageText: 'Monolith Servers',
+			smallImageKey: 'discord',
+			smallImageText: 'discord.gg/uj6NRBS'
+		});
+	}
+	
 }
 
 const createWindow = async () => {
@@ -454,6 +581,10 @@ ipc.handle('request-ram', async (event) => {
 	var result = getramusage();
 	return result;
 });
+ipc.handle('is-development', async (event) => {
+	var result = !app.isPackaged;
+	return result;
+});
 ipc.handle('request-discord', async (event) => {
 	var result = `${rpc.user.username}#${rpc.user.discriminator}`;
 	return result;
@@ -490,12 +621,29 @@ ipc.handle('controlbox-action', async (event, arg) => {
 			return;
 	}
 });
+
 ipc.handle('request-server', async (event) => {
 	var result = await getServer();
 	return result;
 });
+ipc.handle('request-game', async (event) => {
+	var result = await getGame();
+	return result;
+});
+ipc.handle('request-multicore', async (event) => {
+	var result = await getMultiCore();
+	return result;
+});
 ipc.handle('change-server', async (event, arg) => {
 	var result = await setServer(arg);
+	return result;
+});
+ipc.handle('change-game', async (event, arg) => {
+	var result = await setGame(arg);
+	return result;
+});
+ipc.handle('change-multicore', async (event, arg) => {
+	var result = await setMultiCore(arg);
 	return result;
 });
 ipc.handle('steam-avatar', async (event, arg) => {

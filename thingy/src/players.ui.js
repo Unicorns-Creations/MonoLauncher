@@ -2,7 +2,6 @@ const electron = require('electron');
 var clipboard = electron.clipboard;
 var ipcRenderer = electron.ipcRenderer;
 var gamedig = require('gamedig');
-var Button = MaterialUI.Button;
 function toTimeFormat(totalSeconds) {
 	hours = Math.floor(totalSeconds / 3600);
 	totalSeconds %= 3600;
@@ -50,21 +49,6 @@ class PlayerList extends React.Component {
 					</p>
 				</div>
 				<h3 style={{ textAlign: 'center', marginBottom: '10px' }}>Player List</h3>
-				<Button
-					variant="contained"
-					color="primary"
-					onClick={() => {
-						clipboard.writeText(
-							this.state.query.players
-								.filter((f) => f.name && f.name.length > 1)
-								.filter((f) => f.time < 86400)
-								.map((f) => `${f.name} | ${toTimeFormat(Math.ceil(f.time))}`)
-								.join('\n')
-						);
-					}}
-				>
-					Copy Players to Clipboard
-				</Button>
 				<div id="online-table-container">
 					<table id="online-table">
 						<thead>
