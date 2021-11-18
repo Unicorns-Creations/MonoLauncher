@@ -21,7 +21,7 @@
 
 #newsBox {
   position:fixed;
-  top: 9rem;
+  top: 6.8rem;
   left: 2rem;
   font-size: 12px;
   color: white;
@@ -30,7 +30,7 @@
   min-width: 1vh;
   min-height: 1vh;
   max-width: 95%;
-  max-height: 60%;
+  max-height: 65%;
 }
 
 #newsBox div {
@@ -40,6 +40,11 @@
   vertical-align: top;
 }
 
+p.card-text {
+  line-height: 1.5em;
+  height: 15em;
+  overflow: hidden;
+}
 
 #info {
   color: gray;
