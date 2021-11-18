@@ -19,13 +19,13 @@
 
   .toolscontainer > a > img {
     width: 400px;
-    opacity: 85%;
     transition-duration: 250ms;
     cursor: pointer;
     margin: 1rem;
     border-radius: .25rem;
+    filter: brightness(80%);
   }
 
   .toolscontainer > a > img:hover {
-    opacity: 100%;
+    filter: brightness(100%);
   }
