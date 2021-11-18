@@ -19,8 +19,8 @@
 
   .toolscontainer > a > img {
     width: 400px;
-    opacity: 50%;
-    transition-duration: 500ms;
+    opacity: 85%;
+    transition-duration: 250ms;
     cursor: pointer;
     margin: 1rem;
     border-radius: .25rem;
