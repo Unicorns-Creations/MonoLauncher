@@ -14,6 +14,7 @@
     "Fixed styling issues with the navbar on Dev info and Status pages.",
     "Fixed styling of the header on the \"Menu\" page.",
     "Fixed button size when hovering over them.",
-    "Fixed styling and centering on main page."
+    "Fixed styling and centering on main page.",
+    "Made most stuff round so it's uniform."
   ]
 }
