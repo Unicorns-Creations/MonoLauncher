@@ -283,11 +283,11 @@ async function setGame(game) {
 	if (!settings.game) settings.game = game || 'defgmod';
 	settings.game = game;
 	if (settings.game == '64gmod') {
-		settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'bin', 'win64', 'gmod.exe');
+		settings.gamepath = path.join(settings.gmod, 'bin', 'win64', 'gmod.exe');
 	} else if (settings.game == '32gmod') {
-		settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'bin', 'gmod.exe');
+		settings.gamepath = path.join(settings.gmod, 'bin', 'gmod.exe');
 	} else if (settings.game == 'defgmod') {
-		settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'hl2.exe');
+		settings.gamepath = path.join(settings.gmod, 'GarrysMod', 'hl2.exe');
 	}
 	if (!fs.existsSync(settings.gamepath)) {
 		return {
