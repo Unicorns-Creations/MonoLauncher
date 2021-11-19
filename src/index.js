@@ -283,16 +283,16 @@ async function setGame(game) {
 	if (!settings.game) settings.game = game || 'defgmod';
 	settings.game = game;
 	if (settings.game == '64gmod') {
-		settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'bin', 'win64', 'gmod.exe');
+		settings.gamepath = path.join(settings.gmod, 'bin', 'win64', 'gmod.exe');
 	} else if (settings.game == '32gmod') {
-		settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'bin', 'gmod.exe');
+		settings.gamepath = path.join(settings.gmod, 'bin', 'gmod.exe');
 	} else if (settings.game == 'defgmod') {
-		settings.gamepath = path.join(SteamLocation, 'steamapps', 'common', 'GarrysMod', 'hl2.exe');
+		settings.gamepath = path.join(settings.gmod, 'GarrysMod', 'hl2.exe');
 	}
 	if (!fs.existsSync(settings.gamepath)) {
 		return {
 			success: false,
-			error: 'Game not found'
+			error: 'Monolauncher was unable to find the game location.'
 		};
 	}
 	try {
@@ -595,10 +595,6 @@ ipc.handle('request-imsgs', async (event) => {
 });
 ipc.handle('request-imsgs-nofetch', async (event, arg) => {
 	var result = await getMPConversation(arg, true);
-	return result;
-});
-ipc.handle('request-convinfo', async (event) => {
-	var result = await getConvInfo();
 	return result;
 });
 ipc.handle('request-gmod', async (event) => {
