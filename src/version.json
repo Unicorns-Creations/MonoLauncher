@@ -1,20 +1,12 @@
 {
   "name": "MonoLauncher",
-  "version": "v1.3.1",
+  "version": "v1.3.2",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0520",
     "squid#5091"
   ],
   "changeLogs": [
-    "Added a MultiCore enabled toggle.",
-    "Added the ability to select which version of the game to launch.",
-    "Removed useless button in the Status tab.",
-    "Removed Early Access banner.",
-    "Fixed styling issues with the navbar on Dev info and Status pages.",
-    "Fixed styling of the header on the \"Menu\" page.",
-    "Fixed button size when hovering over them.",
-    "Fixed styling and centering on main page.",
-    "Made most stuff round so it's uniform."
+    "Fixed issues for users that had Garry's Mod installed on a different drive than Steam."
   ]
 }
