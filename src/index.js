@@ -292,7 +292,7 @@ async function setGame(game) {
 	if (!fs.existsSync(settings.gamepath)) {
 		return {
 			success: false,
-			error: 'Game not found'
+			error: 'Monolauncher was unable to find the game location.'
 		};
 	}
 	try {

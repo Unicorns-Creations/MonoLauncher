@@ -91,10 +91,10 @@ function changeServer(server) {
 
 function changeGame(game) {
 	ipcRenderer.invoke('change-game', game).then(async (result) => {
-		if (result == '404') {
+		if (!result.success) {
 			return swal(
 				'Ahh sheet',
-				"Seems like we couldn't change the game version for some reason, I usually like to blame Jet for issues like this.",
+				result.error,
 				'error'
 			);
 		}
