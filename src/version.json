@@ -8,6 +8,6 @@
   ],
   "changeLogs": [
     "Fixed issues for users that had Garry's Mod installed on a different drive than Steam.",
-    "Properly display error messages for file existance check."
+    "Properly display error messages for file existence check."
   ]
 }
