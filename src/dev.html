@@ -17,32 +17,6 @@
   <script src="controlbox.ui.js"></script>
 
 </head>
-<script>
-  Swal = swal
-
-  function owo() {
-    Swal.fire({
-      title: 'Would you like to get information about your iMessages?',
-      showCancelButton: true,
-      confirmButtonText: 'Look up',
-      showLoaderOnConfirm: true,
-      preConfirm: (login) => {
-        return ipcRenderer.invoke('request-convinfo').then((result) => {
-          return result
-        });
-      },
-      allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: `iMessage information`,
-          html: result.value,
-          icon: "info"
-        })
-      }
-    })
-  }
-</script>
 
 <body>
   <div id="controlbox-root"></div>
@@ -50,7 +24,6 @@
     <div id="header-root"></div>
   </header>
   <div id="root"></div>
-  <button onclick="owo()">Get Conversations</button>
 </body>
 <script src="header.ui.js"></script>
 <script src="dev.ui.js"></script>

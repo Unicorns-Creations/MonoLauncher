@@ -597,10 +597,6 @@ ipc.handle('request-imsgs-nofetch', async (event, arg) => {
 	var result = await getMPConversation(arg, true);
 	return result;
 });
-ipc.handle('request-convinfo', async (event) => {
-	var result = await getConvInfo();
-	return result;
-});
 ipc.handle('request-gmod', async (event) => {
 	var result = await getgmodlocation();
 	return result;
