@@ -500,9 +500,19 @@ async function setActivity() {
 			largeImageKey: 'monolith',
 			largeImageText: 'Monolith Servers',
 			smallImageKey: 'discord',
-			smallImageText: 'discord.gg/uj6NRBS'
+			smallImageText: 'discord.gg/monolithservers',
+			buttons: [
+				{
+					label: 'Download MonoLauncher',
+					url: 'https://hazel-jacubrstnc.vercel.app/download'
+				},
+				{
+					label: 'Join the Monolith Discord',
+					url: 'https://discord.gg/monolithservers'
+				}
+			]
 		});
-	}else {
+	} else {
 		rpc.setActivity({
 			details: 'Adding new features',
 			state: 'Improving MonoLauncher',
@@ -510,10 +520,20 @@ async function setActivity() {
 			largeImageKey: 'monolith',
 			largeImageText: 'Monolith Servers',
 			smallImageKey: 'discord',
-			smallImageText: 'discord.gg/uj6NRBS'
+			smallImageText: 'discord.gg/monolithservers',
+			buttons: [
+				{
+					label: 'Download MonoLauncher',
+					url: 'https://hazel-jacubrstnc.vercel.app/download'
+				},
+				{
+					label: 'Join the Monolith Discord',
+					url: 'https://discord.gg/monolithservers'
+				}
+			]
 		});
 	}
-	
+
 }
 
 const createWindow = async () => {

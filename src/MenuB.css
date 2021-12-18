@@ -12,20 +12,40 @@
   }
 
   .toolscontainer {
-    min-height: 260px;
-    max-height: 515px;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
-  .toolscontainer > a > img {
+  .toolscontainer>div>a>img {
+    display: block;
     width: 400px;
-    transition-duration: 250ms;
     cursor: pointer;
     margin: 1rem;
     border-radius: .25rem;
+  }
+
+  .toolscontainer>div {
+    transition-duration: 250ms;
+    position: relative;
     filter: brightness(80%);
   }
 
-  .toolscontainer > a > img:hover {
+  .toolscontainer>div:hover {
+    position: relative;
     filter: brightness(100%);
+  }
+
+  .imageOverlayText {
+    color: rgb(201, 201, 201);
+    font-size: 22px;
+    line-height: 1.5em;
+    text-shadow: 2px 2px 2px #000;
+    text-align: left;
+    position: absolute;
+    top: 85%;
+    left: 56%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 5;
   }

@@ -1,13 +1,14 @@
 {
   "name": "MonoLauncher",
-  "version": "v1.3.2",
+  "version": "v1.3.3",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0520",
     "squid#5091"
   ],
   "changeLogs": [
-    "Fixed issues for users that had Garry's Mod installed on a different drive than Steam.",
-    "Properly display error messages for file existence check."
+    "Add buttons to discord rpc activity.",
+    "Replaced old Crafting Calculator with MonoGuns Revamped.",
+    "Replaced old images in Menu page."
   ]
 }
