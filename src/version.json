@@ -7,6 +7,8 @@
     "squid#5091"
   ],
   "changeLogs": [
-    "Add buttons to discord rpc activity."
+    "Add buttons to discord rpc activity.",
+    "Replaced old Crafting Calculator with MonoGuns Revamped.",
+    "Replaced old images in Menu page."
   ]
 }
