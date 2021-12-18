@@ -8,8 +8,8 @@ function MPDC() {
 
 function FTW1() {
 	window.open(
-		'https://clutchmasterftw.github.io/Monolith-Crafting-Calculator',
-		'Crafting Calculator interactive website - Clutch Master FTW',
+		'https://monoguns.wombos.xyz',
+		'MonoGuns Revamped',
 		'top=0,left=0,frame=true,nodeIntegration=false,contextIsolation=true,resizable=true,width=1700,height=1400'
 	);
 }
