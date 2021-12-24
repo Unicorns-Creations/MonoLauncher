@@ -1,14 +1,13 @@
 {
   "name": "MonoLauncher",
-  "version": "v1.3.3",
+  "version": "v1.3.4",
   "versionAuthors": [
     "Jetty#9451",
     "Jacub#0520",
     "squid#5091"
   ],
   "changeLogs": [
-    "Add buttons to discord rpc activity.",
-    "Replaced old Crafting Calculator with MonoGuns Revamped.",
-    "Replaced old images in Menu page."
+    "Keep track on if the game is running or not",
+    "Change Discord Activity depending on if the game is running or not"
   ]
 }
