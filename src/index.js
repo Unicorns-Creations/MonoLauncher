@@ -17,6 +17,7 @@ const cp = require('child_process');
 var window;
 var os = require('os');
 const fetch = require('node-fetch');
+let gmodProcess;
 // var {
 // 	Collection
 // } = require('discord.js');
@@ -364,7 +365,19 @@ async function launchMonolith() {
 		StartArgs.push("+gmod_mcore_test");
 		StartArgs.push("1");
 	}
-	cp.spawn(`${GameLocation.gamepath}`, StartArgs);
+	if (gmodProcess) {
+		const dialogOpts = {
+			type: 'error',
+			title: 'Error',
+			message: "Garry's Mod Already Running",
+			detail: 'Based on the information I was able to gather, garry\'s mod seems to be already running. Close it before trying to start it again.'
+		};
+		return dialog.showMessageBox(dialogOpts);
+	}
+	gmodProcess = cp.spawn(`${GameLocation.gamepath}`, StartArgs);
+	gmodProcess.on("close", () => {
+		gmodProcess = null;
+	})
 }
 
 // async function getConversations() {
