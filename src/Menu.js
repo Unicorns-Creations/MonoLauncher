@@ -2,7 +2,7 @@ function MPDC() {
 	window.open(
 		'https://clutchmasterftw.github.io/Monoford-County-PD-Helper/',
 		'MPD Calculator',
-		'top=0,left=0,frame=true,nodeIntegration=false,contextIsolation=true,resizable=false,width=1045,height=645'
+		'top=0,left=0,frame=true,nodeIntegration=false,contextIsolation=true,resizable=true,width=1700,height=1400'
 	);
 }
 
