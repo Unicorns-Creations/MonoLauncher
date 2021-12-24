@@ -8,6 +8,7 @@
   ],
   "changeLogs": [
     "Keep track on if the game is running or not",
-    "Change Discord Activity depending on if the game is running or not"
+    "Change Discord Activity depending on if the game is running or not",
+    "Change out old PD Calculator to ClutchMaster's PD Calculator"
   ]
 }

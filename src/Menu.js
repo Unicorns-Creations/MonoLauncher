@@ -1,6 +1,6 @@
 function MPDC() {
 	window.open(
-		'https://monolith.wombos.xyz/police/calculator',
+		'https://clutchmasterftw.github.io/Monoford-County-PD-Helper/',
 		'MPD Calculator',
 		'top=0,left=0,frame=true,nodeIntegration=false,contextIsolation=true,resizable=false,width=1045,height=645'
 	);
