@@ -505,30 +505,28 @@ function getramusage() {
 }
 
 async function setActivity() {
+	let details = "";
+	let state = "";
 	if (app.isPackaged) {
-		rpc.setActivity({
-			details: 'Thinking about joining Monolith',
-			state: 'Exploring menus',
-			startTimestamp,
-			largeImageKey: 'monolith',
-			largeImageText: 'Monolith Servers',
-			smallImageKey: 'discord',
-			smallImageText: 'discord.gg/monolithservers',
-			buttons: [
-				{
-					label: 'Download MonoLauncher',
-					url: 'https://hazel-jacubrstnc.vercel.app/download'
-				},
-				{
-					label: 'Join the Monolith Discord',
-					url: 'https://discord.gg/monolithservers'
-				}
-			]
-		});
+		if (gmodProcess) {
+			details = "Playing Monolith",
+				state = "Enjoying MonoLauncher features"
+		} else {
+			details = 'Thinking about joining Monolith'
+			state = 'Exploring menus'
+		}
 	} else {
-		rpc.setActivity({
-			details: 'Adding new features',
-			state: 'Improving MonoLauncher',
+		if (gmodProcess) {
+			details = "Playing Monolith"
+		} else {
+			details = 'Adding new features'
+		}
+		state = 'Working on MonoLauncher'
+	}
+	rpc.setActivity(
+		{
+			details: details,
+			state: state,
 			startTimestamp,
 			largeImageKey: 'monolith',
 			largeImageText: 'Monolith Servers',
@@ -544,8 +542,8 @@ async function setActivity() {
 					url: 'https://discord.gg/monolithservers'
 				}
 			]
-		});
-	}
+		}
+	)
 
 }
 
